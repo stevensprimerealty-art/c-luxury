@@ -37,19 +37,41 @@
   <a href="https://mrcharliestxs.myshopify.com/collections/signature">Signature</a>
 </div>
 
-<!-- MESSAGE BOX -->
-<section class="message-box">
-  <p>
-    For private enquiries, collaborations, or correspondence,
-    contact C-LUXURY directly.
-  </p>
+<!-- ============================= -->
+<!-- BLACK SPLIT MESSAGE SECTION  -->
+<!-- ============================= -->
 
-  <form>
-    <input type="text" placeholder="Name" required>
-    <input type="email" placeholder="Email" required>
-    <textarea placeholder="Message" required></textarea>
-    <button type="submit">Send</button>
-  </form>
+<section class="split-message">
+
+  <!-- LEFT WHITE BLOCK -->
+  <div class="split-box left">
+    <p>
+      Private enquiries,<br>
+      collaborations,<br>
+      or correspondence.
+    </p>
+  </div>
+
+  <!-- RIGHT WHITE BLOCK -->
+  <div class="split-box right">
+
+    <!-- ICON BOX -->
+    <div class="message-trigger" id="message-trigger">
+      <span>•••</span>
+    </div>
+
+    <!-- HIDDEN MESSAGE FORM -->
+    <div class="message-panel" id="message-panel">
+      <form class="message-form">
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <textarea placeholder="Message" rows="4" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+  </div>
+
 </section>
 
 <script>
@@ -66,6 +88,13 @@
   overlay.addEventListener("click", function () {
     panel.classList.remove("open");
     overlay.classList.remove("show");
+  });
+
+  const messageTrigger = document.getElementById("message-trigger");
+  const messagePanel = document.getElementById("message-panel");
+
+  messageTrigger.addEventListener("click", function () {
+    messagePanel.classList.toggle("open");
   });
 </script>
 
