@@ -3,43 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>C-LUXURY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <!-- ============================= -->
-<!-- SITE LOADER                  -->
+<!-- SITE LOADER                   -->
 <!-- ============================= -->
 <div class="site-loader">
   <span>C-LUXURY</span>
 </div>
 
 <!-- ============================= -->
-<!-- HEADER (FIXED)               -->
+<!-- FIXED HEADER                  -->
 <!-- ============================= -->
-<header class="site-header dark">
+<header class="site-header">
   <div class="brand">C-LUXURY</div>
 
   <nav class="nav">
-    <a href="#" id="shop-toggle">Shop</a>
+    <a href="index.html">Home</a>
+    <a href="collections.html">Collections</a>
     <a href="lookbook.html">Lookbook</a>
     <a href="about.html">About</a>
-    <a href="account.html">Account</a>
+    <a href="contact.html">Contact</a>
   </nav>
 </header>
 
-<!-- Overlay -->
-<div class="overlay" id="overlay"></div>
-
 <!-- ============================= -->
-<!-- MAIN CONTENT (KEY FIX)       -->
+<!-- PAGE WRAPPER (CRITICAL FIX)  -->
 <!-- ============================= -->
 <main class="page">
 
-  <!-- HERO -->
-  <section class="home-hero dark">
+  <!-- ============================= -->
+  <!-- HERO SECTION                  -->
+  <!-- ============================= -->
+  <section class="home-hero page-section">
 
     <div class="brand-mark">
       <h1>C-LUXURY</h1>
@@ -59,30 +61,34 @@
 
   </section>
 
-  <!-- PRODUCT GRID -->
-  <section class="product-grid reveal">
+  <!-- ============================= -->
+  <!-- PRODUCT GRID                 -->
+  <!-- ============================= -->
+  <section class="product-grid reveal page-section">
 
     <article class="product-card">
-      <img src="assets/images/products/product-01.jpg" alt="C-LUXURY Look 01">
+      <img src="assets/images/products/product-01.jpg" alt="Foundation Jacket">
       <h3>FOUNDATION JACKET</h3>
       <span>Limited Release</span>
     </article>
 
     <article class="product-card">
-      <img src="assets/images/products/product-02.jpg" alt="C-LUXURY Look 02">
+      <img src="assets/images/products/product-02.jpg" alt="Form Trouser">
       <h3>FORM TROUSER</h3>
       <span>Tailored Series</span>
     </article>
 
     <article class="product-card">
-      <img src="assets/images/products/product-03.jpg" alt="C-LUXURY Look 03">
+      <img src="assets/images/products/product-03.jpg" alt="Signature Set">
       <h3>SIGNATURE SET</h3>
       <span>Archive Edition</span>
     </article>
 
   </section>
 
-  <!-- SPLIT MESSAGE -->
+  <!-- ============================= -->
+  <!-- SPLIT MESSAGE                -->
+  <!-- ============================= -->
   <section class="split-message">
 
     <div class="split-box left">
@@ -94,10 +100,7 @@
     </div>
 
     <div class="split-box right">
-
-      <div class="message-trigger" id="message-trigger">
-        <span>•••</span>
-      </div>
+      <div class="message-trigger" id="message-trigger">•••</div>
 
       <div class="message-panel" id="message-panel">
         <form class="message-form">
@@ -107,7 +110,6 @@
           <button type="submit">Send</button>
         </form>
       </div>
-
     </div>
 
   </section>
@@ -115,51 +117,22 @@
 </main>
 
 <!-- ============================= -->
-<!-- SHOP PANEL                  -->
-<!-- ============================= -->
-<div class="shop-panel" id="shop-panel">
-  <a href="https://mrcharliestxs.myshopify.com">Shop All</a>
-  <a href="https://mrcharliestxs.myshopify.com/collections/foundation">Foundation</a>
-  <a href="https://mrcharliestxs.myshopify.com/collections/form">Form</a>
-  <a href="https://mrcharliestxs.myshopify.com/collections/signature">Signature</a>
-</div>
-
-<!-- ============================= -->
-<!-- SCRIPTS                     -->
+<!-- SCRIPTS                       -->
 <!-- ============================= -->
 <script>
   /* Loader */
   window.addEventListener("load", () => {
     const loader = document.querySelector(".site-loader");
-    if (!loader) return;
-    setTimeout(() => loader.classList.add("hidden"), 800);
+    setTimeout(() => loader.classList.add("hidden"), 700);
   });
 
-  /* Shop panel */
-  const toggle = document.getElementById("shop-toggle");
-  const panel = document.getElementById("shop-panel");
-  const overlay = document.getElementById("overlay");
-
-  if (toggle && panel && overlay) {
-    toggle.addEventListener("click", e => {
-      e.preventDefault();
-      panel.classList.add("open");
-      overlay.classList.add("show");
-    });
-
-    overlay.addEventListener("click", () => {
-      panel.classList.remove("open");
-      overlay.classList.remove("show");
-    });
-  }
-
   /* Message panel */
-  const messageTrigger = document.getElementById("message-trigger");
-  const messagePanel = document.getElementById("message-panel");
+  const trigger = document.getElementById("message-trigger");
+  const panel = document.getElementById("message-panel");
 
-  if (messageTrigger && messagePanel) {
-    messageTrigger.addEventListener("click", () => {
-      messagePanel.classList.toggle("open");
+  if (trigger && panel) {
+    trigger.addEventListener("click", () => {
+      panel.classList.toggle("open");
     });
   }
 
@@ -168,8 +141,7 @@
 
   const revealOnScroll = () => {
     reveals.forEach(el => {
-      const top = el.getBoundingClientRect().top;
-      if (top < window.innerHeight - 120) {
+      if (el.getBoundingClientRect().top < window.innerHeight - 120) {
         el.classList.add("active");
       }
     });
