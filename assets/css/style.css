@@ -292,3 +292,134 @@ body {
     padding: 140px 40px;
   }
 }
+
+/* ============================= */
+/* HOME HERO (DARK)              */
+/* ============================= */
+
+.home-hero.dark {
+  height: 100vh;
+  background: #0e0e0e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.brand-mark h1 {
+  font-size: 96px;
+  letter-spacing: 6px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+/* keep quiet text subtle */
+.home-hero .quiet.top p {
+  color: rgba(255,255,255,0.6);
+}
+
+/* ============================= */
+/* SPLIT MESSAGE SECTION         */
+/* ============================= */
+
+.split-message {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #000;
+  min-height: 60vh;
+}
+
+.split-box {
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.split-box p {
+  font-size: 22px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ============================= */
+/* MESSAGE ICON (•••)            */
+/* ============================= */
+
+.message-trigger {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.message-trigger span {
+  font-size: 26px;
+  letter-spacing: 4px;
+}
+
+/* ============================= */
+/* MESSAGE PANEL                 */
+/* ============================= */
+
+.message-panel {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  width: 320px;
+  background: #fff;
+  padding: 30px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.message-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.message-form input,
+.message-form textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #111;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  font-size: 14px;
+  background: transparent;
+}
+
+.message-form button {
+  border: 1px solid #111;
+  background: transparent;
+  padding: 12px;
+  cursor: pointer;
+}
+
+/* ============================= */
+/* MOBILE FIX                    */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .brand-mark h1 {
+    font-size: 56px;
+  }
+
+  .split-message {
+    grid-template-columns: 1fr;
+  }
+
+  .message-panel {
+    right: 20px;
+    left: 20px;
+    width: auto;
+  }
+}
