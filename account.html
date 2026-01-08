@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Account — C-LUXURY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create or access your C-LUXURY account.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="account-page">
+
+<header class="site-header">
+  <div class="brand">C-LUXURY</div>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="#" id="shop-toggle">Shop</a>
+    <a href="lookbook.html">Lookbook</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="shop-panel" id="shop-panel">
+  <a href="https://mrcharliestxs.myshopify.com">Shop All</a>
+  <a href="https://mrcharliestxs.myshopify.com/collections/foundation">Foundation</a>
+  <a href="https://mrcharliestxs.myshopify.com/collections/form">Form</a>
+  <a href="https://mrcharliestxs.myshopify.com/collections/signature">Signature</a>
+</div>
+
+<main class="account-block">
+  <h1>C-LUXURY Account</h1>
+  <p>
+    Access exclusive releases, order history, and curated updates from
+    C-LUXURY.
+  </p>
+
+  <a class="account-btn" href="https://mrcharliestxs.myshopify.com/account/register">
+    Create an Account
+  </a>
+
+  <div class="account-divider">OR</div>
+
+  <a class="account-link" href="login.html">
+    Already have an account
+  </a>
+</main>
+
+<script>
+  const toggle = document.getElementById("shop-toggle");
+  const panel = document.getElementById("shop-panel");
+  const overlay = document.getElementById("overlay");
+
+  toggle.addEventListener("click", function(e) {
+    e.preventDefault();
+    panel.classList.add("open");
+    overlay.classList.add("show");
+  });
+
+  overlay.addEventListener("click", function() {
+    panel.classList.remove("open");
+    overlay.classList.remove("show");
+  });
+</script>
+
+</body>
+</html>
