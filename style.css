@@ -9,8 +9,8 @@
 
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
-  background: #ffffff;
-  color: #111;
+  background: #000;
+  color: #fff;
   line-height: 1.6;
 }
 
@@ -20,123 +20,133 @@ body {
 .site-loader {
   position: fixed;
   inset: 0;
-  background: #fff;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
 }
 
+.site-loader span {
+  letter-spacing: 4px;
+  font-size: 14px;
+}
+
 .site-loader.hidden {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s ease;
+  transition: opacity .6s ease;
 }
 
 /* ============================= */
-/* HEADER (FIXED)                */
+/* HEADER                        */
 /* ============================= */
 .site-header {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   height: 80px;
-  background: #fff;
+  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 32px;
-  border-bottom: 1px solid #eee;
+  background: #000;
   z-index: 1000;
 }
 
-.site-header .brand {
-  font-weight: 600;
-  letter-spacing: 0.15em;
+.brand {
+  font-size: 14px;
+  letter-spacing: 3px;
 }
 
 .nav a {
+  color: #fff;
   margin-left: 20px;
+  font-size: 12px;
   text-decoration: none;
-  color: #111;
-  font-size: 14px;
+  letter-spacing: 1px;
 }
 
 /* ============================= */
-/* PAGE OFFSET (MAIN FIX)        */
+/* PAGE OFFSET FIX               */
 /* ============================= */
 .page {
-  padding-top: 120px; /* pushes content BELOW fixed header */
+  padding-top: 120px;
 }
 
 /* ============================= */
 /* HERO                          */
 /* ============================= */
 .home-hero {
-  padding: 120px 32px;
-  text-align: center;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
 }
 
-.home-hero h1 {
+.brand-mark h1 {
   font-size: 48px;
-  letter-spacing: 0.25em;
-  margin-bottom: 20px;
+  letter-spacing: 6px;
 }
 
 .quiet {
-  font-size: 14px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  opacity: 0.7;
 }
 
-.luxury-strip span {
-  margin: 0 8px;
-  font-size: 12px;
-  letter-spacing: 0.15em;
+.luxury-strip {
+  display: flex;
+  gap: 16px;
+  margin-top: 40px;
+  font-size: 11px;
+  letter-spacing: 2px;
 }
 
 /* ============================= */
-/* PRODUCTS                      */
+/* PRODUCT GRID                  */
 /* ============================= */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 40px;
-  padding: 80px 32px;
+  padding: 80px 40px;
 }
 
 .product-card img {
   width: 100%;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .product-card h3 {
-  font-size: 14px;
-  letter-spacing: 0.1em;
+  font-size: 13px;
+  letter-spacing: 1px;
 }
 
 .product-card span {
-  font-size: 12px;
-  color: #666;
+  font-size: 11px;
+  opacity: 0.6;
 }
 
 /* ============================= */
 /* SPLIT MESSAGE                 */
 /* ============================= */
 .split-message {
-  display: flex;
-  gap: 40px;
-  padding: 80px 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 80px 40px;
+  border-top: 1px solid rgba(255,255,255,.1);
 }
 
 .split-box {
-  flex: 1;
+  font-size: 13px;
+  letter-spacing: 1px;
 }
 
 .message-trigger {
   cursor: pointer;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .message-panel {
@@ -151,29 +161,59 @@ body {
 .message-form input,
 .message-form textarea {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
+  background: #000;
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  margin-bottom: 12px;
+  padding: 8px;
 }
 
 .message-form button {
-  padding: 10px 20px;
-  background: #111;
-  color: #fff;
+  background: #fff;
+  color: #000;
   border: none;
+  padding: 8px 16px;
   cursor: pointer;
 }
 
 /* ============================= */
-/* REVEAL                        */
+/* SHOP PANEL                    */
 /* ============================= */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s ease;
+.shop-panel {
+  position: fixed;
+  right: -260px;
+  top: 0;
+  height: 100%;
+  width: 260px;
+  background: #000;
+  padding: 40px;
+  transition: right .4s ease;
+  z-index: 1200;
 }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+.shop-panel.open {
+  right: 0;
+}
+
+.shop-panel a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* ============================= */
+/* OVERLAY                       */
+/* ============================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none;
+  z-index: 1100;
+}
+
+.overlay.show {
+  display: block;
 }
