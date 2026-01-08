@@ -7,11 +7,68 @@
   box-sizing: border-box;
 }
 
+/* ============================= */
+/* BASE                          */
+/* ============================= */
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
-  background: #000;
   color: #fff;
   line-height: 1.6;
+  background: #000;
+  overflow-x: hidden;
+}
+
+/* ============================= */
+/* CINEMATIC PAGE FADE           */
+/* ============================= */
+body {
+  opacity: 0;
+  animation: pageFadeIn 1.6s ease forwards;
+  animation-delay: 0.6s;
+}
+
+@keyframes pageFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================= */
+/* FLOATING BACKGROUND           */
+/* ============================= */
+.bg-float {
+  position: fixed;
+  inset: 0;
+  background: url("assets/images/backgrounds/c-luxury-look.PNG")
+              no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+  transform: scale(1.08);
+  animation: luxuryFloat 32s ease-in-out infinite;
+}
+
+/* dark luxury overlay */
+.bg-float::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+@keyframes luxuryFloat {
+  0% {
+    transform: scale(1.08) translateY(0);
+  }
+  50% {
+    transform: scale(1.12) translateY(-24px);
+  }
+  100% {
+    transform: scale(1.08) translateY(0);
+  }
 }
 
 /* ============================= */
@@ -25,6 +82,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  transition: opacity 1s ease;
 }
 
 .site-loader span {
@@ -35,7 +93,6 @@ body {
 .site-loader.hidden {
   opacity: 0;
   pointer-events: none;
-  transition: opacity .6s ease;
 }
 
 /* ============================= */
@@ -50,7 +107,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #000;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
   z-index: 1000;
 }
 
@@ -68,7 +126,7 @@ body {
 }
 
 /* ============================= */
-/* PAGE OFFSET FIX               */
+/* PAGE OFFSET                   */
 /* ============================= */
 .page {
   padding-top: 120px;
@@ -161,7 +219,7 @@ body {
 .message-form input,
 .message-form textarea {
   width: 100%;
-  background: #000;
+  background: transparent;
   border: 1px solid rgba(255,255,255,.2);
   color: #fff;
   margin-bottom: 12px;
@@ -219,10 +277,15 @@ body {
 }
 
 /* ============================= */
-/* GLOBAL BACKGROUND             */
+/* SCROLL REVEAL                 */
 /* ============================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s ease;
+}
 
-body {
-  background: url("assets/images/backgrounds/c-luxury-look.PNG") no-repeat center center fixed;
-  background-size: cover;
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
