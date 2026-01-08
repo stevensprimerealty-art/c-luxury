@@ -1,0 +1,179 @@
+/* ============================= */
+/* RESET                         */
+/* ============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #ffffff;
+  color: #111;
+  line-height: 1.6;
+}
+
+/* ============================= */
+/* LOADER                        */
+/* ============================= */
+.site-loader {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.site-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+/* ============================= */
+/* HEADER (FIXED)                */
+/* ============================= */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
+}
+
+.site-header .brand {
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+.nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #111;
+  font-size: 14px;
+}
+
+/* ============================= */
+/* PAGE OFFSET (MAIN FIX)        */
+/* ============================= */
+.page {
+  padding-top: 120px; /* pushes content BELOW fixed header */
+}
+
+/* ============================= */
+/* HERO                          */
+/* ============================= */
+.home-hero {
+  padding: 120px 32px;
+  text-align: center;
+}
+
+.home-hero h1 {
+  font-size: 48px;
+  letter-spacing: 0.25em;
+  margin-bottom: 20px;
+}
+
+.quiet {
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.luxury-strip span {
+  margin: 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+}
+
+/* ============================= */
+/* PRODUCTS                      */
+/* ============================= */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  padding: 80px 32px;
+}
+
+.product-card img {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+.product-card span {
+  font-size: 12px;
+  color: #666;
+}
+
+/* ============================= */
+/* SPLIT MESSAGE                 */
+/* ============================= */
+.split-message {
+  display: flex;
+  gap: 40px;
+  padding: 80px 32px;
+}
+
+.split-box {
+  flex: 1;
+}
+
+.message-trigger {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.message-panel {
+  display: none;
+  margin-top: 20px;
+}
+
+.message-panel.open {
+  display: block;
+}
+
+.message-form input,
+.message-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.message-form button {
+  padding: 10px 20px;
+  background: #111;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* ============================= */
+/* REVEAL                        */
+/* ============================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
