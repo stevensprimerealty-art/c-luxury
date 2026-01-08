@@ -18,6 +18,7 @@ body {
   color: #111;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  padding-top: 160px; /* fixed header offset */
 }
 
 /* ============================= */
@@ -55,26 +56,12 @@ body {
   opacity: 0.5;
 }
 
-/* Push page under fixed header */
-main,
-section {
-  position: relative;
-}
-
-body {
-  padding-top: 160px;
-}
-
 /* ============================= */
-/* QUIET CENTER TEXT (ASH STYLE) */
+/* QUIET CENTER TEXT             */
 /* ============================= */
 
 .quiet.top {
-  position: absolute;
-  top: 160px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
+  margin-top: 40px;
   text-align: center;
   pointer-events: none;
 }
@@ -233,35 +220,6 @@ body {
 }
 
 /* ============================= */
-/* MOBILE                        */
-/* ============================= */
-
-@media (max-width: 768px) {
-
-  .site-header {
-    padding: 40px 30px;
-  }
-
-  .nav a {
-    margin-left: 24px;
-  }
-
-  .hero h1 {
-    font-size: 44px;
-  }
-
-  .statement,
-  .collections-preview,
-  .closing {
-    padding: 120px 30px;
-  }
-
-  .shop-panel {
-    width: 100%;
-    padding: 140px 40px;
-  }
-}
-/* ============================= */
 /* ACCOUNT PAGE — QUIET LUXURY   */
 /* ============================= */
 
@@ -318,4 +276,34 @@ body {
 
 .account-link:hover {
   border-color: #111;
+}
+
+/* ============================= */
+/* MOBILE                        */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .site-header {
+    padding: 40px 30px;
+  }
+
+  .nav a {
+    margin-left: 24px;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .statement,
+  .collections-preview,
+  .closing {
+    padding: 120px 30px;
+  }
+
+  .shop-panel {
+    width: 100%;
+    padding: 140px 40px;
+  }
 }
