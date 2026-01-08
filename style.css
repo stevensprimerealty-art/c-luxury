@@ -20,55 +20,49 @@ body {
   line-height: 1.6;
   background: #000;
   overflow-x: hidden;
-}
 
-/* ============================= */
-/* CINEMATIC PAGE FADE           */
-/* ============================= */
-body {
   opacity: 0;
   animation: pageFadeIn 1.6s ease forwards;
   animation-delay: 0.6s;
 }
 
 @keyframes pageFadeIn {
-  to {
-    opacity: 1;
-  }
+  to { opacity: 1; }
 }
 
 /* ============================= */
-/* FLOATING BACKGROUND           */
+/* CINEMATIC FLOATING BACKGROUND */
 /* ============================= */
-.bg-float {
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
-  background: url("assets/images/backgrounds/c-luxury-look.PNG")
-              no-repeat center center;
+
+  background-image: url("/assets/images/backgrounds/c-luxury-look.PNG");
   background-size: cover;
-  z-index: -1;
-  transform: scale(1.08);
-  animation: luxuryFloat 32s ease-in-out infinite;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.05);
+  animation: bgFloat 30s ease-in-out infinite alternate;
+
+  z-index: 0;
+  pointer-events: none;
 }
 
-/* dark luxury overlay */
-.bg-float::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
+@keyframes bgFloat {
+  0%   { transform: scale(1.05) translateY(0); }
+  50%  { transform: scale(1.08) translateY(-12px); }
+  100% { transform: scale(1.05) translateY(0); }
 }
 
-@keyframes luxuryFloat {
-  0% {
-    transform: scale(1.08) translateY(0);
-  }
-  50% {
-    transform: scale(1.12) translateY(-24px);
-  }
-  100% {
-    transform: scale(1.08) translateY(0);
-  }
+/* keep content above background */
+.page,
+header,
+nav,
+main {
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================= */
@@ -129,8 +123,6 @@ body {
 /* PAGE OFFSET                   */
 /* ============================= */
 .page {
-  position: relative;
-  z-index: 1;
   padding-top: 120px;
 }
 
@@ -206,7 +198,13 @@ body {
 
 .message-trigger {
   cursor: pointer;
-  font-size: 20px;
+  font-size: 22px;
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+.message-trigger:hover {
+  transform: translateY(-2px);
+  opacity: .8;
 }
 
 .message-panel {
@@ -237,48 +235,6 @@ body {
 }
 
 /* ============================= */
-/* SHOP PANEL                    */
-/* ============================= */
-.shop-panel {
-  position: fixed;
-  right: -260px;
-  top: 0;
-  height: 100%;
-  width: 260px;
-  background: #000;
-  padding: 40px;
-  transition: right .4s ease;
-  z-index: 1200;
-}
-
-.shop-panel.open {
-  right: 0;
-}
-
-.shop-panel a {
-  display: block;
-  color: #fff;
-  text-decoration: none;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
-}
-
-/* ============================= */
-/* OVERLAY                       */
-/* ============================= */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.6);
-  display: none;
-  z-index: 1100;
-}
-
-.overlay.show {
-  display: block;
-}
-
-/* ============================= */
 /* SCROLL REVEAL                 */
 /* ============================= */
 .reveal {
@@ -290,48 +246,4 @@ body {
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ============================= */
-/* CINEMATIC FLOATING BACKGROUND */
-/* ============================= */
-
-/* background layer */
-body {
-  background: #000;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-
-  background-image: url("/assets/images/backgrounds/c-luxury-look.PNG");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  transform: scale(1.05);
-  animation: bgFloat 30s ease-in-out infinite alternate;
-
-  z-index: 0;          /* 🔥 IMPORTANT */
-  pointer-events: none;
-  will-change: transform;
-}
-
-/* keep all content above background */
-.page,
-nav,
-header,
-main {
-  position: relative;
-  z-index: 1;
-}
-
-/* subtle cinematic movement */
-@keyframes bgFloat {
-  0%   { transform: scale(1.05) translateY(0); }
-  50%  { transform: scale(1.08) translateY(-12px); }
-  100% { transform: scale(1.05) translateY(0); }
 }
