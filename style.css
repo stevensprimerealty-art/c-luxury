@@ -31,32 +31,8 @@ body {
 }
 
 /* ============================= */
-/* CINEMATIC FLOATING BACKGROUND */
+/* PAGE LAYERING                 */
 /* ============================= */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-
-  background-image: url("/assets/images/backgrounds/c-luxury-look.PNG");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  transform: scale(1.05);
-  animation: bgFloat 30s ease-in-out infinite alternate;
-
-  z-index: 0;
-  pointer-events: none;
-}
-
-@keyframes bgFloat {
-  0%   { transform: scale(1.05) translateY(0); }
-  50%  { transform: scale(1.08) translateY(-12px); }
-  100% { transform: scale(1.05) translateY(0); }
-}
-
-/* keep content above background */
 .page,
 header,
 nav,
@@ -127,14 +103,35 @@ main {
 }
 
 /* ============================= */
-/* HERO                          */
+/* HERO (BACKGROUND ONLY HERE)   */
 /* ============================= */
 .home-hero {
+  position: relative;
   min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 40px;
+
+  background-image: url("/assets/images/backgrounds/c-luxury-look.PNG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* dark luxury overlay */
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 0;
+}
+
+/* keep hero content above background */
+.home-hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .brand-mark h1 {
@@ -163,6 +160,7 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 40px;
   padding: 80px 40px;
+  background: #000;
 }
 
 .product-card img {
