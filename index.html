@@ -12,14 +12,22 @@
 
 <header class="site-header">
   <div class="brand">C-LUXURY</div>
+
   <nav class="nav">
-    <a href="index.html">Home</a>
-    <a href="collections.html">Collections</a>
+    <a href="#" id="shop-toggle">Shop</a>
     <a href="lookbook.html">Lookbook</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
   </nav>
 </header>
+
+<!-- SLIDE-IN SHOP PANEL -->
+<div class="shop-panel" id="shop-panel">
+  <a href="https://mrcharliestxs.myshopify.com">Shop All</a>
+  <a href="https://mrcharliestxs.myshopify.com/collections/foundation">Foundation</a>
+  <a href="https://mrcharliestxs.myshopify.com/collections/form">Form</a>
+  <a href="https://mrcharliestxs.myshopify.com/collections/signature">Signature</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -56,14 +64,22 @@
 
 <!-- CLOSING -->
 <section class="closing">
-  <p>
-    Designed to endure beyond the moment.
-  </p>
+  <p>Designed to endure beyond the moment.</p>
 </section>
 
 <footer class="site-footer">
   <p>C-LUXURY</p>
 </footer>
+
+<script>
+  const toggle = document.getElementById("shop-toggle");
+  const panel = document.getElementById("shop-panel");
+
+  toggle.addEventListener("click", function(e) {
+    e.preventDefault();
+    panel.classList.toggle("open");
+  });
+</script>
 
 </body>
 </html>
