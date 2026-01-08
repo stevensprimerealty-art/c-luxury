@@ -14,11 +14,10 @@ html, body {
 
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
-  background: #f4f4f4;
-  color: #111;
+  background: #000;
+  color: #ffffff;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  padding-top: 160px; /* fixed header offset */
 }
 
 /* ============================= */
@@ -29,28 +28,39 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 60px 80px;
+  padding: 50px 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #0b0b0b; /* DARK TOP */
+  background: rgba(0,0,0,0.85);
   z-index: 1000;
+
+  transition:
+    background 0.4s ease,
+    padding 0.4s ease,
+    backdrop-filter 0.4s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(6px);
+  padding: 30px 80px;
 }
 
 .brand {
-  font-size: 16px;
-  letter-spacing: 2px;
+  font-size: 14px;
+  letter-spacing: 3px;
   font-weight: 500;
   color: #ffffff;
 }
 
 .nav a {
-  margin-left: 50px;
-  font-size: 13px;
+  margin-left: 48px;
+  font-size: 12px;
   text-decoration: none;
   color: #ffffff;
-  letter-spacing: 1px;
-  opacity: 0.75;
+  letter-spacing: 1.5px;
+  opacity: 0.7;
 }
 
 .nav a:hover {
@@ -58,16 +68,29 @@ body {
 }
 
 /* ============================= */
-/* DARK HOME HERO                */
+/* HOME HERO                     */
 /* ============================= */
 
 .home-hero {
-  min-height: 85vh;
-  background: #0b0b0b;
+  height: 100vh;
+  background-image: url("../images/backgrounds/c-luxury-look.PNG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
 }
 
 /* ============================= */
@@ -75,9 +98,9 @@ body {
 /* ============================= */
 
 .brand-mark {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 140px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 120px;
 }
 
 .brand-mark h1 {
@@ -85,7 +108,6 @@ body {
   font-weight: 400;
   letter-spacing: 6px;
   color: #ffffff;
-  opacity: 0.9;
 }
 
 /* ============================= */
@@ -93,6 +115,8 @@ body {
 /* ============================= */
 
 .quiet.top {
+  position: relative;
+  z-index: 1;
   text-align: center;
   pointer-events: none;
 }
@@ -100,235 +124,36 @@ body {
 .quiet.top p {
   font-size: 14px;
   letter-spacing: 2px;
-  color: #ffffff;
-  opacity: 0.45;
-}
-
-/* ============================= */
-/* SHOP SLIDE PANEL              */
-/* ============================= */
-
-.shop-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 380px;
-  height: 100vh;
-  background: #ededed;
-  padding: 180px 60px;
-  transform: translateX(100%);
-  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
-  z-index: 2000;
-}
-
-.shop-panel a {
-  display: block;
-  font-size: 20px;
-  margin-bottom: 40px;
-  text-decoration: none;
-  color: #111;
-  letter-spacing: 1px;
-  opacity: 0.85;
-}
-
-.shop-panel a:hover {
-  opacity: 0.5;
-}
-
-.shop-panel.open {
-  transform: translateX(0);
-}
-
-/* ============================= */
-/* OVERLAY                       */
-/* ============================= */
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: 1500;
-}
-
-.overlay.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ============================= */
-/* SPLIT MESSAGE SECTION         */
-/* ============================= */
-
-.split-message {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: #0b0b0b;
-  color: #ffffff;
-}
-
-.split-box {
-  padding: 160px 80px;
-  background: #ffffff;
-  color: #111;
-}
-
-.split-box.left p {
-  font-size: 22px;
-  line-height: 1.8;
-}
-
-/* ============================= */
-/* MESSAGE ICON BOX              */
-/* ============================= */
-
-.message-trigger {
-  width: 64px;
-  height: 64px;
-  border: 1px solid #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.message-trigger span {
-  font-size: 22px;
-  letter-spacing: 4px;
-}
-
-/* ============================= */
-/* MESSAGE PANEL                 */
-/* ============================= */
-
-.message-panel {
-  margin-top: 40px;
-  display: none;
-}
-
-.message-panel.open {
-  display: block;
-}
-
-.message-form input,
-.message-form textarea {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  font-family: inherit;
-}
-
-.message-form button {
-  padding: 14px 36px;
-  border: 1px solid #111;
-  background: transparent;
-  font-size: 13px;
-  letter-spacing: 1px;
-  cursor: pointer;
-}
-
-.message-form button:hover {
-  background: #111;
-  color: #ffffff;
-}
-
-/* ============================= */
-/* ACCOUNT PAGE                  */
-/* ============================= */
-
-.account-page {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 220px 40px 160px;
-  text-align: center;
-}
-
-.account-block h1,
-.account-block h2 {
-  font-size: 32px;
-  font-weight: 500;
-  margin-bottom: 24px;
-}
-
-.account-block p {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #444;
-  margin-bottom: 48px;
-}
-
-/* ============================= */
-/* MOBILE                        */
-/* ============================= */
-
-@media (max-width: 768px) {
-
-  .site-header {
-    padding: 40px 30px;
-  }
-
-  .nav a {
-    margin-left: 24px;
-  }
-
-  .brand-mark h1 {
-    font-size: 56px;
-    letter-spacing: 4px;
-  }
-
-  .split-message {
-    grid-template-columns: 1fr;
-  }
-
-  .split-box {
-    padding: 120px 30px;
-  }
-
-  .shop-panel {
-    width: 100%;
-    padding: 140px 40px;
-  }
-}
-
-/* ============================= */
-/* HOME HERO (DARK)              */
-/* ============================= */
-
-.home-hero.dark {
-  height: 100vh;
-  background: #0e0e0e;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.brand-mark h1 {
-  font-size: 96px;
-  letter-spacing: 6px;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-
-/* keep quiet text subtle */
-.home-hero .quiet.top p {
   color: rgba(255,255,255,0.6);
 }
 
 /* ============================= */
+/* LUXURY STRIP                  */
+/* ============================= */
+
+.luxury-strip {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  padding: 40px 0;
+  background: #000;
+}
+
+.luxury-strip span {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ============================= */
 /* SPLIT MESSAGE SECTION         */
 /* ============================= */
 
 .split-message {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: #000;
   min-height: 60vh;
+  background: #000;
 }
 
 .split-box {
@@ -337,16 +162,18 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 120px 80px;
 }
 
 .split-box p {
   font-size: 22px;
   line-height: 1.6;
   text-align: center;
+  color: #111;
 }
 
 /* ============================= */
-/* MESSAGE ICON (•••)            */
+/* MESSAGE ICON                  */
 /* ============================= */
 
 .message-trigger {
@@ -373,7 +200,7 @@ body {
   bottom: 40px;
   right: 40px;
   width: 320px;
-  background: #fff;
+  background: #ffffff;
   padding: 30px;
   opacity: 0;
   pointer-events: none;
@@ -394,32 +221,122 @@ body {
   padding: 10px 0;
   font-size: 14px;
   background: transparent;
+  font-family: inherit;
 }
 
 .message-form button {
   border: 1px solid #111;
   background: transparent;
-  padding: 12px;
+  padding: 12px 24px;
+  font-size: 12px;
+  letter-spacing: 1px;
   cursor: pointer;
 }
 
+.message-form button:hover {
+  background: #111;
+  color: #ffffff;
+}
+
 /* ============================= */
-/* MOBILE FIX                    */
+/* SHOP PANEL                    */
+/* ============================= */
+
+.shop-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  height: 100vh;
+  background: #ededed;
+  padding: 180px 60px;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+  z-index: 2000;
+}
+
+.shop-panel.open {
+  transform: translateX(0);
+}
+
+.shop-panel a {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  color: #111;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+.shop-panel a:hover {
+  opacity: 0.5;
+}
+
+/* ============================= */
+/* OVERLAY                       */
+/* ============================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1500;
+}
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================= */
+/* SCROLL REVEAL                 */
+/* ============================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+/* ============================= */
+/* MOBILE                        */
 /* ============================= */
 
 @media (max-width: 768px) {
 
+  .site-header {
+    padding: 36px 28px;
+  }
+
+  .nav a {
+    margin-left: 24px;
+  }
+
   .brand-mark h1 {
     font-size: 56px;
+    letter-spacing: 4px;
   }
 
   .split-message {
     grid-template-columns: 1fr;
   }
 
+  .split-box {
+    padding: 100px 30px;
+  }
+
   .message-panel {
     right: 20px;
     left: 20px;
     width: auto;
+  }
+
+  .shop-panel {
+    width: 100%;
+    padding: 140px 40px;
   }
 }
