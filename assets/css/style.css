@@ -1,94 +1,212 @@
 /* ============================= */
-/* ASHLUXURY-LIKE REFINEMENT     */
+/* RESET & BASE                  */
 /* ============================= */
 
-/* HEADER REFINEMENT */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #f4f4f4;
+  color: #111;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================= */
+/* HEADER                        */
+/* ============================= */
+
 .site-header {
   position: fixed;
   top: 0;
   width: 100%;
+  padding: 60px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: #f4f4f4;
   z-index: 1000;
 }
 
-/* Push content below fixed header */
-body {
-  padding-top: 140px;
-}
-
-/* HERO REFINEMENT */
-.hero {
-  text-align: center;
-}
-
-.hero h1 {
+.brand {
+  font-size: 16px;
+  letter-spacing: 2px;
   font-weight: 500;
 }
 
-.hero p {
+.nav a {
+  margin-left: 50px;
+  font-size: 13px;
+  text-decoration: none;
+  color: #111;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  opacity: 0.85;
 }
 
-/* STATEMENT + CLOSING RHYTHM */
-.statement,
-.closing {
+.nav a:hover {
+  opacity: 0.5;
+}
+
+/* Push page under fixed header */
+main,
+section {
+  position: relative;
+}
+
+body {
+  padding-top: 160px;
+}
+
+/* ============================= */
+/* QUIET CENTER TEXT (ASH STYLE) */
+/* ============================= */
+
+.quiet.top {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.quiet.top p {
+  font-size: 14px;
+  letter-spacing: 1.6px;
+  opacity: 0.5;
+}
+
+/* ============================= */
+/* HERO                          */
+/* ============================= */
+
+.hero {
+  height: 70vh;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.statement p,
-.closing p {
-  line-height: 1.8;
+.hero h1 {
+  font-size: 72px;
+  font-weight: 500;
+  letter-spacing: 3px;
 }
 
-/* COLLECTIONS — MORE AIR */
+/* ============================= */
+/* STATEMENT                     */
+/* ============================= */
+
+.statement {
+  display: flex;
+  justify-content: center;
+  padding: 180px 80px;
+}
+
+.statement p {
+  max-width: 700px;
+  font-size: 22px;
+  line-height: 1.9;
+  text-align: center;
+}
+
+/* ============================= */
+/* COLLECTIONS                   */
+/* ============================= */
+
 .collections-preview {
   max-width: 1100px;
   margin: 0 auto;
+  padding: 180px 80px;
 }
 
 .collections-preview div {
-  padding-top: 40px;
+  margin-bottom: 120px;
 }
 
 .collections-preview h2 {
+  font-size: 28px;
   font-weight: 500;
+  margin-bottom: 12px;
 }
 
-/* LINK MICRO-INTERACTION */
-a {
-  transition: opacity 0.3s ease;
+.collections-preview a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #111;
+  letter-spacing: 0.8px;
+  opacity: 0.7;
 }
 
-a:hover {
+.collections-preview a:hover {
+  opacity: 0.4;
+}
+
+/* ============================= */
+/* CLOSING                       */
+/* ============================= */
+
+.closing {
+  display: flex;
+  justify-content: center;
+  padding: 200px 80px;
+}
+
+.closing p {
+  font-size: 22px;
+  max-width: 600px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+/* ============================= */
+/* FOOTER                        */
+/* ============================= */
+
+.site-footer {
+  padding: 100px 80px;
+  font-size: 12px;
   opacity: 0.6;
 }
 
 /* ============================= */
-/* SLIDE-IN SHOP PANEL           */
+/* SHOP SLIDE PANEL              */
 /* ============================= */
 
 .shop-panel {
   position: fixed;
   top: 0;
   right: 0;
-  width: 360px;
+  width: 380px;
   height: 100vh;
   background: #ededed;
-  padding: 140px 60px;
+  padding: 180px 60px;
   transform: translateX(100%);
-  transition: transform 0.45s ease;
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
   z-index: 2000;
 }
 
 .shop-panel a {
   display: block;
   font-size: 20px;
-  margin-bottom: 36px;
-  color: #111;
+  margin-bottom: 40px;
   text-decoration: none;
-  letter-spacing: 0.5px;
+  color: #111;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+.shop-panel a:hover {
+  opacity: 0.5;
 }
 
 .shop-panel.open {
@@ -96,7 +214,7 @@ a:hover {
 }
 
 /* ============================= */
-/* OVERLAY (OPTIONAL BUT LUXURY) */
+/* OVERLAY                       */
 /* ============================= */
 
 .overlay {
@@ -115,24 +233,31 @@ a:hover {
 }
 
 /* ============================= */
-/* RESPONSIVE (CLEAN MOBILE)     */
+/* MOBILE                        */
 /* ============================= */
 
 @media (max-width: 768px) {
+
   .site-header {
-    padding: 30px;
+    padding: 40px 30px;
   }
 
-  section {
-    padding: 100px 30px;
+  .nav a {
+    margin-left: 24px;
   }
 
   .hero h1 {
     font-size: 44px;
   }
 
+  .statement,
+  .collections-preview,
+  .closing {
+    padding: 120px 30px;
+  }
+
   .shop-panel {
     width: 100%;
-    padding: 120px 40px;
+    padding: 140px 40px;
   }
 }
