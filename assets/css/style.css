@@ -2,7 +2,9 @@
 /* RESET & BASE                  */
 /* ============================= */
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -42,12 +44,12 @@ body {
 }
 
 .site-loader span {
-  letter-spacing: 0.35em;
   font-size: 0.9rem;
+  letter-spacing: 0.35em;
 }
 
 /* ============================= */
-/* HEADER (FIXED PROPERLY)       */
+/* FIXED HEADER (SAFE)           */
 /* ============================= */
 
 .site-header {
@@ -75,14 +77,19 @@ body {
   color: #fff;
   font-size: 0.75rem;
   letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+.site-header .nav a:hover {
+  opacity: 1;
 }
 
 /* ============================= */
-/* MAIN PAGE OFFSET (THE FIX)    */
+/* PAGE OFFSET (CORE FIX)        */
 /* ============================= */
 
 .page {
-  padding-top: 140px; /* prevents header overlap */
+  padding-top: 140px; /* PREVENTS HEADER OVERLAP ON ALL PAGES */
 }
 
 /* ============================= */
@@ -104,16 +111,18 @@ body {
 
 .quiet {
   margin-top: 24px;
-  opacity: 0.7;
+  font-size: 0.9rem;
+  opacity: 0.6;
 }
 
 .luxury-strip {
   margin-top: 40px;
   display: flex;
+  flex-wrap: wrap;
   gap: 24px;
   font-size: 0.65rem;
   letter-spacing: 0.25em;
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 /* ============================= */
@@ -160,6 +169,7 @@ body {
 .message-trigger {
   cursor: pointer;
   font-size: 1.5rem;
+  opacity: 0.8;
 }
 
 .message-panel {
@@ -179,6 +189,7 @@ body {
   background: #000;
   border: 1px solid #333;
   color: #fff;
+  font-size: 0.85rem;
 }
 
 .message-form button {
@@ -186,6 +197,8 @@ body {
   color: #000;
   border: none;
   padding: 10px 24px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
   cursor: pointer;
 }
 
@@ -253,10 +266,11 @@ body {
 }
 
 /* ============================= */
-/* MOBILE FIX                    */
+/* MOBILE (IPHONE FIXED)         */
 /* ============================= */
 
 @media (max-width: 768px) {
+
   .site-header {
     height: 90px;
     padding: 0 24px;
@@ -274,5 +288,9 @@ body {
 
   .split-message {
     grid-template-columns: 1fr;
+  }
+
+  .site-header .nav a {
+    margin-left: 18px;
   }
 }
