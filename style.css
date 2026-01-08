@@ -297,15 +297,36 @@ body {
 /* ============================= */
 
 /* background layer */
+body {
+  background: #000;
+  overflow-x: hidden;
+}
+
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("assets/images/backgrounds/c-luxury-look.PNG") center center / cover no-repeat;
+
+  background-image: url("/assets/images/backgrounds/c-luxury-look.PNG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   transform: scale(1.05);
-  animation: bgFloat 30s ease-in-out infinite;
-  z-index: -1;
+  animation: bgFloat 30s ease-in-out infinite alternate;
+
+  z-index: 0;          /* 🔥 IMPORTANT */
+  pointer-events: none;
   will-change: transform;
+}
+
+/* keep all content above background */
+.page,
+nav,
+header,
+main {
+  position: relative;
+  z-index: 1;
 }
 
 /* subtle cinematic movement */
