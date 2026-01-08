@@ -48,13 +48,13 @@
   </div>
 
   <!-- LUXURY IDENTITY STRIP -->
-  <section class="luxury-strip">
+  <div class="luxury-strip">
     <span>LAGOS</span>
     <span>DYNASTY</span>
     <span>FORM</span>
     <span>CONTROL</span>
     <span>TIMELESS</span>
-  </section>
+  </div>
 
 </section>
 
@@ -132,9 +132,8 @@
   /* Loader */
   window.addEventListener("load", () => {
     const loader = document.querySelector(".site-loader");
-    setTimeout(() => {
-      loader.classList.add("hidden");
-    }, 800);
+    if (!loader) return;
+    setTimeout(() => loader.classList.add("hidden"), 800);
   });
 
   /* Shop panel */
@@ -142,36 +141,43 @@
   const panel = document.getElementById("shop-panel");
   const overlay = document.getElementById("overlay");
 
-  toggle.addEventListener("click", function (e) {
-    e.preventDefault();
-    panel.classList.add("open");
-    overlay.classList.add("show");
-  });
+  if (toggle && panel && overlay) {
+    toggle.addEventListener("click", e => {
+      e.preventDefault();
+      panel.classList.add("open");
+      overlay.classList.add("show");
+    });
 
-  overlay.addEventListener("click", function () {
-    panel.classList.remove("open");
-    overlay.classList.remove("show");
-  });
+    overlay.addEventListener("click", () => {
+      panel.classList.remove("open");
+      overlay.classList.remove("show");
+    });
+  }
 
   /* Message panel */
   const messageTrigger = document.getElementById("message-trigger");
   const messagePanel = document.getElementById("message-panel");
 
-  messageTrigger.addEventListener("click", function () {
-    messagePanel.classList.toggle("open");
-  });
+  if (messageTrigger && messagePanel) {
+    messageTrigger.addEventListener("click", () => {
+      messagePanel.classList.toggle("open");
+    });
+  }
 
   /* Scroll reveal */
   const reveals = document.querySelectorAll(".reveal");
-  window.addEventListener("scroll", () => {
+
+  const revealOnScroll = () => {
     reveals.forEach(el => {
       const top = el.getBoundingClientRect().top;
       if (top < window.innerHeight - 120) {
-        el.style.opacity = "1";
-        el.style.transform = "translateY(0)";
+        el.classList.add("active");
       }
     });
-  });
+  };
+
+  window.addEventListener("scroll", revealOnScroll);
+  revealOnScroll();
 </script>
 
 </body>
