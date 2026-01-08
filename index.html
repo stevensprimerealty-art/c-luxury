@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>C-LUXURY — Contemporary Form</title>
+  <title>C-LUXURY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="C-LUXURY — contemporary fashion defined by restraint and cultural confidence.">
+  <meta name="description" content="C-LUXURY — Presence without noise.">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -12,21 +12,22 @@
 
 <header class="site-header">
   <div class="brand">C-LUXURY</div>
+
   <nav class="nav">
     <a href="#" id="shop-toggle">Shop</a>
     <a href="lookbook.html">Lookbook</a>
     <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="account.html">Account</a>
   </nav>
 </header>
 
-<!-- QUIET CENTER TEXT (ABOVE HERO) -->
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- QUIET CENTER TEXT -->
 <main class="quiet top">
   <p>Presence without noise.</p>
 </main>
-
-<!-- OVERLAY -->
-<div class="overlay" id="overlay"></div>
 
 <!-- SLIDE-IN SHOP PANEL -->
 <div class="shop-panel" id="shop-panel">
@@ -36,59 +37,18 @@
   <a href="https://mrcharliestxs.myshopify.com/collections/signature">Signature</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>C-LUXURY</h1>
-</section>
-
-<!-- STATEMENT -->
-<section class="statement">
-  <p>
-    Contemporary form.<br>
-    Disciplined design.<br>
-    Cultural confidence.
-  </p>
-</section>
-
-<!-- COLLECTIONS -->
-<section class="collections-preview">
-  <div>
-    <h2>The Foundation</h2>
-    <a href="https://mrcharliestxs.myshopify.com/collections/foundation">View</a>
-  </div>
-
-  <div>
-    <h2>The Form Collection</h2>
-    <a href="https://mrcharliestxs.myshopify.com/collections/form">View</a>
-  </div>
-
-  <div>
-    <h2>Signature Pieces</h2>
-    <a href="https://mrcharliestxs.myshopify.com/collections/signature">View</a>
-  </div>
-</section>
-
-<!-- CLOSING -->
-<section class="closing">
-  <p>Designed to endure beyond the moment.</p>
-</section>
-
-<footer class="site-footer">
-  <p>C-LUXURY</p>
-</footer>
-
 <script>
   const toggle = document.getElementById("shop-toggle");
   const panel = document.getElementById("shop-panel");
   const overlay = document.getElementById("overlay");
 
-  toggle.addEventListener("click", function(e) {
+  toggle.addEventListener("click", function (e) {
     e.preventDefault();
     panel.classList.add("open");
     overlay.classList.add("show");
   });
 
-  overlay.addEventListener("click", function() {
+  overlay.addEventListener("click", function () {
     panel.classList.remove("open");
     overlay.classList.remove("show");
   });
