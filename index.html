@@ -10,6 +10,7 @@
 
 <body>
 
+<!-- HEADER -->
 <header class="site-header">
   <div class="brand">C-LUXURY</div>
 
@@ -20,6 +21,9 @@
     <a href="contact.html">Contact</a>
   </nav>
 </header>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
 
 <!-- SLIDE-IN SHOP PANEL -->
 <div class="shop-panel" id="shop-panel">
@@ -44,7 +48,7 @@
   </p>
 </section>
 
-<!-- COLLECTIONS -->
+<!-- COLLECTION PREVIEW -->
 <section class="collections-preview">
   <div>
     <h2>The Foundation</h2>
@@ -67,17 +71,26 @@
   <p>Designed to endure beyond the moment.</p>
 </section>
 
+<!-- FOOTER -->
 <footer class="site-footer">
   <p>C-LUXURY</p>
 </footer>
 
+<!-- SCRIPT -->
 <script>
   const toggle = document.getElementById("shop-toggle");
   const panel = document.getElementById("shop-panel");
+  const overlay = document.getElementById("overlay");
 
   toggle.addEventListener("click", function(e) {
     e.preventDefault();
     panel.classList.toggle("open");
+    overlay.classList.toggle("show");
+  });
+
+  overlay.addEventListener("click", function() {
+    panel.classList.remove("open");
+    overlay.classList.remove("show");
   });
 </script>
 
