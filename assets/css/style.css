@@ -10,7 +10,7 @@
 
 
 html {
-  font-size: 16px;
+  font-size: 100%;
 }
 
 html, body {
@@ -22,9 +22,9 @@ body {
   background: #000;
   color: #ffffff;
   line-height: 1.7;
+  font-size: 1rem; /* RESTORES NORMAL SCALE */
   -webkit-font-smoothing: antialiased;
 }
-
 /* ============================= */
 /* HEADER                        */
 /* ============================= */
@@ -309,32 +309,22 @@ body {
     padding: 36px 28px;
   }
 
-  .nav a {
-    font-size: 15px;
-  }
+ .nav a {
+  font-size: 1rem; /* 16px */
+}
 
-  .brand-mark h1 {
-    font-size: 56px;
-  }
+.brand-mark h1 {
+  font-size: 3.5rem; /* ~56px, keeps luxury scale */
+}
 
-  .quiet p {
-    font-size: 16px;
-  }
+.quiet p {
+  font-size: 1rem;
+}
 
-  .split-message {
-    grid-template-columns: 1fr;
-  }
+.product-card h3 {
+  font-size: 1.1rem;
+}
 
-  .product-grid {
-    grid-template-columns: 1fr;
-    padding: 120px 30px;
-  }
-
-  .product-card h3 {
-    font-size: 17px;
-  }
-
-  .product-card span {
-    font-size: 15px;
-  }
+.product-card span {
+  font-size: 0.95rem;
 }
