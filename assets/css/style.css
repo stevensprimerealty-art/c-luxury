@@ -114,14 +114,14 @@ body {
 /* QUIET CENTER TEXT             */
 /* ============================= */
 
-.quiet.top {
+.quiet {
   position: relative;
   z-index: 1;
   text-align: center;
   pointer-events: none;
 }
 
-.quiet.top p {
+.quiet p {
   font-size: 14px;
   letter-spacing: 2px;
   color: rgba(255,255,255,0.6);
