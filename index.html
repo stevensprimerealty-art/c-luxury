@@ -34,22 +34,20 @@
 </header>
 
 <!-- ============================= -->
-<!-- PAGE WRAPPER (CRITICAL FIX)  -->
+<!-- PAGE WRAPPER (CRITICAL)       -->
 <!-- ============================= -->
 <main class="page">
 
   <!-- ============================= -->
-  <!-- HERO SECTION                  -->
+  <!-- HERO                          -->
   <!-- ============================= -->
-  <section class="home-hero page-section">
+  <section class="home-hero">
 
     <div class="brand-mark">
       <h1>C-LUXURY</h1>
     </div>
 
-    <div class="quiet">
-      <p>Presence without noise.</p>
-    </div>
+    <p class="quiet">Presence without noise.</p>
 
     <div class="luxury-strip">
       <span>LAGOS</span>
@@ -62,9 +60,9 @@
   </section>
 
   <!-- ============================= -->
-  <!-- PRODUCT GRID                 -->
+  <!-- PRODUCT GRID                  -->
   <!-- ============================= -->
-  <section class="product-grid reveal page-section">
+  <section class="product-grid reveal">
 
     <article class="product-card">
       <img src="assets/images/products/product-01.jpg" alt="Foundation Jacket">
@@ -87,11 +85,11 @@
   </section>
 
   <!-- ============================= -->
-  <!-- SPLIT MESSAGE                -->
+  <!-- SPLIT MESSAGE                 -->
   <!-- ============================= -->
   <section class="split-message">
 
-    <div class="split-box left">
+    <div class="split-box">
       <p>
         Private enquiries,<br>
         collaborations,<br>
@@ -99,7 +97,7 @@
       </p>
     </div>
 
-    <div class="split-box right">
+    <div class="split-box">
       <div class="message-trigger" id="message-trigger">•••</div>
 
       <div class="message-panel" id="message-panel">
@@ -123,7 +121,9 @@
   /* Loader */
   window.addEventListener("load", () => {
     const loader = document.querySelector(".site-loader");
-    setTimeout(() => loader.classList.add("hidden"), 700);
+    if (loader) {
+      setTimeout(() => loader.classList.add("hidden"), 700);
+    }
   });
 
   /* Message panel */
