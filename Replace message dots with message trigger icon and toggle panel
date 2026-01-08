@@ -87,31 +87,32 @@
   <!-- ============================= -->
   <!-- SPLIT MESSAGE                 -->
   <!-- ============================= -->
-  <section class="split-message">
+<section class="split-message">
 
-    <div class="split-box">
-      <p>
-        Private enquiries,<br>
-        collaborations,<br>
-        or correspondence.
-      </p>
+  <div class="split-box">
+    <p>
+      Private enquiries,<br>
+      collaborations,<br>
+      or correspondence.
+    </p>
+  </div>
+
+  <div class="split-box">
+    <div class="message-trigger" id="message-trigger" aria-label="Open message">
+      📤
     </div>
 
-    <div class="split-box">
-      <div class="message-trigger" id="message-trigger">•••</div>
-
-      <div class="message-panel" id="message-panel">
-        <form class="message-form">
-          <input type="text" placeholder="Name" required>
-          <input type="email" placeholder="Email" required>
-          <textarea placeholder="Message" rows="4" required></textarea>
-          <button type="submit">Send</button>
-        </form>
-      </div>
+    <div class="message-panel" id="message-panel">
+      <form class="message-form">
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <textarea placeholder="Message" rows="4" required></textarea>
+        <button type="submit">Send</button>
+      </form>
     </div>
+  </div>
 
-  </section>
-
+</section>
 </main>
 
 <!-- ============================= -->
