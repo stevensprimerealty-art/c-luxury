@@ -8,146 +8,143 @@
   box-sizing: border-box;
 }
 
-
 html {
   font-size: 100%;
-}
-
-html, body {
-  height: 100%;
 }
 
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
   background: #000;
-  color: #ffffff;
+  color: #fff;
   line-height: 1.7;
-  font-size: 1rem; /* RESTORES NORMAL SCALE */
-  -webkit-font-smoothing: antialiased;
+  font-size: 1rem;
+  overflow-x: hidden;
 }
+
 /* ============================= */
-/* HEADER                        */
+/* SITE LOADER                   */
+/* ============================= */
+
+.site-loader {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.site-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.site-loader span {
+  letter-spacing: 0.35em;
+  font-size: 0.9rem;
+}
+
+/* ============================= */
+/* HEADER (FIXED PROPERLY)       */
 /* ============================= */
 
 .site-header {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  padding: 48px 80px;
+  height: 120px;
+  padding: 0 60px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.85);
+  justify-content: space-between;
+  background: #000;
   z-index: 1000;
-  transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease;
 }
 
-.site-header.scrolled {
-  background: rgba(0,0,0,0.95);
-  backdrop-filter: blur(6px);
-  padding: 32px 80px;
+.site-header .brand {
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
 }
 
-.brand {
-  font-size: 16px;
-  letter-spacing: 3px;
-  font-weight: 500;
-}
-
-.nav a {
-  margin-left: 48px;
-  font-size: 14px;
+.site-header .nav a {
+  margin-left: 32px;
   text-decoration: none;
   color: #fff;
-  letter-spacing: 1.5px;
-  opacity: 0.7;
-}
-
-.nav a:hover {
-  opacity: 0.4;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
 }
 
 /* ============================= */
-/* HOME HERO                     */
+/* MAIN PAGE OFFSET (THE FIX)    */
+/* ============================= */
+
+.page {
+  padding-top: 140px; /* prevents header overlap */
+}
+
+/* ============================= */
+/* HERO                          */
 /* ============================= */
 
 .home-hero {
-  height: 100vh;
-  padding-top: 160px;
-
-  background-image: url("../images/backgrounds/c-luxury-look.PNG");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  position: relative;
+  min-height: 80vh;
+  padding: 120px 60px 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-}
-
-.home-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: 0;
-}
-
-/* ============================= */
-/* BRAND MARK                    */
-/* ============================= */
-
-.brand-mark {
-  position: relative;
-  z-index: 1;
-  margin-bottom: 120px;
 }
 
 .brand-mark h1 {
-  font-size: 96px;
-  font-weight: 400;
-  letter-spacing: 6px;
+  font-size: clamp(3rem, 10vw, 7rem);
+  letter-spacing: 0.15em;
 }
-
-/* ============================= */
-/* QUIET CENTER TEXT             */
-/* ============================= */
 
 .quiet {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  pointer-events: none;
+  margin-top: 24px;
+  opacity: 0.7;
 }
-
-.quiet p {
-  font-size: 16px;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.6);
-}
-
-/* ============================= */
-/* LUXURY STRIP                  */
-/* ============================= */
 
 .luxury-strip {
+  margin-top: 40px;
   display: flex;
-  justify-content: center;
-  gap: 48px;
-  padding: 48px 0;
-  background: #000;
-}
-
-.luxury-strip span {
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.55);
+  gap: 24px;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  opacity: 0.6;
 }
 
 /* ============================= */
-/* SPLIT MESSAGE SECTION         */
+/* PRODUCT GRID                  */
+/* ============================= */
+
+.product-grid {
+  padding: 120px 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 60px;
+}
+
+.product-card img {
+  width: 100%;
+  display: block;
+}
+
+.product-card h3 {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+}
+
+.product-card span {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+/* ============================= */
+/* SPLIT MESSAGE                 */
 /* ============================= */
 
 .split-message {
@@ -157,107 +154,68 @@ body {
 }
 
 .split-box {
-  background: #f4f4f4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 80px;
+  padding: 120px 60px;
 }
-
-.split-box p {
-  font-size: 22px;
-  text-align: center;
-  color: #111;
-  line-height: 1.7;
-}
-
-/* ============================= */
-/* MESSAGE ICON + PANEL          */
-/* ============================= */
 
 .message-trigger {
-  width: 80px;
-  height: 80px;
-  border: 1px solid #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-}
-
-.message-trigger span {
-  font-size: 26px;
-  letter-spacing: 4px;
+  font-size: 1.5rem;
 }
 
 .message-panel {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  width: 320px;
-  background: #fff;
-  padding: 30px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  margin-top: 24px;
+  display: none;
 }
 
 .message-panel.open {
-  opacity: 1;
-  pointer-events: auto;
+  display: block;
 }
 
 .message-form input,
 .message-form textarea {
   width: 100%;
-  border: none;
-  border-bottom: 1px solid #111;
-  margin-bottom: 20px;
-  padding: 10px 0;
-  font-size: 14px;
-  background: transparent;
-}
-
-.message-form button {
-  border: 1px solid #111;
-  background: transparent;
-  padding: 12px 24px;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.message-form button:hover {
-  background: #111;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: #000;
+  border: 1px solid #333;
   color: #fff;
 }
 
+.message-form button {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
 /* ============================= */
-/* SHOP PANEL + OVERLAY          */
+/* SHOP PANEL                    */
 /* ============================= */
 
 .shop-panel {
   position: fixed;
   top: 0;
-  right: 0;
-  width: 380px;
+  right: -320px;
+  width: 320px;
   height: 100vh;
-  background: #ededed;
-  padding: 180px 60px;
-  transform: translateX(100%);
-  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
-  z-index: 2000;
+  background: #000;
+  padding: 120px 40px;
+  transition: right 0.4s ease;
+  z-index: 1200;
 }
 
 .shop-panel.open {
-  transform: translateX(0);
+  right: 0;
 }
 
 .shop-panel a {
   display: block;
-  font-size: 20px;
-  margin-bottom: 40px;
-  color: #111;
+  margin-bottom: 24px;
   text-decoration: none;
+  color: #fff;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
 }
 
 /* ============================= */
@@ -267,11 +225,11 @@ body {
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.6);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
-  z-index: 1500;
+  z-index: 1100;
 }
 
 .overlay.show {
@@ -280,51 +238,41 @@ body {
 }
 
 /* ============================= */
-/* PRODUCT GRID                  */
+/* REVEAL EFFECT                 */
 /* ============================= */
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 64px;
-  padding: 160px 80px;
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
 }
 
-.product-card h3 {
-  font-size: 16px;
-  letter-spacing: 2px;
-}
-
-.product-card span {
-  font-size: 14px;
-  color: rgba(255,255,255,0.55);
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ============================= */
-/* MOBILE                        */
+/* MOBILE FIX                    */
 /* ============================= */
 
 @media (max-width: 768px) {
   .site-header {
-    padding: 36px 28px;
+    height: 90px;
+    padding: 0 24px;
   }
 
- .nav a {
-  font-size: 1rem; /* 16px */
-}
+  .page {
+    padding-top: 110px;
+  }
 
-.brand-mark h1 {
-  font-size: 3.5rem; /* ~56px, keeps luxury scale */
-}
+  .home-hero,
+  .product-grid,
+  .split-box {
+    padding: 80px 24px;
+  }
 
-.quiet p {
-  font-size: 1rem;
-}
-
-.product-card h3 {
-  font-size: 1.1rem;
-}
-
-.product-card span {
-  font-size: 0.95rem;
+  .split-message {
+    grid-template-columns: 1fr;
+  }
 }
