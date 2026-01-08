@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 html, body {
   height: 100%;
 }
@@ -16,7 +20,7 @@ body {
   font-family: "Helvetica Neue", Arial, sans-serif;
   background: #000;
   color: #ffffff;
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -28,7 +32,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 50px 80px;
+  padding: 48px 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,18 +44,18 @@ body {
 .site-header.scrolled {
   background: rgba(0,0,0,0.95);
   backdrop-filter: blur(6px);
-  padding: 30px 80px;
+  padding: 32px 80px;
 }
 
 .brand {
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 3px;
   font-weight: 500;
 }
 
 .nav a {
   margin-left: 48px;
-  font-size: 12px;
+  font-size: 14px;
   text-decoration: none;
   color: #fff;
   letter-spacing: 1.5px;
@@ -63,12 +67,12 @@ body {
 }
 
 /* ============================= */
-/* HOME HERO (FIXED)             */
+/* HOME HERO                     */
 /* ============================= */
 
 .home-hero {
   height: 100vh;
-  padding-top: 160px; /* FIXES HEADER OVERLAP */
+  padding-top: 160px;
 
   background-image: url("../images/backgrounds/c-luxury-look.PNG");
   background-size: cover;
@@ -118,7 +122,7 @@ body {
 }
 
 .quiet p {
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 2px;
   color: rgba(255,255,255,0.6);
 }
@@ -131,12 +135,12 @@ body {
   display: flex;
   justify-content: center;
   gap: 48px;
-  padding: 40px 0;
+  padding: 48px 0;
   background: #000;
 }
 
 .luxury-strip span {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 2px;
   color: rgba(255,255,255,0.55);
 }
@@ -163,6 +167,7 @@ body {
   font-size: 22px;
   text-align: center;
   color: #111;
+  line-height: 1.7;
 }
 
 /* ============================= */
@@ -254,6 +259,10 @@ body {
   text-decoration: none;
 }
 
+/* ============================= */
+/* OVERLAY                       */
+/* ============================= */
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -280,24 +289,13 @@ body {
   padding: 160px 80px;
 }
 
-.product-card img {
-  width: 100%;
-  margin-bottom: 28px;
-  transition: transform 0.8s ease, opacity 0.6s ease;
-}
-
-.product-card:hover img {
-  transform: scale(1.04);
-  opacity: 0.95;
-}
-
 .product-card h3 {
-  font-size: 13px;
+  font-size: 16px;
   letter-spacing: 2px;
 }
 
 .product-card span {
-  font-size: 12px;
+  font-size: 14px;
   color: rgba(255,255,255,0.55);
 }
 
@@ -310,8 +308,16 @@ body {
     padding: 36px 28px;
   }
 
+  .nav a {
+    font-size: 15px;
+  }
+
   .brand-mark h1 {
     font-size: 56px;
+  }
+
+  .quiet p {
+    font-size: 16px;
   }
 
   .split-message {
@@ -321,5 +327,13 @@ body {
   .product-grid {
     grid-template-columns: 1fr;
     padding: 120px 30px;
+  }
+
+  .product-card h3 {
+    font-size: 17px;
+  }
+
+  .product-card span {
+    font-size: 15px;
   }
 }
