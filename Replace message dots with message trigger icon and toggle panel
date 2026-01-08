@@ -34,7 +34,7 @@
 </header>
 
 <!-- ============================= -->
-<!-- PAGE WRAPPER (CRITICAL)       -->
+<!-- PAGE WRAPPER                  -->
 <!-- ============================= -->
 <main class="page">
 
@@ -87,69 +87,79 @@
   <!-- ============================= -->
   <!-- SPLIT MESSAGE                 -->
   <!-- ============================= -->
-<section class="split-message">
+  <section class="split-message">
 
-  <div class="split-box">
-    <p>
-      Private enquiries,<br>
-      collaborations,<br>
-      or correspondence.
-    </p>
-  </div>
-
-  <div class="split-box">
-    <div class="message-trigger" id="message-trigger" aria-label="Open message">
-      📤
+    <div class="split-box">
+      <p>
+        Private enquiries,<br>
+        collaborations,<br>
+        or correspondence.
+      </p>
     </div>
 
-    <div class="message-panel" id="message-panel">
-      <form class="message-form">
-        <input type="text" placeholder="Name" required>
-        <input type="email" placeholder="Email" required>
-        <textarea placeholder="Message" rows="4" required></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  </div>
+    <div class="split-box">
 
-</section>
+      <div
+        class="message-trigger"
+        id="message-trigger"
+        aria-label="Open message"
+        role="button"
+      >
+        📤
+      </div>
+
+      <div class="message-panel" id="message-panel">
+        <form class="message-form">
+          <input type="text" placeholder="Name" required>
+          <input type="email" placeholder="Email" required>
+          <textarea placeholder="Message" rows="4" required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+
+    </div>
+
+  </section>
+
 </main>
 
 <!-- ============================= -->
 <!-- SCRIPTS                       -->
 <!-- ============================= -->
 <script>
-  /* Loader */
   window.addEventListener("load", () => {
+
+    /* Loader */
     const loader = document.querySelector(".site-loader");
     if (loader) {
       setTimeout(() => loader.classList.add("hidden"), 700);
     }
+
+    /* Message panel */
+    const trigger = document.getElementById("message-trigger");
+    const panel = document.getElementById("message-panel");
+
+    if (trigger && panel) {
+      trigger.addEventListener("click", () => {
+        panel.classList.toggle("open");
+      });
+    }
+
+    /* Scroll reveal */
+    const reveals = document.querySelectorAll(".reveal");
+
+    const revealOnScroll = () => {
+      reveals.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 120) {
+          el.classList.add("active");
+        }
+      });
+    };
+
+    revealOnScroll();
+    window.addEventListener("scroll", revealOnScroll);
+
   });
-
-  /* Message panel */
-  const trigger = document.getElementById("message-trigger");
-  const panel = document.getElementById("message-panel");
-
-  if (trigger && panel) {
-    trigger.addEventListener("click", () => {
-      panel.classList.toggle("open");
-    });
-  }
-
-  /* Scroll reveal */
-  const reveals = document.querySelectorAll(".reveal");
-
-  const revealOnScroll = () => {
-    reveals.forEach(el => {
-      if (el.getBoundingClientRect().top < window.innerHeight - 120) {
-        el.classList.add("active");
-      }
-    });
-  };
-
-  window.addEventListener("scroll", revealOnScroll);
-  revealOnScroll();
 </script>
 
 </body>
