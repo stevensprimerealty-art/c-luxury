@@ -10,7 +10,10 @@
 
 <body>
 
-<header class="site-header">
+<!-- ============================= -->
+<!-- HEADER                       -->
+<!-- ============================= -->
+<header class="site-header dark">
   <div class="brand">C-LUXURY</div>
 
   <nav class="nav">
@@ -24,19 +27,33 @@
 <!-- Overlay -->
 <div class="overlay" id="overlay"></div>
 
+<!-- ============================= -->
+<!-- HERO / BRAND STATEMENT       -->
+<!-- ============================= -->
 <section class="home-hero dark">
 
   <div class="brand-mark">
     <h1>C-LUXURY</h1>
   </div>
 
-  <main class="quiet top">
+  <div class="quiet">
     <p>Presence without noise.</p>
-  </main>
+  </div>
+
+  <!-- LUXURY IDENTITY STRIP -->
+  <section class="luxury-strip">
+    <span>LAGOS</span>
+    <span>DYNASTY</span>
+    <span>FORM</span>
+    <span>CONTROL</span>
+    <span>TIMELESS</span>
+  </section>
 
 </section>
 
-<!-- SLIDE-IN SHOP PANEL -->
+<!-- ============================= -->
+<!-- SLIDE-IN SHOP PANEL          -->
+<!-- ============================= -->
 <div class="shop-panel" id="shop-panel">
   <a href="https://mrcharliestxs.myshopify.com">Shop All</a>
   <a href="https://mrcharliestxs.myshopify.com/collections/foundation">Foundation</a>
@@ -45,12 +62,11 @@
 </div>
 
 <!-- ============================= -->
-<!-- BLACK SPLIT MESSAGE SECTION  -->
+<!-- SPLIT MESSAGE SECTION        -->
 <!-- ============================= -->
-
 <section class="split-message">
 
-  <!-- LEFT WHITE BLOCK -->
+  <!-- LEFT BLOCK -->
   <div class="split-box left">
     <p>
       Private enquiries,<br>
@@ -59,15 +75,15 @@
     </p>
   </div>
 
-  <!-- RIGHT WHITE BLOCK -->
+  <!-- RIGHT BLOCK -->
   <div class="split-box right">
 
-    <!-- ICON BOX -->
+    <!-- ICON TRIGGER -->
     <div class="message-trigger" id="message-trigger">
       <span>•••</span>
     </div>
 
-    <!-- HIDDEN MESSAGE FORM -->
+    <!-- MESSAGE PANEL -->
     <div class="message-panel" id="message-panel">
       <form class="message-form">
         <input type="text" placeholder="Name" required>
@@ -81,6 +97,9 @@
 
 </section>
 
+<!-- ============================= -->
+<!-- SCRIPTS                      -->
+<!-- ============================= -->
 <script>
   const toggle = document.getElementById("shop-toggle");
   const panel = document.getElementById("shop-panel");
