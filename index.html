@@ -22,7 +22,9 @@
 
     <div class="header-right">
       <button class="icon-btn" aria-label="Search">🔍</button>
-      <a href="cart.html" class="icon-btn cart" aria-label="Cart">🛒<span class="cart-count">0</span></a>
+      <a href="cart.html" class="icon-btn cart" aria-label="Cart">
+        🛒<span class="cart-count">0</span>
+      </a>
       <button class="icon-btn menu-toggle" aria-label="Menu">⋮</button>
     </div>
   </header>
@@ -79,12 +81,75 @@
       </div>
     </section>
 
+    <!-- NEW IN COLLECTION -->
+    <section class="new-in reveal">
+      <h3 class="new-in-sub">NEW IN COLLECTION</h3>
+      <h2 class="new-in-title">Dive into our collections</h2>
+      <a class="new-in-link" href="collections.html"><em>Shop New In</em></a>
+
+      <div class="new-in-grid">
+        <a
+          class="new-in-card"
+          href="https://mrcharliestxs.myshopify.com/products/punk-rock-lip-graphic-tee-2025-skeleton-band-back-print?variant=43781844467763"
+          target="_blank"
+          rel="noopener"
+        >
+          <img src="assets/images/punk-rock-tee.jpg" alt="Punk Rock Lip Graphic Tee — Skeleton Band Back Print">
+          <h4 class="new-in-name">Punk Rock Lip Graphic Tee — Skeleton Band Back Print</h4>
+          <p class="new-in-price">$22.26</p>
+        </a>
+
+        <a
+          class="new-in-card"
+          href="https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
+          target="_blank"
+          rel="noopener"
+        >
+          <img src="assets/images/blue-neon-wolf-slides.jpg" alt="Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides">
+          <h4 class="new-in-name">Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides</h4>
+          <p class="new-in-price">$51.76</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- FEATURE BANNERS -->
+    <section class="feature-banners">
+
+      <a
+        href="https://mrcharliestxs.myshopify.com/collections/all"
+        target="_blank"
+        rel="noopener"
+        class="feature-banner reveal"
+        style="background-image:url('assets/images/backgrounds/new-release.jpg')"
+        aria-label="New Release - Explore now"
+      >
+        <div class="feature-overlay">
+          <span class="feature-eyebrow">NEW RELEASE</span>
+          <span class="feature-cta">Explore now</span>
+        </div>
+      </a>
+
+      <a
+        href="https://mrcharliestxs.myshopify.com/collections/all"
+        target="_blank"
+        rel="noopener"
+        class="feature-banner reveal"
+        style="background-image:url('assets/images/backgrounds/new-collection.jpg')"
+        aria-label="From our new collection - Explore now"
+      >
+        <div class="feature-overlay">
+          <span class="feature-eyebrow">FROM OUR NEW COLLECTION</span>
+          <span class="feature-cta">Explore now</span>
+        </div>
+      </a>
+
+    </section>
+
     <!-- OWN THE LOOK -->
     <section class="own-look reveal">
       <div class="own-look-head">
         <h3 class="own-look-title">OWN THE LOOK</h3>
 
-        <!-- Nav bar like: < • • • • > -->
         <div class="own-look-nav" aria-label="Own the look navigation">
           <button class="own-look-arrow" id="own-prev" type="button" aria-label="Previous product">‹</button>
 
@@ -99,9 +164,7 @@
         </div>
       </div>
 
-      <!-- Swipe area -->
       <div class="own-look-stage" id="own-swipe">
-        <!-- ✅ FIX: give href + fallback src/text so it always works even before JS -->
         <a
           id="own-link"
           class="own-look-card"
@@ -145,26 +208,20 @@
   <script>
     window.addEventListener("load", () => {
 
-      /* ========================= */
-      /* HIDE LOADER               */
-      /* ========================= */
+      /* HIDE LOADER */
       setTimeout(() => {
         const loader = document.querySelector(".site-loader");
         if (loader) loader.classList.add("hidden");
       }, 700);
 
-      /* ========================= */
-      /* MENU TOGGLE               */
-      /* ========================= */
+      /* MENU TOGGLE */
       const menuToggle = document.querySelector(".menu-toggle");
       const menuPanel = document.querySelector(".menu-panel");
       if (menuToggle && menuPanel) {
         menuToggle.onclick = () => menuPanel.classList.toggle("open");
       }
 
-      /* ========================= */
-      /* HERO SLIDER               */
-      /* ========================= */
+      /* HERO SLIDER */
       const heroTitle = document.getElementById("hero-title");
       const heroSubtext = document.getElementById("hero-subtext");
       const heroDots = document.querySelectorAll(".hero-dots .dot");
@@ -244,13 +301,10 @@
         dot.onclick = () => { heroCurrent = i; changeHero(heroCurrent); startHeroAuto(); };
       });
 
-      // ✅ ensure first background is set immediately
       if (bgLayers[0]) bgLayers[0].style.backgroundImage = `url(${slides[0].image})`;
       startHeroAuto();
 
-      /* ========================= */
-      /* REVEAL ON SCROLL          */
-      /* ========================= */
+      /* REVEAL ON SCROLL */
       const revealEls = document.querySelectorAll(".reveal");
       if (revealEls.length) {
         const observer = new IntersectionObserver((entries) => {
@@ -265,9 +319,7 @@
         revealEls.forEach(el => observer.observe(el));
       }
 
-      /* ========================= */
-      /* OWN THE LOOK (AUTO + ARROWS + SWIPE) */
-      /* ========================= */
+      /* OWN THE LOOK */
       const ownDots = document.querySelectorAll(".own-dot");
       const ownImg = document.getElementById("own-img");
       const ownName = document.getElementById("own-name");
@@ -330,7 +382,6 @@
         ownDots.forEach(d => d.classList.remove("active"));
         if (ownDots[ownCurrent]) ownDots[ownCurrent].classList.add("active");
 
-        // uses your CSS class .own-look-card.own-fade { ... }
         ownCard.classList.add("own-fade");
         setTimeout(() => {
           const p = products[ownCurrent];
@@ -343,33 +394,14 @@
         }, 250);
       }
 
-      // dots click
       ownDots.forEach((dot, i) => {
-        dot.onclick = () => {
-          showSlide(i);
-          startOwnAuto();
-        };
+        dot.onclick = () => { showSlide(i); startOwnAuto(); };
       });
 
-      // arrows
-      if (ownPrev) {
-        ownPrev.onclick = () => {
-          showSlide(ownCurrent - 1);
-          startOwnAuto();
-        };
-      }
+      if (ownPrev) ownPrev.onclick = () => { showSlide(ownCurrent - 1); startOwnAuto(); };
+      if (ownNext) ownNext.onclick = () => { showSlide(ownCurrent + 1); startOwnAuto(); };
 
-      if (ownNext) {
-        ownNext.onclick = () => {
-          showSlide(ownCurrent + 1);
-          startOwnAuto();
-        };
-      }
-
-      // swipe (mobile)
-      let startX = 0;
-      let startY = 0;
-      let isSwiping = false;
+      let startX = 0, startY = 0, isSwiping = false;
 
       function onTouchStart(e) {
         const t = e.touches[0];
@@ -383,20 +415,15 @@
         const t = e.touches[0];
         const dx = t.clientX - startX;
         const dy = t.clientY - startY;
-
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 18) {
-          e.preventDefault();
-        }
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 18) e.preventDefault();
       }
 
       function onTouchEnd(e) {
         if (!isSwiping) return;
         isSwiping = false;
-
         const t = e.changedTouches[0];
         const dx = t.clientX - startX;
         const dy = t.clientY - startY;
-
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
           if (dx < 0) showSlide(ownCurrent + 1);
           else showSlide(ownCurrent - 1);
@@ -410,11 +437,9 @@
         swipeArea.addEventListener("touchend", onTouchEnd, { passive: true });
       }
 
-      // init own slider
       showSlide(0);
       startOwnAuto();
 
-      // pause auto slide when tab hidden
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
           stopOwnAuto();
