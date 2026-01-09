@@ -266,9 +266,103 @@ section {
 }
 
 /* ================================================= */
+/* NEW IN SECTION — EDITORIAL / INSPO STYLE          */
+/* ================================================= */
+.new-in{
+  padding: 90px 24px;
+  background: #ffffff;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.new-in-sub{
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.new-in-title{
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.new-in-link{
+  display: inline-block;
+  font-style: italic;
+  text-decoration: underline;
+  color: #111;
+  margin-bottom: 44px;
+}
+
+/* product grid */
+.new-in-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  align-items: start;
+}
+
+/* product card */
+.new-in-card{
+  text-decoration: none;
+  color: #111;
+  display: block;
+  text-align: left;
+}
+
+.new-in-card img{
+  width: 100%;
+  display: block;
+  background: #f5f5f5;
+  border-radius: 10px;
+  transition: opacity .25s ease, transform .25s ease;
+  will-change: transform, opacity;
+}
+
+.new-in-card:hover img{
+  opacity: 0.9;
+  transform: translateY(-3px);
+}
+
+.new-in-name{
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  line-height: 1.35;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+.new-in-price{
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* mobile */
+@media (max-width: 768px){
+  .new-in{
+    padding: 70px 20px;
+  }
+
+  .new-in-grid{
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .new-in-title{
+    font-size: 20px;
+  }
+}
+
+/* ================================================= */
 /* COLLECTIONS PAGE — FINAL                          */
 /* ================================================= */
-
 .collections-page {
   background: #ffffff;
   padding: 80px 40px;
@@ -346,5 +440,30 @@ section {
 @media (max-width: 768px) {
   .collection-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ================================================= */
+/* SMOOTH FADE-IN ON SCROLL (NO GLITCH)              */
+/* ================================================= */
+/* Add class="reveal" to any section you want animated */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .8s ease, transform .8s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce){
+  .reveal{
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
