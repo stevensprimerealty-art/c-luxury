@@ -31,12 +31,13 @@ body {
 }
 
 /* ============================= */
-/* PAGE LAYERING                 */
+/* PAGE LAYERING (CRITICAL)      */
 /* ============================= */
 .page,
 header,
 nav,
-main {
+main,
+section {
   position: relative;
   z-index: 1;
   background: #ffffff;
@@ -112,7 +113,7 @@ main {
   overflow: hidden;
 }
 
-/* background layers */
+/* background images */
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -135,7 +136,7 @@ main {
 }
 
 /* ============================= */
-/* HERO TEXT (LUXURY SCALE)      */
+/* HERO TEXT (STABLE)            */
 /* ============================= */
 .brand-mark h1 {
   font-size: 34px;
@@ -158,7 +159,7 @@ main {
 }
 
 /* ============================= */
-/* HERO NAVIGATION               */
+/* HERO NAVIGATION  < • >        */
 /* ============================= */
 .hero-nav {
   margin-top: 40px;
@@ -172,7 +173,7 @@ main {
   background: none;
   border: none;
   color: #ffffff;
-  font-size: 28px;
+  font-size: 26px;
   cursor: pointer;
   opacity: 0.7;
   transition: opacity .3s ease;
@@ -182,17 +183,19 @@ main {
   opacity: 1;
 }
 
+/* horizontal dots */
 .hero-dots {
   display: flex;
   gap: 10px;
 }
 
 .hero-dots .dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: rgba(255,255,255,.4);
   cursor: pointer;
+  transition: background .3s ease;
 }
 
 .hero-dots .dot.active {
