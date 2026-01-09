@@ -40,7 +40,6 @@ main,
 section {
   position: relative;
   z-index: 1;
-  background: #ffffff;
 }
 
 /* ============================= */
@@ -80,13 +79,13 @@ section {
 }
 
 .brand {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 3px;
 }
 
 .nav a {
   margin-left: 20px;
-  font-size: 12px;
+  font-size: 11px;
   text-decoration: none;
   letter-spacing: 1px;
   color: #111;
@@ -100,7 +99,7 @@ section {
 }
 
 /* ============================= */
-/* HERO SLIDER (CINEMATIC)       */
+/* HERO SLIDER                   */
 /* ============================= */
 .home-hero {
   position: relative;
@@ -133,10 +132,20 @@ section {
   position: relative;
   z-index: 2;
   color: #ffffff;
+  transition: opacity .6s ease;
+}
+
+/* fade animation */
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
 }
 
 /* ============================= */
-/* HERO TEXT (STABLE)            */
+/* HERO TEXT                     */
 /* ============================= */
 .brand-mark h1 {
   font-size: 34px;
@@ -156,6 +165,9 @@ section {
   font-size: 11px;
   letter-spacing: 2px;
   opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
 }
 
 /* ============================= */
@@ -169,7 +181,9 @@ section {
   gap: 18px;
 }
 
-.hero-arrow {
+/* arrows — FIXED to match HTML buttons */
+#prev-slide,
+#next-slide {
   background: none;
   border: none;
   color: #ffffff;
@@ -179,11 +193,12 @@ section {
   transition: opacity .3s ease;
 }
 
-.hero-arrow:hover {
+#prev-slide:hover,
+#next-slide:hover {
   opacity: 1;
 }
 
-/* horizontal dots */
+/* dots — horizontal */
 .hero-dots {
   display: flex;
   gap: 10px;
@@ -261,18 +276,4 @@ section {
 
 .message-panel.open {
   display: block;
-}
-
-/* ============================= */
-/* SCROLL REVEAL                 */
-/* ============================= */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.2s ease;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
 }
