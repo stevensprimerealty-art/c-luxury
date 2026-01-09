@@ -10,9 +10,7 @@
 /* ============================= */
 /* BASE                          */
 /* ============================= */
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -25,9 +23,7 @@ body {
   animation-delay: 0.4s;
 }
 
-@keyframes pageFadeIn {
-  to { opacity: 1; }
-}
+@keyframes pageFadeIn { to { opacity: 1; } }
 
 /* ============================= */
 /* PAGE LAYERING                 */
@@ -144,9 +140,7 @@ section {
   z-index: 1001;
 }
 
-.menu-panel.open {
-  display: flex;
-}
+.menu-panel.open { display: flex; }
 
 .menu-panel a {
   text-decoration: none;
@@ -158,9 +152,7 @@ section {
 /* ============================= */
 /* PAGE OFFSET                   */
 /* ============================= */
-.page {
-  padding-top: 160px;
-}
+.page { padding-top: 160px; }
 
 /* ============================= */
 /* HERO SLIDER                   */
@@ -185,9 +177,7 @@ section {
   transition: opacity 1.6s ease-in-out;
 }
 
-.hero-bg.active {
-  opacity: 1;
-}
+.hero-bg.active { opacity: 1; }
 
 .hero-content {
   position: relative;
@@ -247,9 +237,7 @@ section {
 }
 
 #prev-slide:hover,
-#next-slide:hover {
-  opacity: 1;
-}
+#next-slide:hover { opacity: 1; }
 
 .hero-dots {
   display: flex;
@@ -264,9 +252,7 @@ section {
   cursor: pointer;
 }
 
-.hero-dots .dot.active {
-  background: #ffffff;
-}
+.hero-dots .dot.active { background: #ffffff; }
 
 /* ================================================= */
 /* NEW IN SECTION — EDITORIAL / INSPO STYLE          */
@@ -350,26 +336,15 @@ section {
 
 /* mobile */
 @media (max-width: 768px){
-  .new-in{
-    padding: 70px 20px;
-  }
-
-  .new-in-grid{
-    grid-template-columns: 1fr;
-    gap: 34px;
-  }
-
-  .new-in-title{
-    font-size: 20px;
-  }
+  .new-in{ padding: 70px 20px; }
+  .new-in-grid{ grid-template-columns: 1fr; gap: 34px; }
+  .new-in-title{ font-size: 20px; }
 }
 
 /* ================================================= */
 /* FEATURE BANNERS (NEW RELEASE / NEW COLLECTION)    */
 /* ================================================= */
-.feature-banners{
-  width: 100%;
-}
+.feature-banners{ width: 100%; }
 
 .feature-banner{
   position: relative;
@@ -384,7 +359,6 @@ section {
   overflow: hidden;
 }
 
-/* soft dark fade so text is readable */
 .feature-banner::after{
   content: "";
   position: absolute;
@@ -397,7 +371,6 @@ section {
   );
 }
 
-/* text block placement (bottom-left) */
 .feature-overlay{
   position: absolute;
   left: 22px;
@@ -409,7 +382,6 @@ section {
   gap: 14px;
 }
 
-/* “NEW RELEASE / FROM OUR NEW COLLECTION” */
 .feature-eyebrow{
   font-size: 11px;
   letter-spacing: 4px;
@@ -417,7 +389,6 @@ section {
   opacity: .95;
 }
 
-/* “Explore now” */
 .feature-cta{
   font-size: 14px;
   letter-spacing: 2px;
@@ -427,19 +398,142 @@ section {
   opacity: .95;
 }
 
-.feature-banner:hover .feature-cta{
+.feature-banner:hover .feature-cta{ opacity: 1; }
+
+@media (max-width: 768px){
+  .feature-banner{ height: 70vh; min-height: 480px; }
+  .feature-overlay{ left: 18px; bottom: 24px; }
+}
+
+/* ================================================= */
+/* OWN THE LOOK — PRODUCT FEATURE (MATCH YOUR HTML)  */
+/* ================================================= */
+.own-look{
+  padding: 90px 24px 70px;
+  background: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.own-look-head{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+
+.own-look-title{
+  font-size: 14px;
+  letter-spacing: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.own-look-dots{
+  display: flex;
+  gap: 10px;
+}
+
+.own-dot{
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(17,17,17,.25);
+  cursor: pointer;
+}
+
+.own-dot.active{ background: #111; }
+
+.own-look-stage{
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.own-look-card{
+  display: block;
+  text-decoration: none;
+  color: #111;
+  transition: opacity .26s ease; /* used by JS fade */
+}
+
+.own-look-card.own-fade{ opacity: 0; }
+
+.own-look-image{
+  position: relative;
+  background: #f5f5f5;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+
+.own-look-image img{
+  width: 100%;
+  display: block;
+}
+
+/* QUICK VIEW overlay */
+.own-quickview{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17,17,17,.88);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .25s ease, transform .25s ease;
+  will-change: opacity, transform;
+}
+
+.own-look-card:hover .own-quickview{
   opacity: 1;
+  transform: translateY(0);
+}
+
+@media (hover: none){
+  .own-quickview{
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.own-look-info{
+  text-align: center;
+  padding: 22px 10px 0;
+}
+
+.own-look-info h4{
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.own-look-info p{
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0;
 }
 
 @media (max-width: 768px){
-  .feature-banner{
-    height: 70vh;
-    min-height: 480px;
-  }
-  .feature-overlay{
-    left: 18px;
-    bottom: 24px;
-  }
+  .own-look{ padding: 70px 20px 60px; }
+  .own-look-stage{ max-width: 420px; }
+  .own-look-info h4,
+  .own-look-info p{ font-size: 17px; }
 }
 
 /* ================================================= */
@@ -472,207 +566,6 @@ section {
 }
 
 /* ================================================= */
-/* OWN THE LOOK — PRODUCT SLIDER (INSPO STYLE)       */
-/* ================================================= */
-/* Use these classes in your HTML:
-   section.own-look
-   .own-look-head (title + nav)
-   .own-look-title
-   .own-look-nav (arrows + dots)
-   button.own-look-arrow
-   .own-look-dots .dot
-   .own-look-viewport
-   .own-look-slide (one slide)
-   a.own-look-card (click opens Shopify)
-   .own-look-media img
-   .own-look-quickview
-   .own-look-meta (name + price)
-*/
-
-.own-look{
-  padding: 90px 24px 70px;
-  background: #fff;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.own-look-head{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  margin-bottom: 26px;
-}
-
-.own-look-title{
-  font-size: 14px;
-  letter-spacing: 4px;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 1.2;
-}
-
-/* nav bar like < • • • • > */
-.own-look-nav{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-}
-
-.own-look-arrow{
-  background: none;
-  border: none;
-  font-size: 22px;
-  cursor: pointer;
-  color: #111;
-  opacity: .6;
-  padding: 6px 10px;
-}
-
-.own-look-arrow:hover{ opacity: 1; }
-
-.own-look-dots{
-  display: flex;
-  gap: 10px;
-}
-
-.own-look-dots .dot{
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: rgba(17,17,17,.25);
-  cursor: pointer;
-}
-
-.own-look-dots .dot.active{
-  background: #111;
-}
-
-/* slide viewport */
-.own-look-viewport{
-  position: relative;
-  width: 100%;
-  max-width: 520px;        /* keeps it centered like inspo */
-  margin: 0 auto;
-}
-
-/* FADE + SLIGHT LIFT (NO GLITCH) */
-.own-look-slide{
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: translateY(10px);
-  pointer-events: none;
-  transition: opacity .55s ease, transform .55s ease;
-  will-change: opacity, transform;
-}
-
-.own-look-slide.active{
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-  position: relative;      /* active slide takes space */
-}
-
-/* card link */
-.own-look-card{
-  display: block;
-  text-decoration: none;
-  color: #111;
-}
-
-/* image */
-.own-look-media{
-  position: relative;
-  background: #f5f5f5;
-  border: 1px solid #eee;
-  overflow: hidden;
-}
-
-.own-look-media img{
-  width: 100%;
-  display: block;
-}
-
-/* QUICK VIEW bar overlay (like inspo) */
-.own-look-quickview{
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(17,17,17,.88);
-  color: #fff;
-  font-size: 12px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity .25s ease, transform .25s ease;
-  will-change: opacity, transform;
-}
-
-/* show quick view on hover (desktop) */
-.own-look-card:hover .own-look-quickview{
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* always visible on touch devices (no hover) */
-@media (hover: none){
-  .own-look-quickview{
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* name + price center */
-.own-look-meta{
-  text-align: center;
-  padding: 22px 10px 0;
-}
-
-.own-look-name{
-  font-size: 18px;
-  letter-spacing: 1px;
-  font-weight: 600;
-  text-transform: uppercase;
-  line-height: 1.25;
-  margin-bottom: 10px;
-}
-
-.own-look-price{
-  font-size: 18px;
-  letter-spacing: 1px;
-  font-weight: 400;
-  margin: 0;
-}
-
-/* spacing under slider like your inspo */
-.own-look-spacer{
-  height: 34px;
-}
-
-/* mobile tweaks */
-@media (max-width: 768px){
-  .own-look{
-    padding: 70px 20px 60px;
-  }
-  .own-look-viewport{
-    max-width: 420px;
-  }
-  .own-look-name,
-  .own-look-price{
-    font-size: 17px;
-  }
-}
-
-/* ================================================= */
 /* COLLECTIONS PAGE — FINAL                          */
 /* ================================================= */
 .collections-page {
@@ -680,12 +573,8 @@ section {
   padding: 80px 40px;
 }
 
-/* each season */
-.collection-section {
-  margin-bottom: 100px;
-}
+.collection-section { margin-bottom: 100px; }
 
-/* title */
 .collection-title {
   font-size: 14px;
   letter-spacing: 3px;
@@ -693,7 +582,6 @@ section {
   text-transform: uppercase;
 }
 
-/* split image layout */
 .collection-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -712,14 +600,8 @@ section {
   background: #f5f5f5;
 }
 
-/* hover luxury effect */
-.collection-item:hover img {
-  opacity: 0.85;
-}
+.collection-item:hover img { opacity: 0.85; }
 
-/* ============================= */
-/* COLLECTION FOOTER             */
-/* ============================= */
 .collections-footer {
   text-align: center;
   margin-top: 120px;
@@ -746,13 +628,8 @@ section {
   color: #fff;
 }
 
-/* ============================= */
-/* RESPONSIVE                    */
-/* ============================= */
 @media (max-width: 768px) {
-  .collection-grid {
-    grid-template-columns: 1fr;
-  }
+  .collection-grid { grid-template-columns: 1fr; }
 }
 
 /* ================================================= */
@@ -772,10 +649,12 @@ section {
 
 /* Respect reduced-motion settings */
 @media (prefers-reduced-motion: reduce){
-  .reveal,
-  .own-look-slide{
+  .reveal{
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+  .own-look-card{
     transition: none;
   }
 }
