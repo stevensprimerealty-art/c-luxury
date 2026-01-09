@@ -53,6 +53,8 @@ section {
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  font-size: 14px;
+  letter-spacing: 4px;
   transition: opacity 1s ease;
 }
 
@@ -78,24 +80,94 @@ section {
   z-index: 1000;
 }
 
-.brand {
-  font-size: 13px;
-  letter-spacing: 3px;
+.header-left .brand {
+  font-size: 14px;
+  letter-spacing: 4px;
 }
 
-.nav a {
-  margin-left: 20px;
-  font-size: 11px;
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* icon buttons */
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #111;
+  position: relative;
+}
+
+/* cart count */
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: #111;
+  color: #fff;
+  font-size: 9px;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+/* ============================= */
+/* SHOP NOW BAR                  */
+/* ============================= */
+.shop-now-bar {
+  position: fixed;
+  top: 80px;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background: #111;
+  color: #fff;
   text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2px;
+  z-index: 999;
+}
+
+/* ============================= */
+/* MENU PANEL                    */
+/* ============================= */
+.menu-panel {
+  position: fixed;
+  top: 120px;
+  right: 24px;
+  background: #ffffff;
+  border: 1px solid #eee;
+  padding: 16px 20px;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1001;
+}
+
+.menu-panel.open {
+  display: flex;
+}
+
+.menu-panel a {
+  text-decoration: none;
+  font-size: 12px;
   letter-spacing: 1px;
   color: #111;
+}
+
+.menu-panel hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 8px 0;
 }
 
 /* ============================= */
 /* PAGE OFFSET                   */
 /* ============================= */
 .page {
-  padding-top: 120px;
+  padding-top: 160px;
 }
 
 /* ============================= */
@@ -112,7 +184,7 @@ section {
   overflow: hidden;
 }
 
-/* background images */
+/* background layers */
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -135,14 +207,8 @@ section {
   transition: opacity .6s ease;
 }
 
-/* fade animation */
-.fade-in {
-  opacity: 1;
-}
-
-.fade-out {
-  opacity: 0;
-}
+.fade-in { opacity: 1; }
+.fade-out { opacity: 0; }
 
 /* ============================= */
 /* HERO TEXT                     */
@@ -181,7 +247,6 @@ section {
   gap: 18px;
 }
 
-/* arrows — FIXED to match HTML buttons */
 #prev-slide,
 #next-slide {
   background: none;
@@ -198,7 +263,7 @@ section {
   opacity: 1;
 }
 
-/* dots — horizontal */
+/* dots */
 .hero-dots {
   display: flex;
   gap: 10px;
@@ -210,7 +275,6 @@ section {
   border-radius: 50%;
   background: rgba(255,255,255,.4);
   cursor: pointer;
-  transition: background .3s ease;
 }
 
 .hero-dots .dot.active {
@@ -271,7 +335,6 @@ section {
 
 .message-panel {
   display: none;
-  margin-top: 20px;
 }
 
 .message-panel.open {
