@@ -23,11 +23,12 @@
   <div class="header-right">
     <button class="icon-btn" aria-label="Search">🔍</button>
 
-    <a href="cart.html" class="icon-btn cart">
-      🛒<span class="cart-count">0</span>
+    <a href="cart.html" class="icon-btn cart" aria-label="Cart">
+      🛒
+      <span class="cart-count">0</span>
     </a>
 
-    <button class="icon-btn menu-toggle" aria-label="Menu">☰</button>
+    <button class="icon-btn menu-toggle" aria-label="Menu">⋮</button>
   </div>
 </header>
 
@@ -37,7 +38,7 @@
   target="_blank"
   class="shop-now-bar"
 >
-  Shop Now
+  SHOP NOW →
 </a>
 
 <!-- MENU PANEL -->
@@ -45,6 +46,7 @@
   <a href="index.html">Home</a>
   <a href="collections.html">Collections</a>
   <a href="about.html">About</a>
+  <hr>
   <a href="login.html">👤 Register / Login</a>
 </nav>
 
@@ -57,10 +59,12 @@
     <div class="hero-bg active"></div>
     <div class="hero-bg"></div>
 
-    <!-- content -->
+    <!-- hero content -->
     <div class="hero-content fade-in">
       <div class="brand-mark">
-        <h1 id="hero-title">A NEW YEAR<br>CURATED FOR YOU</h1>
+        <h1 id="hero-title">
+          A NEW YEAR<br>CURATED FOR YOU
+        </h1>
       </div>
 
       <p class="quiet" id="hero-subtext">
@@ -79,24 +83,27 @@
       <!-- HERO NAV -->
       <div class="hero-nav">
         <button id="prev-slide" class="hero-arrow">‹</button>
+
         <div class="hero-dots">
           <span class="dot active"></span>
           <span class="dot"></span>
           <span class="dot"></span>
         </div>
+
         <button id="next-slide" class="hero-arrow">›</button>
       </div>
     </div>
-  </section>
 
+  </section>
 </main>
 
 <script>
 window.addEventListener("load", () => {
 
-  setTimeout(() =>
-    document.querySelector(".site-loader").classList.add("hidden"), 700
-  );
+  /* hide loader */
+  setTimeout(() => {
+    document.querySelector(".site-loader").classList.add("hidden");
+  }, 700);
 
   const heroTitle = document.getElementById("hero-title");
   const heroSubtext = document.getElementById("hero-subtext");
@@ -171,9 +178,12 @@ window.addEventListener("load", () => {
     changeSlide(current);
   }, 6500);
 
-  // menu toggle
-  document.querySelector(".menu-toggle").onclick = () => {
-    document.querySelector(".menu-panel").classList.toggle("open");
+  /* menu toggle */
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuPanel = document.querySelector(".menu-panel");
+
+  menuToggle.onclick = () => {
+    menuPanel.classList.toggle("open");
   };
 });
 </script>
