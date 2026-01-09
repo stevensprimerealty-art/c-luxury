@@ -107,6 +107,17 @@ section {
   border-radius: 50%;
 }
 
+/* Nice focus for keyboard users */
+.icon-btn:focus-visible,
+.menu-panel a:focus-visible,
+.hero-nav button:focus-visible,
+.own-look-nav button:focus-visible,
+.own-dot:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 /* ============================= */
 /* SHOP NOW BAR                  */
 /* ============================= */
@@ -138,6 +149,7 @@ section {
   flex-direction: column;
   gap: 12px;
   z-index: 1001;
+  box-shadow: 0 12px 40px rgba(0,0,0,.08);
 }
 
 .menu-panel.open { display: flex; }
@@ -147,6 +159,12 @@ section {
   font-size: 12px;
   letter-spacing: 1px;
   color: #111;
+}
+
+.menu-panel hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 6px 0;
 }
 
 /* ============================= */
@@ -168,6 +186,21 @@ section {
   overflow: hidden;
 }
 
+/* Make text readable on bright photos */
+.home-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.45) 0%,
+    rgba(0,0,0,.18) 45%,
+    rgba(0,0,0,.10) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -175,6 +208,7 @@ section {
   background-position: center;
   opacity: 0;
   transition: opacity 1.6s ease-in-out;
+  transform: translateZ(0);
 }
 
 .hero-bg.active { opacity: 1; }
@@ -184,6 +218,7 @@ section {
   z-index: 2;
   color: #ffffff;
   transition: opacity .55s ease;
+  text-shadow: 0 10px 30px rgba(0,0,0,.28);
 }
 
 .fade-in { opacity: 1; }
@@ -202,7 +237,7 @@ section {
   margin-top: 14px;
   font-size: 14px;
   font-weight: 300;
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 .luxury-strip {
@@ -234,6 +269,7 @@ section {
   font-size: 26px;
   cursor: pointer;
   opacity: 0.7;
+  padding: 6px 10px;
 }
 
 #prev-slide:hover,
@@ -359,6 +395,7 @@ section {
   overflow: hidden;
 }
 
+/* soft dark fade so text is readable */
 .feature-banner::after{
   content: "";
   position: absolute;
@@ -371,6 +408,7 @@ section {
   );
 }
 
+/* text block placement (bottom-left) */
 .feature-overlay{
   position: absolute;
   left: 22px;
@@ -415,11 +453,13 @@ section {
   margin: 0 auto;
 }
 
+/* title centered + nav (dots + arrows) */
 .own-look-head{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 14px;
   margin-bottom: 26px;
 }
 
@@ -432,11 +472,33 @@ section {
   line-height: 1.2;
 }
 
+/* Nav bar like: < • • • • > */
+.own-look-nav{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.own-look-arrow{
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #111;
+  opacity: .6;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+.own-look-arrow:hover{ opacity: 1; }
+
 .own-look-dots{
   display: flex;
   gap: 10px;
 }
 
+/* Dot buttons */
 .own-dot{
   width: 7px;
   height: 7px;
@@ -448,19 +510,23 @@ section {
 
 .own-dot.active{ background: #111; }
 
+/* stage/viewport */
 .own-look-stage{
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
 }
 
+/* card link */
 .own-look-card{
   display: block;
   text-decoration: none;
   color: #111;
-  transition: opacity .26s ease; /* used by JS fade */
+  transition: opacity .26s ease;
+  will-change: opacity;
 }
 
+/* used by JS for smooth fade when changing product */
 .own-look-card.own-fade{ opacity: 0; }
 
 .own-look-image{
@@ -468,14 +534,16 @@ section {
   background: #f5f5f5;
   border: 1px solid #eee;
   overflow: hidden;
+  border-radius: 0; /* inspo is sharp edges */
 }
 
+/* prevent layout shift before image loads */
 .own-look-image img{
   width: 100%;
   display: block;
 }
 
-/* QUICK VIEW overlay */
+/* QUICK VIEW overlay (like inspo) */
 .own-quickview{
   position: absolute;
   left: 0;
@@ -501,6 +569,7 @@ section {
   transform: translateY(0);
 }
 
+/* always visible on touch devices (no hover) */
 @media (hover: none){
   .own-quickview{
     opacity: 1;
@@ -647,14 +716,20 @@ section {
   transform: translateY(0);
 }
 
-/* Respect reduced-motion settings */
+/* ================================================= */
+/* REDUCED MOTION (ACCESSIBLE)                       */
+/* ================================================= */
 @media (prefers-reduced-motion: reduce){
+  body{ animation: none; opacity: 1; }
   .reveal{
     opacity: 1;
     transform: none;
     transition: none;
   }
-  .own-look-card{
-    transition: none;
+  .hero-bg,
+  .hero-content,
+  .own-look-card,
+  .own-quickview{
+    transition: none !important;
   }
 }
