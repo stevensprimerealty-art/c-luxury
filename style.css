@@ -31,10 +31,8 @@ body {
 }
 
 /* ============================= */
-/* PAGE LAYERING (FIX)           */
+/* PAGE LAYERING                 */
 /* ============================= */
-/* ❌ removed section background */
-/* ✅ hero can now show */
 .page,
 header,
 nav,
@@ -101,7 +99,7 @@ main {
 }
 
 /* ============================= */
-/* HERO SLIDER (FINAL FIX)       */
+/* HERO SLIDER (CINEMATIC)       */
 /* ============================= */
 .home-hero {
   position: relative;
@@ -111,43 +109,36 @@ main {
   justify-content: center;
   text-align: center;
   padding: 60px;
+  overflow: hidden;
+}
 
+/* background layers */
+.hero-bg {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-
-  animation: heroSlider 18s infinite ease-in-out;
+  opacity: 0;
+  transition: opacity 1.6s ease-in-out;
+  z-index: 0;
 }
 
-/* no overlay */
-.home-hero::before {
-  content: none;
+.hero-bg.active {
+  opacity: 1;
 }
 
-/* ✅ EXACT filename match */
-@keyframes heroSlider {
-  0%, 33% {
-    background-image: url("assets/images/hero/hero.PNG");
-  }
-  34%, 66% {
-    background-image: url("assets/images/hero/hero-2.PNG");
-  }
-  67%, 100% {
-    background-image: url("assets/images/hero/hero-3.PNG");
-  }
-}
-
-/* ============================= */
-/* HERO TEXT (LUXURY SCALE)      */
-/* ============================= */
-.home-hero > * {
+/* hero content */
+.hero-content {
   position: relative;
   z-index: 2;
   color: #ffffff;
 }
 
+/* ============================= */
+/* HERO TEXT (LUXURY SCALE)      */
+/* ============================= */
 .brand-mark h1 {
-  font-size: 34px;              /* smaller */
+  font-size: 34px;
   font-weight: 300;
   letter-spacing: 4px;
 }
@@ -164,6 +155,48 @@ main {
   font-size: 11px;
   letter-spacing: 2px;
   opacity: 0.8;
+}
+
+/* ============================= */
+/* HERO NAVIGATION               */
+/* ============================= */
+.hero-nav {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.hero-arrow {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity .3s ease;
+}
+
+.hero-arrow:hover {
+  opacity: 1;
+}
+
+.hero-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.hero-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.4);
+  cursor: pointer;
+}
+
+.hero-dots .dot.active {
+  background: #ffffff;
 }
 
 /* ============================= */
