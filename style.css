@@ -31,8 +31,10 @@ body {
 }
 
 /* ============================= */
-/* PAGE LAYERING (FIXED)         */
+/* PAGE LAYERING (FIX)           */
 /* ============================= */
+/* ❌ removed section background */
+/* ✅ hero can now show */
 .page,
 header,
 nav,
@@ -43,7 +45,7 @@ main {
 }
 
 /* ============================= */
-/* LOADER (WHITE)                */
+/* LOADER                        */
 /* ============================= */
 .site-loader {
   position: fixed;
@@ -54,7 +56,6 @@ main {
   justify-content: center;
   z-index: 9999;
   transition: opacity 1s ease;
-  color: #111;
 }
 
 .site-loader.hidden {
@@ -82,15 +83,14 @@ main {
 .brand {
   font-size: 14px;
   letter-spacing: 3px;
-  color: #111;
 }
 
 .nav a {
-  color: #111;
   margin-left: 20px;
   font-size: 12px;
   text-decoration: none;
   letter-spacing: 1px;
+  color: #111;
 }
 
 /* ============================= */
@@ -101,66 +101,69 @@ main {
 }
 
 /* ============================= */
-/* HERO SLIDER (UPPERCASE PNG)   */
+/* HERO SLIDER (FINAL FIX)       */
 /* ============================= */
 .home-hero {
   position: relative;
-  min-height: 80vh;
+  min-height: 85vh;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  text-align: center;
   padding: 60px;
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  animation: heroSlider 18s infinite;
+  animation: heroSlider 18s infinite ease-in-out;
 }
 
-/* REMOVE ANY DARK OVERLAY */
+/* no overlay */
 .home-hero::before {
   content: none;
 }
 
+/* ✅ EXACT filename match */
 @keyframes heroSlider {
-  0%,
-  33% {
+  0%, 33% {
     background-image: url("assets/images/hero/hero.PNG");
   }
-  34%,
-  66% {
+  34%, 66% {
     background-image: url("assets/images/hero/hero-2.PNG");
   }
-  67%,
-  100% {
+  67%, 100% {
     background-image: url("assets/images/hero/hero-3.PNG");
   }
 }
 
+/* ============================= */
+/* HERO TEXT (LUXURY SCALE)      */
+/* ============================= */
 .home-hero > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  color: #ffffff;
 }
 
 .brand-mark h1 {
-  font-size: 48px;
-  letter-spacing: 6px;
-  color: #111;
+  font-size: 34px;              /* smaller */
+  font-weight: 300;
+  letter-spacing: 4px;
 }
 
 .quiet {
-  margin-top: 20px;
-  color: #555;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 300;
+  opacity: 0.85;
 }
 
 .luxury-strip {
-  display: flex;
-  gap: 16px;
-  margin-top: 40px;
+  margin-top: 32px;
   font-size: 11px;
   letter-spacing: 2px;
-  color: #777;
+  opacity: 0.8;
 }
 
 /* ============================= */
@@ -171,7 +174,6 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 40px;
   padding: 80px 40px;
-  background: #ffffff;
 }
 
 .product-card img {
@@ -183,12 +185,11 @@ main {
 .product-card h3 {
   font-size: 13px;
   letter-spacing: 1px;
-  color: #111;
 }
 
 .product-card span {
   font-size: 11px;
-  color: #777;
+  opacity: 0.7;
 }
 
 /* ============================= */
@@ -199,20 +200,17 @@ main {
   grid-template-columns: 1fr 1fr;
   padding: 80px 40px;
   border-top: 1px solid #eee;
-  background: #ffffff;
 }
 
 .split-box {
   font-size: 13px;
   letter-spacing: 1px;
-  color: #111;
 }
 
 .message-trigger {
   cursor: pointer;
   font-size: 22px;
   transition: transform .3s ease, opacity .3s ease;
-  color: #111;
 }
 
 .message-trigger:hover {
@@ -227,25 +225,6 @@ main {
 
 .message-panel.open {
   display: block;
-}
-
-.message-form input,
-.message-form textarea {
-  width: 100%;
-  background: #ffffff;
-  border: 1px solid #ddd;
-  color: #111;
-  margin-bottom: 12px;
-  padding: 10px;
-}
-
-.message-form button {
-  background: #111;
-  color: #ffffff;
-  border: none;
-  padding: 10px 18px;
-  cursor: pointer;
-  letter-spacing: 1px;
 }
 
 /* ============================= */
