@@ -154,6 +154,44 @@
       </a>
     </section>
 
+    <!-- OWN THE LOOK (4-SLIDE PRODUCT FEATURE) -->
+    <section class="own-look reveal">
+      <div class="own-look-head">
+        <h3 class="own-look-title">OWN THE LOOK</h3>
+        <div class="own-look-dots" aria-label="Own the look product dots">
+          <button class="own-dot active" type="button" aria-label="Product slide 1"></button>
+          <button class="own-dot" type="button" aria-label="Product slide 2"></button>
+          <button class="own-dot" type="button" aria-label="Product slide 3"></button>
+          <button class="own-dot" type="button" aria-label="Product slide 4"></button>
+        </div>
+      </div>
+
+      <div class="own-look-stage">
+        <a
+          id="own-link"
+          class="own-look-card"
+          href="https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="own-look-image">
+            <img
+              id="own-img"
+              src="assets/images/products/wolf-teal-floral.jpg"
+              alt="WOLF TEA FLORAL T-SHIRT"
+              loading="lazy"
+            >
+            <div class="own-quickview">QUICK VIEW</div>
+          </div>
+
+          <div class="own-look-info">
+            <h4 id="own-name">WOLF TEA FLORAL T-SHIRT</h4>
+            <p id="own-price">$38.99</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
     <!-- EXPLORE MORE -->
     <section class="explore-more reveal">
       <h3>EXPLORE MORE PRODUCTS</h3>
@@ -177,6 +215,7 @@
         if (loader) loader.classList.add("hidden");
       }, 700);
 
+      /* HERO SLIDER */
       const heroTitle = document.getElementById("hero-title");
       const heroSubtext = document.getElementById("hero-subtext");
       const dots = document.querySelectorAll(".dot");
@@ -266,7 +305,7 @@
         menuToggle.onclick = () => menuPanel.classList.toggle("open");
       }
 
-      /* smooth reveal on scroll (no glitch) */
+      /* REVEAL ON SCROLL */
       const revealEls = document.querySelectorAll(".reveal");
       if (revealEls.length) {
         const observer = new IntersectionObserver((entries) => {
@@ -280,6 +319,63 @@
 
         revealEls.forEach(el => observer.observe(el));
       }
+
+      /* OWN THE LOOK (PRODUCT SLIDER) */
+      const ownDots = document.querySelectorAll(".own-dot");
+      const ownImg = document.getElementById("own-img");
+      const ownName = document.getElementById("own-name");
+      const ownPrice = document.getElementById("own-price");
+      const ownLink = document.getElementById("own-link");
+
+      const ownProducts = [
+        {
+          image: "assets/images/products/wolf-teal-floral.jpg",
+          name: "WOLF TEA FLORAL T-SHIRT",
+          price: "$38.99",
+          link: "https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995"
+        },
+        {
+          image: "assets/images/products/samurai-moon.jpg",
+          name: "SAMURAI MOON T-SHIRT",
+          price: "$25.73",
+          link: "https://mrcharliestxs.myshopify.com/products/samurai-moon-graphic-t-shirt-shine-back-print?variant=43781765464115"
+        },
+        {
+          image: "assets/images/products/samurai-kanji-hoodie.jpg",
+          name: "SAMURAI KANJI HOODIE",
+          price: "$30.83",
+          link: "https://mrcharliestxs.myshopify.com/products/samurai-warrior-hoodie-vintage-japanese-kanji-design?variant=43772208054323"
+        },
+        {
+          image: "assets/images/products/gingerbread-sweatshirt.jpg",
+          name: "CHRISTMAS GINGERBREAD SWEATSHIRT",
+          price: "$62.59",
+          link: "https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849317427"
+        }
+      ];
+
+      ownProducts.forEach(p => { const img = new Image(); img.src = p.image; });
+
+      let ownCurrent = 0;
+
+      function setOwnSlide(i){
+        ownCurrent = i;
+
+        ownDots.forEach(d => d.classList.remove("active"));
+        if (ownDots[i]) ownDots[i].classList.add("active");
+
+        if (ownImg) ownImg.src = ownProducts[i].image;
+        if (ownImg) ownImg.alt = ownProducts[i].name;
+        if (ownName) ownName.textContent = ownProducts[i].name;
+        if (ownPrice) ownPrice.textContent = ownProducts[i].price;
+        if (ownLink) ownLink.href = ownProducts[i].link;
+      }
+
+      ownDots.forEach((btn, i) => {
+        btn.addEventListener("click", () => setOwnSlide(i));
+      });
+
+      setOwnSlide(0);
 
     });
   </script>
