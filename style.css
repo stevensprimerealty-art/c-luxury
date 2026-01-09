@@ -20,7 +20,6 @@ body {
   line-height: 1.6;
   background: #ffffff;
   overflow-x: hidden;
-
   opacity: 0;
   animation: pageFadeIn 1.6s ease forwards;
   animation-delay: 0.4s;
@@ -31,7 +30,7 @@ body {
 }
 
 /* ============================= */
-/* PAGE LAYERING (CRITICAL)      */
+/* PAGE LAYERING                 */
 /* ============================= */
 .page,
 header,
@@ -91,7 +90,6 @@ section {
   gap: 18px;
 }
 
-/* icon buttons */
 .icon-btn {
   background: none;
   border: none;
@@ -101,7 +99,6 @@ section {
   position: relative;
 }
 
-/* cart count */
 .cart-count {
   position: absolute;
   top: -6px;
@@ -157,12 +154,6 @@ section {
   color: #111;
 }
 
-.menu-panel hr {
-  border: none;
-  border-top: 1px solid #eee;
-  margin: 8px 0;
-}
-
 /* ============================= */
 /* PAGE OFFSET                   */
 /* ============================= */
@@ -184,7 +175,6 @@ section {
   overflow: hidden;
 }
 
-/* background layers */
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -192,19 +182,16 @@ section {
   background-position: center;
   opacity: 0;
   transition: opacity 1.6s ease-in-out;
-  z-index: 0;
 }
 
 .hero-bg.active {
   opacity: 1;
 }
 
-/* hero content */
 .hero-content {
   position: relative;
   z-index: 2;
   color: #ffffff;
-  transition: opacity .6s ease;
 }
 
 .fade-in { opacity: 1; }
@@ -230,14 +217,13 @@ section {
   margin-top: 32px;
   font-size: 11px;
   letter-spacing: 2px;
-  opacity: 0.8;
   display: flex;
   justify-content: center;
   gap: 16px;
 }
 
 /* ============================= */
-/* HERO NAVIGATION  < • >        */
+/* HERO NAVIGATION               */
 /* ============================= */
 .hero-nav {
   margin-top: 40px;
@@ -255,7 +241,6 @@ section {
   font-size: 26px;
   cursor: pointer;
   opacity: 0.7;
-  transition: opacity .3s ease;
 }
 
 #prev-slide:hover,
@@ -263,7 +248,6 @@ section {
   opacity: 1;
 }
 
-/* dots */
 .hero-dots {
   display: flex;
   gap: 10px;
@@ -281,62 +265,86 @@ section {
   background: #ffffff;
 }
 
-/* ============================= */
-/* PRODUCT GRID                  */
-/* ============================= */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px;
+/* ================================================= */
+/* COLLECTIONS PAGE — FINAL                          */
+/* ================================================= */
+
+.collections-page {
+  background: #ffffff;
   padding: 80px 40px;
 }
 
-.product-card img {
-  width: 100%;
-  display: block;
-  margin-bottom: 12px;
+/* each season */
+.collection-section {
+  margin-bottom: 100px;
 }
 
-.product-card h3 {
-  font-size: 13px;
-  letter-spacing: 1px;
+/* title */
+.collection-title {
+  font-size: 14px;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
 }
 
-.product-card span {
-  font-size: 11px;
-  opacity: 0.7;
-}
-
-/* ============================= */
-/* SPLIT MESSAGE                 */
-/* ============================= */
-.split-message {
+/* split image layout */
+.collection-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 80px 40px;
-  border-top: 1px solid #eee;
+  gap: 40px;
 }
 
-.split-box {
+.collection-item {
+  text-decoration: none;
+  color: #111;
+  display: block;
+}
+
+.collection-item img {
+  width: 100%;
+  display: block;
+  background: #f5f5f5;
+}
+
+/* hover luxury effect */
+.collection-item:hover img {
+  opacity: 0.85;
+}
+
+/* ============================= */
+/* COLLECTION FOOTER             */
+/* ============================= */
+.collections-footer {
+  text-align: center;
+  margin-top: 120px;
+}
+
+.collections-footer p {
   font-size: 13px;
   letter-spacing: 1px;
+  margin-bottom: 20px;
 }
 
-.message-trigger {
-  cursor: pointer;
-  font-size: 22px;
-  transition: transform .3s ease, opacity .3s ease;
+.collections-footer a {
+  display: inline-block;
+  padding: 12px 32px;
+  border: 1px solid #111;
+  text-decoration: none;
+  color: #111;
+  font-size: 11px;
+  letter-spacing: 2px;
 }
 
-.message-trigger:hover {
-  transform: translateY(-2px);
-  opacity: .7;
+.collections-footer a:hover {
+  background: #111;
+  color: #fff;
 }
 
-.message-panel {
-  display: none;
-}
-
-.message-panel.open {
-  display: block;
+/* ============================= */
+/* RESPONSIVE                    */
+/* ============================= */
+@media (max-width: 768px) {
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
 }
