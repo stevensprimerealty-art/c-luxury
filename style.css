@@ -361,6 +361,115 @@ section {
 }
 
 /* ================================================= */
+/* FEATURE BANNERS (NEW RELEASE / NEW COLLECTION)    */
+/* ================================================= */
+.feature-banners{
+  width: 100%;
+}
+
+.feature-banner{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 78vh;              /* tall like your inspo */
+  min-height: 520px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+/* soft dark fade so text is readable */
+.feature-banner::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.55) 0%,
+    rgba(0,0,0,.20) 45%,
+    rgba(0,0,0,.10) 100%
+  );
+}
+
+/* text block placement (bottom-left) */
+.feature-overlay{
+  position: absolute;
+  left: 22px;
+  bottom: 28px;
+  z-index: 2;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* “NEW RELEASE / FROM OUR NEW COLLECTION” */
+.feature-eyebrow{
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: .95;
+}
+
+/* “Explore now” */
+.feature-cta{
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  opacity: .95;
+}
+
+/* subtle hover */
+.feature-banner:hover .feature-cta{
+  opacity: 1;
+}
+
+/* mobile sizing */
+@media (max-width: 768px){
+  .feature-banner{
+    height: 70vh;
+    min-height: 480px;
+  }
+  .feature-overlay{
+    left: 18px;
+    bottom: 24px;
+  }
+}
+
+/* ================================================= */
+/* EXPLORE MORE (Shop All Products)                  */
+/* ================================================= */
+.explore-more{
+  padding: 80px 24px 110px;
+  background: #fff;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid #eee;
+}
+
+.explore-more h3{
+  font-size: 13px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  text-transform: uppercase;
+}
+
+.explore-more a{
+  display: inline-block;
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  font-size: 14px;
+  letter-spacing: .5px;
+}
+
+/* ================================================= */
 /* COLLECTIONS PAGE — FINAL                          */
 /* ================================================= */
 .collections-page {
@@ -446,11 +555,10 @@ section {
 /* ================================================= */
 /* SMOOTH FADE-IN ON SCROLL (NO GLITCH)              */
 /* ================================================= */
-/* Add class="reveal" to any section you want animated */
 .reveal{
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity .8s ease, transform .8s ease;
+  transition: opacity .85s ease, transform .85s ease;
   will-change: opacity, transform;
 }
 
