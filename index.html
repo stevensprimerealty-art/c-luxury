@@ -28,7 +28,12 @@
   </header>
 
   <!-- SHOP NOW BAR -->
-  <a href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" class="shop-now-bar" rel="noopener">
+  <a
+    href="https://mrcharliestxs.myshopify.com/collections/all"
+    target="_blank"
+    class="shop-now-bar"
+    rel="noopener"
+  >
     SHOP NOW →
   </a>
 
@@ -52,8 +57,10 @@
         <div class="brand-mark">
           <h1 id="hero-title">A NEW YEAR<br>CURATED FOR YOU</h1>
         </div>
+
         <p class="quiet" id="hero-subtext">
-          EMBRACE FRESH STYLES AND STATEMENT PIECES<br>FROM YOUR FAVORITE BRAND.
+          EMBRACE FRESH STYLES AND STATEMENT PIECES<br>
+          FROM YOUR FAVORITE BRAND.
         </p>
 
         <div class="luxury-strip">
@@ -61,13 +68,13 @@
         </div>
 
         <div class="hero-nav">
-          <button id="prev-slide">‹</button>
-          <div class="hero-dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+          <button id="prev-slide" aria-label="Previous slide">‹</button>
+          <div class="hero-dots" aria-label="Hero slide dots">
+            <span class="dot active" aria-label="Slide 1"></span>
+            <span class="dot" aria-label="Slide 2"></span>
+            <span class="dot" aria-label="Slide 3"></span>
           </div>
-          <button id="next-slide">›</button>
+          <button id="next-slide" aria-label="Next slide">›</button>
         </div>
       </div>
     </section>
@@ -76,23 +83,46 @@
     <section class="own-look reveal">
       <div class="own-look-head">
         <h3 class="own-look-title">OWN THE LOOK</h3>
-        <div class="own-look-dots">
-          <button class="own-dot active"></button>
-          <button class="own-dot"></button>
-          <button class="own-dot"></button>
-          <button class="own-dot"></button>
+
+        <!-- Nav bar like: < • • • • > -->
+        <div class="own-look-nav" aria-label="Own the look navigation">
+          <button class="own-look-arrow" id="own-prev" type="button" aria-label="Previous product">‹</button>
+
+          <div class="own-look-dots" aria-label="Own the look product dots">
+            <button class="own-dot active" type="button" aria-label="Product slide 1"></button>
+            <button class="own-dot" type="button" aria-label="Product slide 2"></button>
+            <button class="own-dot" type="button" aria-label="Product slide 3"></button>
+            <button class="own-dot" type="button" aria-label="Product slide 4"></button>
+          </div>
+
+          <button class="own-look-arrow" id="own-next" type="button" aria-label="Next product">›</button>
         </div>
       </div>
 
-      <div class="own-look-stage">
-        <a id="own-link" class="own-look-card" target="_blank" rel="noopener">
+      <!-- Swipe area -->
+      <div class="own-look-stage" id="own-swipe">
+        <!-- ✅ FIX: give href + fallback src/text so it always works even before JS -->
+        <a
+          id="own-link"
+          class="own-look-card"
+          href="https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995"
+          target="_blank"
+          rel="noopener"
+          aria-label="Open product on Shopify"
+        >
           <div class="own-look-image">
-            <img id="own-img" loading="lazy">
+            <img
+              id="own-img"
+              src="assets/images/products/wolf-teal-floral.jpg"
+              loading="lazy"
+              alt="WOLF TEA FLORAL T-SHIRT"
+            >
             <div class="own-quickview">QUICK VIEW</div>
           </div>
+
           <div class="own-look-info">
-            <h4 id="own-name"></h4>
-            <p id="own-price"></p>
+            <h4 id="own-name">WOLF TEA FLORAL T-SHIRT</h4>
+            <p id="own-price">$38.99</p>
           </div>
         </a>
       </div>
@@ -101,7 +131,11 @@
     <!-- EXPLORE MORE -->
     <section class="explore-more reveal">
       <h3>EXPLORE MORE PRODUCTS</h3>
-      <a href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">
+      <a
+        href="https://mrcharliestxs.myshopify.com/collections/all"
+        target="_blank"
+        rel="noopener"
+      >
         Shop All Products
       </a>
     </section>
@@ -111,17 +145,138 @@
   <script>
     window.addEventListener("load", () => {
 
-      /* MENU */
-      document.querySelector(".menu-toggle").onclick = () =>
-        document.querySelector(".menu-panel").classList.toggle("open");
+      /* ========================= */
+      /* HIDE LOADER               */
+      /* ========================= */
+      setTimeout(() => {
+        const loader = document.querySelector(".site-loader");
+        if (loader) loader.classList.add("hidden");
+      }, 700);
 
-      /* OWN THE LOOK AUTO SLIDER */
+      /* ========================= */
+      /* MENU TOGGLE               */
+      /* ========================= */
+      const menuToggle = document.querySelector(".menu-toggle");
+      const menuPanel = document.querySelector(".menu-panel");
+      if (menuToggle && menuPanel) {
+        menuToggle.onclick = () => menuPanel.classList.toggle("open");
+      }
+
+      /* ========================= */
+      /* HERO SLIDER               */
+      /* ========================= */
+      const heroTitle = document.getElementById("hero-title");
+      const heroSubtext = document.getElementById("hero-subtext");
+      const heroDots = document.querySelectorAll(".hero-dots .dot");
+      const bgLayers = document.querySelectorAll(".hero-bg");
+      const heroContent = document.querySelector(".hero-content");
+
+      const slides = [
+        {
+          image: "assets/images/hero/hero.PNG",
+          title: "A NEW YEAR<br>CURATED FOR YOU",
+          text: "EMBRACE FRESH STYLES AND STATEMENT PIECES<br>FROM YOUR FAVORITE BRAND."
+        },
+        {
+          image: "assets/images/hero/hero-2.PNG",
+          title: "PRESENCE<br>WITHOUT NOISE",
+          text: "QUIET CONFIDENCE.<br>DEFINED FORM.<br>TIMELESS CONTROL."
+        },
+        {
+          image: "assets/images/hero/hero-3.PNG",
+          title: "WELCOME TO<br>C-LUXURY",
+          text: "EXPLORE DISTINCTIVE STYLES<br>AS YOU AWAIT WHAT’S TO COME."
+        }
+      ];
+
+      slides.forEach(s => { const img = new Image(); img.src = s.image; });
+
+      let heroCurrent = 0;
+      let activeBg = 0;
+      let heroTimer = null;
+
+      function changeHero(index) {
+        if (!bgLayers.length || !heroTitle || !heroSubtext || !heroContent) return;
+
+        const nextBg = activeBg === 0 ? 1 : 0;
+
+        heroContent.classList.add("fade-out");
+
+        setTimeout(() => {
+          bgLayers[nextBg].style.backgroundImage = `url(${slides[index].image})`;
+          bgLayers[nextBg].classList.add("active");
+          bgLayers[activeBg].classList.remove("active");
+          activeBg = nextBg;
+
+          heroTitle.innerHTML = slides[index].title;
+          heroSubtext.innerHTML = slides[index].text;
+
+          heroDots.forEach(d => d.classList.remove("active"));
+          if (heroDots[index]) heroDots[index].classList.add("active");
+
+          heroContent.classList.remove("fade-out");
+          heroContent.classList.add("fade-in");
+        }, 600);
+      }
+
+      function stopHeroAuto() {
+        if (heroTimer) {
+          clearInterval(heroTimer);
+          heroTimer = null;
+        }
+      }
+
+      function startHeroAuto() {
+        stopHeroAuto();
+        heroTimer = setInterval(() => {
+          heroCurrent = (heroCurrent + 1) % slides.length;
+          changeHero(heroCurrent);
+        }, 6500);
+      }
+
+      const nextHeroBtn = document.getElementById("next-slide");
+      const prevHeroBtn = document.getElementById("prev-slide");
+
+      if (nextHeroBtn) nextHeroBtn.onclick = () => { heroCurrent = (heroCurrent + 1) % slides.length; changeHero(heroCurrent); startHeroAuto(); };
+      if (prevHeroBtn) prevHeroBtn.onclick = () => { heroCurrent = (heroCurrent - 1 + slides.length) % slides.length; changeHero(heroCurrent); startHeroAuto(); };
+
+      heroDots.forEach((dot, i) => {
+        dot.onclick = () => { heroCurrent = i; changeHero(heroCurrent); startHeroAuto(); };
+      });
+
+      // ✅ ensure first background is set immediately
+      if (bgLayers[0]) bgLayers[0].style.backgroundImage = `url(${slides[0].image})`;
+      startHeroAuto();
+
+      /* ========================= */
+      /* REVEAL ON SCROLL          */
+      /* ========================= */
+      const revealEls = document.querySelectorAll(".reveal");
+      if (revealEls.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+
+        revealEls.forEach(el => observer.observe(el));
+      }
+
+      /* ========================= */
+      /* OWN THE LOOK (AUTO + ARROWS + SWIPE) */
+      /* ========================= */
       const ownDots = document.querySelectorAll(".own-dot");
       const ownImg = document.getElementById("own-img");
       const ownName = document.getElementById("own-name");
       const ownPrice = document.getElementById("own-price");
       const ownLink = document.getElementById("own-link");
       const ownCard = document.querySelector(".own-look-card");
+      const ownPrev = document.getElementById("own-prev");
+      const ownNext = document.getElementById("own-next");
+      const swipeArea = document.getElementById("own-swipe");
 
       const products = [
         {
@@ -150,39 +305,126 @@
         }
       ];
 
-      let current = 0;
-      let timer;
+      products.forEach(p => { const img = new Image(); img.src = p.img; });
+
+      let ownCurrent = 0;
+      let ownTimer = null;
+
+      function stopOwnAuto() {
+        if (ownTimer) {
+          clearInterval(ownTimer);
+          ownTimer = null;
+        }
+      }
+
+      function startOwnAuto() {
+        stopOwnAuto();
+        ownTimer = setInterval(() => showSlide(ownCurrent + 1), 5200);
+      }
 
       function showSlide(i) {
-        current = i % products.length;
+        if (!ownImg || !ownName || !ownPrice || !ownLink || !ownCard) return;
+
+        ownCurrent = (i + products.length) % products.length;
 
         ownDots.forEach(d => d.classList.remove("active"));
-        ownDots[current].classList.add("active");
+        if (ownDots[ownCurrent]) ownDots[ownCurrent].classList.add("active");
 
+        // uses your CSS class .own-look-card.own-fade { ... }
         ownCard.classList.add("own-fade");
         setTimeout(() => {
-          ownImg.src = products[current].img;
-          ownName.textContent = products[current].name;
-          ownPrice.textContent = products[current].price;
-          ownLink.href = products[current].link;
+          const p = products[ownCurrent];
+          ownImg.src = p.img;
+          ownImg.alt = p.name;
+          ownName.textContent = p.name;
+          ownPrice.textContent = p.price;
+          ownLink.href = p.link;
           ownCard.classList.remove("own-fade");
         }, 250);
       }
 
-      function autoSlide() {
-        showSlide((current + 1) % products.length);
-      }
-
+      // dots click
       ownDots.forEach((dot, i) => {
         dot.onclick = () => {
-          clearInterval(timer);
           showSlide(i);
-          timer = setInterval(autoSlide, 5200);
+          startOwnAuto();
         };
       });
 
+      // arrows
+      if (ownPrev) {
+        ownPrev.onclick = () => {
+          showSlide(ownCurrent - 1);
+          startOwnAuto();
+        };
+      }
+
+      if (ownNext) {
+        ownNext.onclick = () => {
+          showSlide(ownCurrent + 1);
+          startOwnAuto();
+        };
+      }
+
+      // swipe (mobile)
+      let startX = 0;
+      let startY = 0;
+      let isSwiping = false;
+
+      function onTouchStart(e) {
+        const t = e.touches[0];
+        startX = t.clientX;
+        startY = t.clientY;
+        isSwiping = true;
+      }
+
+      function onTouchMove(e) {
+        if (!isSwiping) return;
+        const t = e.touches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 18) {
+          e.preventDefault();
+        }
+      }
+
+      function onTouchEnd(e) {
+        if (!isSwiping) return;
+        isSwiping = false;
+
+        const t = e.changedTouches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+          if (dx < 0) showSlide(ownCurrent + 1);
+          else showSlide(ownCurrent - 1);
+          startOwnAuto();
+        }
+      }
+
+      if (swipeArea) {
+        swipeArea.addEventListener("touchstart", onTouchStart, { passive: true });
+        swipeArea.addEventListener("touchmove", onTouchMove, { passive: false });
+        swipeArea.addEventListener("touchend", onTouchEnd, { passive: true });
+      }
+
+      // init own slider
       showSlide(0);
-      timer = setInterval(autoSlide, 5200);
+      startOwnAuto();
+
+      // pause auto slide when tab hidden
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopOwnAuto();
+          stopHeroAuto();
+        } else {
+          startOwnAuto();
+          startHeroAuto();
+        }
+      });
+
     });
   </script>
 
