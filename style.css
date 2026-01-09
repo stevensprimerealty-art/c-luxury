@@ -127,15 +127,15 @@ section {
 @keyframes heroSlider {
   0%,
   33% {
-    background-image: url("/assets/images/hero/hero.PNG");
+    background-image: url("assets/images/hero/hero.PNG");
   }
   34%,
   66% {
-    background-image: url("/assets/images/hero/hero-2.PNG");
+    background-image: url("assets/images/hero/hero-2.PNG");
   }
   67%,
   100% {
-    background-image: url("/assets/images/hero/hero-3.PNG");
+    background-image: url("assets/images/hero/hero-3.PNG");
   }
 }
 
