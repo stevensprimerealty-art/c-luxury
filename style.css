@@ -16,14 +16,14 @@ html, body {
 
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
-  color: #fff;
+  color: #111;
   line-height: 1.6;
-  background: #000;
+  background: #ffffff;
   overflow-x: hidden;
 
   opacity: 0;
   animation: pageFadeIn 1.6s ease forwards;
-  animation-delay: 0.6s;
+  animation-delay: 0.4s;
 }
 
 @keyframes pageFadeIn {
@@ -36,28 +36,26 @@ body {
 .page,
 header,
 nav,
-main {
+main,
+section {
   position: relative;
   z-index: 1;
+  background: #ffffff;
 }
 
 /* ============================= */
-/* LOADER                        */
+/* LOADER (WHITE)                */
 /* ============================= */
 .site-loader {
   position: fixed;
   inset: 0;
-  background: #000;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
   transition: opacity 1s ease;
-}
-
-.site-loader span {
-  letter-spacing: 4px;
-  font-size: 14px;
+  color: #111;
 }
 
 .site-loader.hidden {
@@ -77,18 +75,19 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(6px);
+  background: #ffffff;
+  border-bottom: 1px solid #eee;
   z-index: 1000;
 }
 
 .brand {
   font-size: 14px;
   letter-spacing: 3px;
+  color: #111;
 }
 
 .nav a {
-  color: #fff;
+  color: #111;
   margin-left: 20px;
   font-size: 12px;
   text-decoration: none;
@@ -103,7 +102,7 @@ main {
 }
 
 /* ============================= */
-/* HERO (BACKGROUND ONLY HERE)   */
+/* HERO (OPTIONAL BACKGROUND)    */
 /* ============================= */
 .home-hero {
   position: relative;
@@ -111,7 +110,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px;
+  padding: 60px;
 
   background-image: url("/assets/images/backgrounds/c-luxury-look.PNG");
   background-size: cover;
@@ -119,16 +118,11 @@ main {
   background-repeat: no-repeat;
 }
 
-/* dark luxury overlay */
+/* REMOVE DARK OVERLAY */
 .home-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 0;
+  content: none;
 }
 
-/* keep hero content above background */
 .home-hero > * {
   position: relative;
   z-index: 1;
@@ -137,11 +131,12 @@ main {
 .brand-mark h1 {
   font-size: 48px;
   letter-spacing: 6px;
+  color: #111;
 }
 
 .quiet {
   margin-top: 20px;
-  opacity: 0.7;
+  color: #555;
 }
 
 .luxury-strip {
@@ -150,6 +145,7 @@ main {
   margin-top: 40px;
   font-size: 11px;
   letter-spacing: 2px;
+  color: #777;
 }
 
 /* ============================= */
@@ -160,7 +156,7 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 40px;
   padding: 80px 40px;
-  background: #000;
+  background: #ffffff;
 }
 
 .product-card img {
@@ -172,11 +168,12 @@ main {
 .product-card h3 {
   font-size: 13px;
   letter-spacing: 1px;
+  color: #111;
 }
 
 .product-card span {
   font-size: 11px;
-  opacity: 0.6;
+  color: #777;
 }
 
 /* ============================= */
@@ -186,23 +183,26 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 80px 40px;
-  border-top: 1px solid rgba(255,255,255,.1);
+  border-top: 1px solid #eee;
+  background: #ffffff;
 }
 
 .split-box {
   font-size: 13px;
   letter-spacing: 1px;
+  color: #111;
 }
 
 .message-trigger {
   cursor: pointer;
   font-size: 22px;
   transition: transform .3s ease, opacity .3s ease;
+  color: #111;
 }
 
 .message-trigger:hover {
   transform: translateY(-2px);
-  opacity: .8;
+  opacity: .7;
 }
 
 .message-panel {
@@ -217,19 +217,20 @@ main {
 .message-form input,
 .message-form textarea {
   width: 100%;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,.2);
-  color: #fff;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  color: #111;
   margin-bottom: 12px;
-  padding: 8px;
+  padding: 10px;
 }
 
 .message-form button {
-  background: #fff;
-  color: #000;
+  background: #111;
+  color: #ffffff;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 18px;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
 /* ============================= */
