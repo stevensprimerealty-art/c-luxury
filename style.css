@@ -102,7 +102,7 @@ section {
 }
 
 /* ============================= */
-/* HERO (OPTIONAL BACKGROUND)    */
+/* HERO SLIDER (UPPERCASE PNG)   */
 /* ============================= */
 .home-hero {
   position: relative;
@@ -112,15 +112,31 @@ section {
   justify-content: center;
   padding: 60px;
 
-  background-image: url("/assets/images/backgrounds/c-luxury-look.PNG");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  animation: heroSlider 18s infinite;
 }
 
-/* REMOVE DARK OVERLAY */
+/* REMOVE ANY DARK OVERLAY */
 .home-hero::before {
   content: none;
+}
+
+@keyframes heroSlider {
+  0%,
+  33% {
+    background-image: url("/assets/images/hero/hero.PNG");
+  }
+  34%,
+  66% {
+    background-image: url("/assets/images/hero/hero-2.PNG");
+  }
+  67%,
+  100% {
+    background-image: url("/assets/images/hero/hero-3.PNG");
+  }
 }
 
 .home-hero > * {
