@@ -16,15 +16,37 @@
 
 <!-- HEADER -->
 <header class="site-header">
-  <div class="brand">C-LUXURY</div>
-  <nav class="nav">
-    <a href="index.html">Home</a>
-    <a href="collections.html">Collections</a>
-    <a href="lookbook.html">Lookbook</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <div class="header-left">
+    <div class="brand">C-LUXURY</div>
+  </div>
+
+  <div class="header-right">
+    <button class="icon-btn" aria-label="Search">🔍</button>
+
+    <a href="cart.html" class="icon-btn cart">
+      🛒<span class="cart-count">0</span>
+    </a>
+
+    <button class="icon-btn menu-toggle" aria-label="Menu">☰</button>
+  </div>
 </header>
+
+<!-- SHOP NOW BAR -->
+<a
+  href="https://mrcharliestxs.myshopify.com/collections/all"
+  target="_blank"
+  class="shop-now-bar"
+>
+  Shop Now
+</a>
+
+<!-- MENU PANEL -->
+<nav class="menu-panel">
+  <a href="index.html">Home</a>
+  <a href="collections.html">Collections</a>
+  <a href="about.html">About</a>
+  <a href="login.html">👤 Register / Login</a>
+</nav>
 
 <main class="page">
 
@@ -54,15 +76,15 @@
         <span>TIMELESS</span>
       </div>
 
-      <!-- NAV -->
+      <!-- HERO NAV -->
       <div class="hero-nav">
-        <button id="prev-slide">‹</button>
+        <button id="prev-slide" class="hero-arrow">‹</button>
         <div class="hero-dots">
           <span class="dot active"></span>
           <span class="dot"></span>
           <span class="dot"></span>
         </div>
-        <button id="next-slide">›</button>
+        <button id="next-slide" class="hero-arrow">›</button>
       </div>
     </div>
   </section>
@@ -72,7 +94,6 @@
 <script>
 window.addEventListener("load", () => {
 
-  /* loader */
   setTimeout(() =>
     document.querySelector(".site-loader").classList.add("hidden"), 700
   );
@@ -109,13 +130,10 @@ window.addEventListener("load", () => {
   function changeSlide(index) {
     const nextBg = activeBg === 0 ? 1 : 0;
 
-    heroContent.classList.remove("fade-in");
     heroContent.classList.add("fade-out");
 
     setTimeout(() => {
-      bgLayers[nextBg].style.backgroundImage =
-        `url(${slides[index].image})`;
-
+      bgLayers[nextBg].style.backgroundImage = `url(${slides[index].image})`;
       bgLayers[nextBg].classList.add("active");
       bgLayers[activeBg].classList.remove("active");
       activeBg = nextBg;
@@ -152,6 +170,11 @@ window.addEventListener("load", () => {
     current = (current + 1) % slides.length;
     changeSlide(current);
   }, 6500);
+
+  // menu toggle
+  document.querySelector(".menu-toggle").onclick = () => {
+    document.querySelector(".menu-panel").classList.toggle("open");
+  };
 });
 </script>
 
