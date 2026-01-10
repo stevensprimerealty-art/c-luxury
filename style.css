@@ -59,12 +59,12 @@ body{
   z-index:1000;
 }
 
-/* ✅ Bigger + more “capitalized” brand */
+/* Bigger + premium brand */
 .header-left .brand{
-  font-size:18px;              /* was 14px */
-  letter-spacing:5px;          /* stronger luxury spacing */
-  text-transform:uppercase;    /* force caps */
-  font-weight:600;             /* more premium */
+  font-size:18px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  font-weight:600;
 }
 
 @media (max-width:768px){
@@ -102,7 +102,7 @@ body{
   border-radius:50%;
 }
 
-/* Nice focus for keyboard users */
+/* Focus for keyboard users */
 .icon-btn:focus-visible,
 .menu-panel a:focus-visible,
 .hero-nav button:focus-visible,
@@ -112,7 +112,8 @@ body{
 .explore-more a:focus-visible,
 .chat-action:focus-visible,
 .chat-bubble:focus-visible,
-.currency-btn:focus-visible{
+.currency-btn:focus-visible,
+.search-close:focus-visible{
   outline:2px solid #111;
   outline-offset:3px;
   border-radius:8px;
@@ -184,7 +185,6 @@ body{
   overflow:hidden;
 }
 
-/* Make text readable on bright photos */
 .home-hero::after{
   content:"";
   position:absolute;
@@ -220,9 +220,6 @@ body{
 .fade-in{ opacity:1; }
 .fade-out{ opacity:0; }
 
-/* ============================= */
-/* HERO TEXT                     */
-/* ============================= */
 .brand-mark h1{
   font-size:34px;
   font-weight:300;
@@ -246,9 +243,6 @@ body{
   flex-wrap:wrap;
 }
 
-/* ============================= */
-/* HERO NAVIGATION               */
-/* ============================= */
 .hero-nav{
   margin-top:40px;
   display:flex;
@@ -317,7 +311,6 @@ body{
   margin-bottom:44px;
 }
 
-/* product grid */
 .new-in-grid{
   display:grid;
   grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -325,7 +318,6 @@ body{
   align-items:start;
 }
 
-/* product card */
 .new-in-card{
   text-decoration:none;
   color:#111;
@@ -361,7 +353,6 @@ body{
   margin:0;
 }
 
-/* mobile */
 @media (max-width:768px){
   .new-in{ padding:70px 20px; }
   .new-in-grid{ grid-template-columns:1fr; gap:34px; }
@@ -369,7 +360,7 @@ body{
 }
 
 /* ================================================= */
-/* FEATURE BANNERS (ALL BANNER SECTIONS)             */
+/* FEATURE BANNERS                                   */
 /* ================================================= */
 .feature-banners{ width:100%; }
 
@@ -742,8 +733,7 @@ body{
 }
 
 /* ================================================= */
-/* FLOATING UI: Currency Switch + Chat Bubble        */
-/* ✅ Currency left-bottom, ✅ Chat right-bottom      */
+/* FLOATING UI: Currency + Chat                       */
 /* ================================================= */
 
 /* Currency stays bottom-left */
@@ -790,7 +780,7 @@ body{
   .floating-ui{ bottom: calc(16px + env(safe-area-inset-bottom)); }
 }
 
-/* ✅ Chat bubble now on RIGHT corner + horizontal text */
+/* Chat bubble on RIGHT + horizontal */
 .chat-bubble{
   position:fixed;
   right:16px;
@@ -817,16 +807,13 @@ body{
   -webkit-tap-highlight-color: transparent;
 }
 
-/* show text */
 .chat-bubble-text{
   font-size:14px;
   letter-spacing:1px;
-  text-transform:none;
   opacity:.95;
   white-space:nowrap;
 }
 
-/* green online dot */
 .chat-bubble::after{
   content:"";
   width:10px;
@@ -839,11 +826,11 @@ body{
   border:2px solid #2b2b2b;
 }
 
-/* Chat panel opens above bubble (right side) */
+/* Chat panel opens above bubble */
 .chat-panel{
   position:fixed;
   right:16px;
-  bottom:80px; /* above the bubble */
+  bottom:80px;
   z-index:2001;
   width:min(360px, calc(100vw - 32px));
   background:#fff;
@@ -933,7 +920,6 @@ body{
   color:#fff;
 }
 
-/* small screens polish */
 @media (max-width:420px){
   .currency-btn{ padding:9px 12px; font-size:11px; }
   .chat-bubble{ height:52px; padding:0 14px; }
@@ -941,7 +927,9 @@ body{
 }
 
 /* ================================================= */
-/* SEARCH UI (CSS ONLY — for when you add HTML/JS)   */
+/* SEARCH UI (MATCHES YOUR INDEX + JS)               */
+/* - hidden until .open is added                     */
+/* - has top-right close (✕)                         */
 /* ================================================= */
 .search-overlay{
   position:fixed;
@@ -957,11 +945,12 @@ body{
   pointer-events:auto;
 }
 
+/* IMPORTANT: hidden by default */
 .search-modal{
   position:fixed;
   top:110px;
   left:50%;
-  transform:translateX(-50%);
+  transform:translateX(-50%) translateY(8px);
   width:min(720px, calc(100vw - 32px));
   background:#fff;
   border:1px solid rgba(0,0,0,.12);
@@ -969,11 +958,46 @@ body{
   box-shadow:0 30px 90px rgba(0,0,0,.28);
   z-index:3001;
   padding:16px;
+
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
 }
 
+/* show when open */
+.search-modal.open{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* Close (✕) button inside modal */
+.search-close{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.14);
+  background:#fff;
+  color:#111;
+  cursor:pointer;
+  font-size:16px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  -webkit-tap-highlight-color: transparent;
+}
+.search-close:hover{
+  border-color:#111;
+}
+
+/* Input */
 .search-input{
   width:100%;
-  padding:14px 14px;
+  padding:14px 44px 14px 14px; /* space so close btn never overlaps */
   border:1px solid #ddd;
   border-radius:12px;
   font-size:14px;
@@ -982,6 +1006,7 @@ body{
 }
 .search-input:focus{ border-color:#111; }
 
+/* Results list */
 .search-results{
   margin-top:12px;
   display:flex;
@@ -992,15 +1017,16 @@ body{
   padding-right:4px;
 }
 
+/* Each result card */
 .search-result{
   display:flex;
   gap:12px;
   align-items:center;
-  text-decoration:none;
   color:#111;
   border:1px solid #eee;
   border-radius:14px;
   padding:12px;
+  background:#fff;
 }
 .search-result:hover{
   border-color:#111;
@@ -1035,6 +1061,15 @@ body{
   font-weight:600;
 }
 
+/* Mobile: keep modal comfortable */
+@media (max-width:480px){
+  .search-modal{
+    top:96px;
+    border-radius:18px;
+  }
+  .search-results{ max-height:60vh; }
+}
+
 /* ================================================= */
 /* REDUCED MOTION                                    */
 /* ================================================= */
@@ -1050,7 +1085,8 @@ body{
   .own-look-card,
   .own-quickview,
   .chat-panel,
-  .search-overlay{
+  .search-overlay,
+  .search-modal{
     transition:none !important;
   }
 }
