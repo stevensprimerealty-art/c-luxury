@@ -1077,106 +1077,207 @@ body{
   .own-quickview,
   .chat-panel,
   .search-overlay,
-  .search-modal{
+  .search-modal,
+  .about-slide,
+  .about-word,
+  .about-btn{
     transition:none !important;
+    animation:none !important;
   }
 }
 
 /* ================================================= */
-/* ABOUT PAGE                                        */
+/* ABOUT PAGE (FINAL SLIDER)                          */
 /* ================================================= */
 body.about-page{
   background:#fff;
 }
 
-/* Header same as main, with dark underline */
+/* underline on About header */
 .site-header.about-header{
   border-bottom:1px solid #111;
 }
 
-/* Offset content below fixed header (About page) */
+/* About content offset */
 .about-wrap{
   padding-top:80px;
 }
 
-/* Adjust menu position on About page */
+/* Menu placement on About page */
 body.about-page .menu-panel{
   top:90px;
 }
 
-/* ============================= */
-/* ABOUT HERO                    */
-/* ============================= */
-.about-hero{
+/* ABOUT SLIDER */
+.about-slider{
   position:relative;
   width:100%;
-  height:min(78vh, 720px);
+  height:min(78vh, 760px);
+  min-height:520px;
   overflow:hidden;
-  background:#fff;
+  background:#0b0b0b;
 }
 
-.about-hero-bg{
+/* Slides */
+.about-slide{
   position:absolute;
   inset:0;
   background-size:cover;
   background-position:center;
+  background-repeat:no-repeat;
   opacity:0;
-  animation:aboutHeroFade 1.2s ease forwards;
+  transition:opacity 650ms ease-in-out;
+  will-change:opacity;
+  pointer-events:none;
+  transform:translateZ(0);
+}
+.about-slide.is-active{
+  opacity:1;
+  pointer-events:auto;
+}
+.about-slide.is-fadeout{
+  opacity:0;
 }
 
-@keyframes aboutHeroFade{
-  to{ opacity:1; }
-}
-
-.about-hero::after{
-  content:"";
+/* Cinematic overlay */
+.about-cine{
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,.52) 0%,
-    rgba(0,0,0,.18) 55%,
-    rgba(0,0,0,.10) 100%
-  );
+  z-index:2;
+  pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 40%,
+      rgba(0,0,0,.10) 0%,
+      rgba(0,0,0,.45) 60%,
+      rgba(0,0,0,.72) 100%),
+    linear-gradient(to top,
+      rgba(0,0,0,.62) 0%,
+      rgba(0,0,0,.28) 55%,
+      rgba(0,0,0,.18) 100%);
 }
 
-.about-hero-overlay{
+/* Film grain */
+.about-cine::after{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  opacity:.14;
+  pointer-events:none;
+  mix-blend-mode:overlay;
+  background-image:
+    repeating-linear-gradient(0deg,
+      rgba(255,255,255,.08) 0px,
+      rgba(255,255,255,.08) 1px,
+      rgba(0,0,0,.08) 2px,
+      rgba(0,0,0,.08) 3px),
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.06) 0px,
+      rgba(255,255,255,.06) 1px,
+      rgba(0,0,0,.06) 2px,
+      rgba(0,0,0,.06) 3px);
+  transform:translateZ(0);
+  animation:aboutGrain 6s steps(10) infinite;
+}
+
+@keyframes aboutGrain{
+  0%   { transform:translate3d(-2%, -2%, 0); }
+  10%  { transform:translate3d(1%, -3%, 0); }
+  20%  { transform:translate3d(3%, 1%, 0); }
+  30%  { transform:translate3d(-3%, 2%, 0); }
+  40%  { transform:translate3d(2%, -1%, 0); }
+  50%  { transform:translate3d(-1%, 3%, 0); }
+  60%  { transform:translate3d(2%, 2%, 0); }
+  70%  { transform:translate3d(-3%, -1%, 0); }
+  80%  { transform:translate3d(1%, 2%, 0); }
+  90%  { transform:translate3d(-2%, 1%, 0); }
+  100% { transform:translate3d(2%, -2%, 0); }
+}
+
+/* Overlay content */
+.about-overlay{
   position:relative;
-  z-index:2;
+  z-index:3;
   height:100%;
+  width:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  color:#fff;
+  gap:18px;
   padding:24px;
-  text-shadow:0 10px 30px rgba(0,0,0,.28);
+  text-align:center;
 }
 
-.about-hero-title{
-  font-size:34px;
+/* Text */
+.about-word{
+  color:#fff;
+  font-size:52px;
+  letter-spacing:8px;
   font-weight:300;
-  letter-spacing:4px;
   text-transform:uppercase;
-  line-height:1.05;
+  text-shadow:0 14px 40px rgba(0,0,0,.35);
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity 650ms ease, transform 650ms ease;
+  will-change:opacity, transform;
+}
+.about-word.is-in{
+  opacity:1;
+  transform:translateY(0);
 }
 
-.about-hero-sub{
-  margin-top:14px;
-  font-size:13px;
+/* Position shift per word */
+.about-word.is-left{   transform:translate3d(-18px, 10px, 0); }
+.about-word.is-center{ transform:translate3d(0, 10px, 0); }
+.about-word.is-right{  transform:translate3d(18px, 10px, 0); }
+
+.about-word.is-in.is-left{   transform:translate3d(-18px, 0, 0); }
+.about-word.is-in.is-center{ transform:translate3d(0, 0, 0); }
+.about-word.is-in.is-right{  transform:translate3d(18px, 0, 0); }
+
+/* Button */
+.about-btn{
+  display:inline-block;
+  border:1px solid rgba(255,255,255,.92);
+  color:#fff;
+  text-decoration:none;
+  padding:12px 26px;
+  border-radius:999px;
+  font-size:12px;
   letter-spacing:3px;
   text-transform:uppercase;
-  opacity:.9;
+  background:rgba(0,0,0,.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity 650ms ease, transform 650ms ease, background .2s ease;
+  will-change:opacity, transform;
+}
+.about-btn.is-in{
+  opacity:1;
+  transform:translateY(0);
+}
+.about-btn:hover{
+  background:rgba(0,0,0,.30);
 }
 
+/* About slider mobile tuning */
 @media (max-width:768px){
-  .about-hero-title{ font-size:30px; }
+  .about-slider{ min-height:480px; }
+  .about-word{
+    font-size:38px;
+    letter-spacing:6px;
+  }
+  .about-word.is-left{   transform:translate3d(-12px, 10px, 0); }
+  .about-word.is-right{  transform:translate3d(12px, 10px, 0); }
+  .about-word.is-in.is-left{  transform:translate3d(-12px, 0, 0); }
+  .about-word.is-in.is-right{ transform:translate3d(12px, 0, 0); }
 }
 
-/* ============================= */
-/* MARQUEE TEXT                  */
-/* ============================= */
+/* ================================================= */
+/* MARQUEE (used on About too)                        */
+/* ================================================= */
 .marquee{
   background:#fff;
   border-top:1px solid #eee;
@@ -1213,9 +1314,9 @@ body.about-page .menu-panel{
   .marquee-track span{ font-size:44px; }
 }
 
-/* ============================= */
-/* ABOUT COPY                    */
-/* ============================= */
+/* ================================================= */
+/* ABOUT COPY (shared)                               */
+/* ================================================= */
 .about-copy{
   max-width:980px;
   margin:0 auto;
@@ -1240,9 +1341,7 @@ body.about-page .menu-panel{
   max-width:860px;
 }
 
-/* ============================= */
-/* ABOUT FOOTER (BLURRED IMAGE)  */
-/* ============================= */
+/* About footer blur background */
 .site-footer.about-footer{
   position:relative;
   overflow:hidden;
