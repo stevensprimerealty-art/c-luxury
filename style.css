@@ -1,5 +1,3 @@
-/* ✅ FINAL style.css (copy/paste) */
-
 /* ============================= */
 /* RESET                         */
 /* ============================= */
@@ -102,6 +100,11 @@ body{
   font-size:9px;
   padding:2px 5px;
   border-radius:50%;
+}
+
+/* ✅ Hide badge when empty (clean + safe) */
+.cart-count.is-empty{
+  display:none;
 }
 
 /* Focus for keyboard users */
@@ -929,7 +932,7 @@ body{
 }
 
 /* ================================================= */
-/* SEARCH UI (MATCHES YOUR INDEX + JS)               */
+/* SEARCH UI                                         */
 /* ================================================= */
 .search-overlay{
   position:fixed;
