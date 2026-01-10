@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>C-LUXURY</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -21,8 +21,8 @@
     </div>
 
     <div class="header-right">
-      <!-- Search now opens modal -->
-      <button class="icon-btn" id="open-search" aria-label="Search">🔍</button>
+      <!-- ✅ SEARCH button now works -->
+      <button class="icon-btn" id="searchBtn" aria-label="Search">🔍</button>
 
       <a href="cart.html" class="icon-btn cart" aria-label="Cart">
         🛒<span class="cart-count">0</span>
@@ -47,7 +47,7 @@
     <a href="index.html">Home</a>
     <a href="collections.html">Collections</a>
     <a href="about.html">About</a>
-    <hr>
+    <hr />
     <a href="login.html">👤 Register / Login</a>
   </nav>
 
@@ -60,11 +60,11 @@
 
       <div class="hero-content fade-in">
         <div class="brand-mark">
-          <h1 id="hero-title">A NEW YEAR<br>CURATED FOR YOU</h1>
+          <h1 id="hero-title">A NEW YEAR<br />CURATED FOR YOU</h1>
         </div>
 
         <p class="quiet" id="hero-subtext">
-          EMBRACE FRESH STYLES AND STATEMENT PIECES<br>
+          EMBRACE FRESH STYLES AND STATEMENT PIECES<br />
           FROM YOUR FAVORITE BRAND.
         </p>
 
@@ -85,32 +85,32 @@
     </section>
 
     <!-- NEW IN COLLECTION -->
-    <section class="new-in reveal">
+    <section class="new-in reveal" id="new-in">
       <h3 class="new-in-sub">NEW IN COLLECTION</h3>
       <h2 class="new-in-title">Dive into our collections</h2>
       <a class="new-in-link" href="collections.html"><em>Shop New In</em></a>
 
       <div class="new-in-grid">
         <a
+          id="product-newin-1"
           class="new-in-card"
-          id="prod-punkrock"
           href="https://mrcharliestxs.myshopify.com/products/punk-rock-lip-graphic-tee-2025-skeleton-band-back-print?variant=43781844467763"
           target="_blank"
           rel="noopener"
         >
-          <img src="assets/images/punk-rock-tee.jpg" alt="Punk Rock Lip Graphic Tee — Skeleton Band Back Print">
+          <img src="assets/images/punk-rock-tee.jpg" alt="Punk Rock Lip Graphic Tee — Skeleton Band Back Print" />
           <h4 class="new-in-name">Punk Rock Lip Graphic Tee — Skeleton Band Back Print</h4>
           <p class="new-in-price" data-money data-usd="22.26">$22.26</p>
         </a>
 
         <a
+          id="product-newin-2"
           class="new-in-card"
-          id="prod-wolfslides"
           href="https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
           target="_blank"
           rel="noopener"
         >
-          <img src="assets/images/blue-neon-wolf-slides.jpg" alt="Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides">
+          <img src="assets/images/blue-neon-wolf-slides.jpg" alt="Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides" />
           <h4 class="new-in-name">Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides</h4>
           <p class="new-in-price" data-money data-usd="51.76">$51.76</p>
         </a>
@@ -119,7 +119,6 @@
 
     <!-- FEATURE BANNERS -->
     <section class="feature-banners">
-
       <a
         href="https://mrcharliestxs.myshopify.com/collections/all"
         target="_blank"
@@ -147,7 +146,6 @@
           <span class="feature-cta">Explore now</span>
         </div>
       </a>
-
     </section>
 
     <!-- OWN THE LOOK -->
@@ -184,7 +182,7 @@
               src="assets/images/products/wolf-teal-floral.jpg"
               loading="lazy"
               alt="WOLF TEA FLORAL T-SHIRT"
-            >
+            />
             <div class="own-quickview">QUICK VIEW</div>
           </div>
 
@@ -210,8 +208,6 @@
 
     <!-- NEW BANNERS (AFTER SHOP ALL PRODUCTS) -->
     <section class="feature-banners">
-
-      <!-- Banner 1: NEW RELEASES -->
       <a
         href="https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
         target="_blank"
@@ -226,7 +222,6 @@
         </div>
       </a>
 
-      <!-- Banner 2: FROM OUR NEW COLLECTION -->
       <a
         href="https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849382963"
         target="_blank"
@@ -240,10 +235,9 @@
           <span class="feature-cta">EXPLORE NOW</span>
         </div>
       </a>
-
     </section>
 
-    <!-- FOOTER (PROFESSIONAL) -->
+    <!-- FOOTER -->
     <footer class="site-footer reveal">
       <div class="footer-inner">
         <div class="footer-brand">C-LUXURY</div>
@@ -260,23 +254,34 @@
         <p class="footer-copy">© 2026 C-LUXURY. All rights reserved.</p>
       </div>
     </footer>
-
   </main>
 
-  <!-- FLOATING UI: Currency Switch + Chat Bubble (sticky on scroll) -->
+  <!-- ✅ SEARCH OVERLAY + MODAL (WORKING) -->
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true"></div>
+  <div class="search-modal" id="searchModal" aria-hidden="true" role="dialog" aria-label="Search products">
+    <input
+      type="search"
+      class="search-input"
+      id="searchInput"
+      placeholder="Search products..."
+      autocomplete="off"
+      aria-label="Search input"
+    />
+    <div class="search-results" id="searchResults" aria-label="Search results"></div>
+  </div>
+
+  <!-- FLOATING UI: Currency Switch (left) -->
   <div class="floating-ui" aria-label="Floating controls">
-    <!-- Currency Switch -->
     <div class="currency-switch" role="group" aria-label="Currency switch">
       <button type="button" class="currency-btn active" data-currency="USD">USD</button>
       <button type="button" class="currency-btn" data-currency="NGN">NGN</button>
     </div>
-
-    <!-- Chat Bubble (right corner + horizontal handled in CSS) -->
-    <button type="button" class="chat-bubble" aria-label="Chat with us" id="chatOpenBtn">
-      <span class="chat-icon">💬</span>
-      <span class="chat-bubble-text">Chat with us</span>
-    </button>
   </div>
+
+  <!-- ✅ Chat bubble (right corner, horizontal) -->
+  <button type="button" class="chat-bubble" aria-label="Chat with us" id="chatOpenBtn">
+    💬 <span class="chat-bubble-text">Chat with us</span>
+  </button>
 
   <!-- Chat Panel -->
   <div class="chat-panel" id="chatPanel" aria-hidden="true">
@@ -291,58 +296,34 @@
     </div>
 
     <div class="chat-actions">
-      <a
-        class="chat-action"
-        href="https://mrcharliestxs.myshopify.com/collections/all"
-        target="_blank"
-        rel="noopener"
-      >Shop All Products</a>
-      <a
-        class="chat-action"
-        href="https://mrcharliestxs.myshopify.com/pages/contact"
-        target="_blank"
-        rel="noopener"
-      >Contact</a>
-    </div>
-  </div>
-
-  <!-- SEARCH MODAL -->
-  <div class="search-modal" id="search-modal" aria-hidden="true">
-    <div class="search-box" role="dialog" aria-label="Search products">
-      <div class="search-top">
-        <div class="search-title">SEARCH</div>
-        <button class="search-close" id="close-search" aria-label="Close search">✕</button>
-      </div>
-
-      <input
-        class="search-input"
-        id="search-input"
-        type="search"
-        placeholder="Search products…"
-        autocomplete="off"
-      />
-
-      <div class="search-results" id="search-results"></div>
+      <a class="chat-action" href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">Shop All Products</a>
+      <a class="chat-action" href="https://mrcharliestxs.myshopify.com/pages/contact" target="_blank" rel="noopener">Contact</a>
     </div>
   </div>
 
   <script>
     window.addEventListener("load", () => {
 
-      /* HIDE LOADER */
+      /* ========================= */
+      /* HIDE LOADER               */
+      /* ========================= */
       setTimeout(() => {
         const loader = document.querySelector(".site-loader");
         if (loader) loader.classList.add("hidden");
       }, 700);
 
-      /* MENU TOGGLE */
+      /* ========================= */
+      /* MENU TOGGLE               */
+      /* ========================= */
       const menuToggle = document.querySelector(".menu-toggle");
       const menuPanel = document.querySelector(".menu-panel");
       if (menuToggle && menuPanel) {
         menuToggle.onclick = () => menuPanel.classList.toggle("open");
       }
 
-      /* HERO SLIDER */
+      /* ========================= */
+      /* HERO SLIDER               */
+      /* ========================= */
       const heroTitle = document.getElementById("hero-title");
       const heroSubtext = document.getElementById("hero-subtext");
       const heroDots = document.querySelectorAll(".hero-dots .dot");
@@ -350,21 +331,9 @@
       const heroContent = document.querySelector(".hero-content");
 
       const slides = [
-        {
-          image: "assets/images/hero/hero.PNG",
-          title: "A NEW YEAR<br>CURATED FOR YOU",
-          text: "EMBRACE FRESH STYLES AND STATEMENT PIECES<br>FROM YOUR FAVORITE BRAND."
-        },
-        {
-          image: "assets/images/hero/hero-2.PNG",
-          title: "PRESENCE<br>WITHOUT NOISE",
-          text: "QUIET CONFIDENCE.<br>DEFINED FORM.<br>TIMELESS CONTROL."
-        },
-        {
-          image: "assets/images/hero/hero-3.PNG",
-          title: "WELCOME TO<br>C-LUXURY",
-          text: "EXPLORE DISTINCTIVE STYLES<br>AS YOU AWAIT WHAT’S TO COME."
-        }
+        { image: "assets/images/hero/hero.PNG",   title: "A NEW YEAR<br>CURATED FOR YOU", text: "EMBRACE FRESH STYLES AND STATEMENT PIECES<br>FROM YOUR FAVORITE BRAND." },
+        { image: "assets/images/hero/hero-2.PNG", title: "PRESENCE<br>WITHOUT NOISE",      text: "QUIET CONFIDENCE.<br>DEFINED FORM.<br>TIMELESS CONTROL." },
+        { image: "assets/images/hero/hero-3.PNG", title: "WELCOME TO<br>C-LUXURY",         text: "EXPLORE DISTINCTIVE STYLES<br>AS YOU AWAIT WHAT’S TO COME." }
       ];
 
       slides.forEach(s => { const img = new Image(); img.src = s.image; });
@@ -377,7 +346,6 @@
         if (!bgLayers.length || !heroTitle || !heroSubtext || !heroContent) return;
 
         const nextBg = activeBg === 0 ? 1 : 0;
-
         heroContent.classList.add("fade-out");
 
         setTimeout(() => {
@@ -398,10 +366,7 @@
       }
 
       function stopHeroAuto() {
-        if (heroTimer) {
-          clearInterval(heroTimer);
-          heroTimer = null;
-        }
+        if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
       }
 
       function startHeroAuto() {
@@ -425,7 +390,9 @@
       if (bgLayers[0]) bgLayers[0].style.backgroundImage = `url(${slides[0].image})`;
       startHeroAuto();
 
-      /* REVEAL ON SCROLL */
+      /* ========================= */
+      /* REVEAL ON SCROLL          */
+      /* ========================= */
       const revealEls = document.querySelectorAll(".reveal");
       if (revealEls.length) {
         const observer = new IntersectionObserver((entries) => {
@@ -440,37 +407,9 @@
         revealEls.forEach(el => observer.observe(el));
       }
 
-      /* -----------------------------
-         CURRENCY SWITCH (USD / NGN)
-      ------------------------------*/
-      const NGN_RATE = 1500; // change anytime
-      let activeCurrency = "USD";
-      const currencyBtns = document.querySelectorAll(".currency-btn");
-
-      function formatMoneyUSD(v) { return `$${v.toFixed(2)}`; }
-      function formatMoneyNGN(v) { return `₦${Math.round(v).toLocaleString("en-NG")}`; }
-
-      function renderMoneyAll() {
-        const moneyEls = document.querySelectorAll("[data-money][data-usd]");
-        moneyEls.forEach(el => {
-          const usd = Number(el.dataset.usd || "0");
-          el.textContent = (activeCurrency === "USD") ? formatMoneyUSD(usd) : formatMoneyNGN(usd * NGN_RATE);
-        });
-      }
-
-      currencyBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          currencyBtns.forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          activeCurrency = btn.dataset.currency || "USD";
-          renderMoneyAll();
-        });
-      });
-
-      // first render
-      renderMoneyAll();
-
-      /* OWN THE LOOK */
+      /* ========================= */
+      /* OWN THE LOOK SLIDER       */
+      /* ========================= */
       const ownDots = document.querySelectorAll(".own-dot");
       const ownImg = document.getElementById("own-img");
       const ownName = document.getElementById("own-name");
@@ -481,34 +420,61 @@
       const ownNext = document.getElementById("own-next");
       const swipeArea = document.getElementById("own-swipe");
 
+      // ✅ Product catalog (used by slider AND search)
       const products = [
         {
-          img: "assets/images/products/wolf-teal-floral.jpg",
+          key: "punk-rock-tee",
+          name: "Punk Rock Lip Graphic Tee — Skeleton Band Back Print",
+          priceUSD: 22.26,
+          img: "assets/images/punk-rock-tee.jpg",
+          link: "https://mrcharliestxs.myshopify.com/products/punk-rock-lip-graphic-tee-2025-skeleton-band-back-print?variant=43781844467763",
+          onPageId: "product-newin-1"
+        },
+        {
+          key: "blue-neon-wolf-slides",
+          name: "Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides",
+          priceUSD: 51.76,
+          img: "assets/images/blue-neon-wolf-slides.jpg",
+          link: "https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891",
+          onPageId: "product-newin-2"
+        },
+        {
+          key: "wolf-teal-floral",
           name: "WOLF TEA FLORAL T-SHIRT",
           priceUSD: 38.99,
-          link: "https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995"
+          img: "assets/images/products/wolf-teal-floral.jpg",
+          link: "https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995",
+          sliderIndex: 0
         },
         {
-          img: "assets/images/products/samurai-moon.jpg",
+          key: "samurai-moon",
           name: "SAMURAI MOON T-SHIRT",
           priceUSD: 25.73,
-          link: "https://mrcharliestxs.myshopify.com/products/samurai-moon-graphic-t-shirt-shine-back-print?variant=43781765464115"
+          img: "assets/images/products/samurai-moon.jpg",
+          link: "https://mrcharliestxs.myshopify.com/products/samurai-moon-graphic-t-shirt-shine-back-print?variant=43781765464115",
+          sliderIndex: 1
         },
         {
-          img: "assets/images/products/samurai-kanji-hoodie.jpg",
+          key: "samurai-kanji-hoodie",
           name: "SAMURAI KANJI HOODIE",
           priceUSD: 30.83,
-          link: "https://mrcharliestxs.myshopify.com/products/samurai-warrior-hoodie-vintage-japanese-kanji-design?variant=43772208054323"
+          img: "assets/images/products/samurai-kanji-hoodie.jpg",
+          link: "https://mrcharliestxs.myshopify.com/products/samurai-warrior-hoodie-vintage-japanese-kanji-design?variant=43772208054323",
+          sliderIndex: 2
         },
         {
-          img: "assets/images/products/gingerbread-sweatshirt.jpg",
+          key: "gingerbread-sweatshirt",
           name: "CHRISTMAS GINGERBREAD SWEATSHIRT",
           priceUSD: 62.59,
-          link: "https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849317427"
+          img: "assets/images/products/gingerbread-sweatshirt.jpg",
+          link: "https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849317427",
+          sliderIndex: 3
         }
       ];
 
-      products.forEach(p => { const img = new Image(); img.src = p.img; });
+      // slider items only
+      const sliderProducts = products.filter(p => typeof p.sliderIndex === "number").sort((a,b)=>a.sliderIndex-b.sliderIndex);
+      sliderProducts.forEach(p => { const img = new Image(); img.src = p.img; });
 
       let ownCurrent = 0;
       let ownTimer = null;
@@ -516,6 +482,7 @@
       function stopOwnAuto() {
         if (ownTimer) { clearInterval(ownTimer); ownTimer = null; }
       }
+
       function startOwnAuto() {
         stopOwnAuto();
         ownTimer = setInterval(() => showSlide(ownCurrent + 1), 5200);
@@ -524,20 +491,20 @@
       function showSlide(i) {
         if (!ownImg || !ownName || !ownPrice || !ownLink || !ownCard) return;
 
-        ownCurrent = (i + products.length) % products.length;
+        ownCurrent = (i + sliderProducts.length) % sliderProducts.length;
 
         ownDots.forEach(d => d.classList.remove("active"));
         if (ownDots[ownCurrent]) ownDots[ownCurrent].classList.add("active");
 
         ownCard.classList.add("own-fade");
         setTimeout(() => {
-          const p = products[ownCurrent];
+          const p = sliderProducts[ownCurrent];
           ownImg.src = p.img;
           ownImg.alt = p.name;
           ownName.textContent = p.name;
           ownLink.href = p.link;
 
-          // set USD base in dataset for currency switch
+          // update currency base
           ownPrice.dataset.usd = String(p.priceUSD);
           renderMoneyAll();
 
@@ -545,20 +512,23 @@
         }, 250);
       }
 
-      ownDots.forEach((dot, i) => {
-        dot.onclick = () => { showSlide(i); startOwnAuto(); };
-      });
+      // expose for Search
+      function jumpToSliderProduct(sliderIndex) {
+        showSlide(sliderIndex);
+        const ownSection = document.getElementById("own-look");
+        if (ownSection) ownSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
 
+      ownDots.forEach((dot, i) => { dot.onclick = () => { showSlide(i); startOwnAuto(); }; });
       if (ownPrev) ownPrev.onclick = () => { showSlide(ownCurrent - 1); startOwnAuto(); };
       if (ownNext) ownNext.onclick = () => { showSlide(ownCurrent + 1); startOwnAuto(); };
 
+      // swipe
       let startX = 0, startY = 0, isSwiping = false;
 
       function onTouchStart(e) {
         const t = e.touches[0];
-        startX = t.clientX;
-        startY = t.clientY;
-        isSwiping = true;
+        startX = t.clientX; startY = t.clientY; isSwiping = true;
       }
 
       function onTouchMove(e) {
@@ -591,9 +561,9 @@
       showSlide(0);
       startOwnAuto();
 
-      /* -----------------------------
-         STICKY CHAT (INSPO STYLE)
-      ------------------------------*/
+      /* ========================= */
+      /* CHAT PANEL                */
+      /* ========================= */
       const chatPanel = document.getElementById("chatPanel");
       const chatOpenBtn = document.getElementById("chatOpenBtn");
       const chatCloseBtn = document.getElementById("chatCloseBtn");
@@ -613,147 +583,189 @@
       if (chatOpenBtn) chatOpenBtn.addEventListener("click", openChat);
       if (chatCloseBtn) chatCloseBtn.addEventListener("click", closeChat);
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          closeChat();
-          closeSearch();
-        }
+      /* ========================= */
+      /* CURRENCY (USD / NGN)      */
+      /* ========================= */
+      // Default fallback rate (works offline)
+      let NGN_RATE = 1500; // fallback
+
+      // Optional: auto-update rate (no keys). If it fails, fallback stays.
+      // You can remove this fetch if you want manual rate only.
+      fetch("https://open.er-api.com/v6/latest/USD")
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.result === "success" && data.rates && data.rates.NGN) {
+            NGN_RATE = Number(data.rates.NGN) || NGN_RATE;
+            renderMoneyAll();
+          }
+        })
+        .catch(() => { /* keep fallback */ });
+
+      let activeCurrency = "USD";
+      const currencyBtns = document.querySelectorAll(".currency-btn");
+
+      function formatMoneyUSD(v) { return `$${v.toFixed(2)}`; }
+      function formatMoneyNGN(v) { return `₦${Math.round(v).toLocaleString("en-NG")}`; }
+
+      function renderMoneyAll() {
+        const moneyEls = document.querySelectorAll("[data-money][data-usd]");
+        moneyEls.forEach(el => {
+          const usd = Number(el.dataset.usd || "0");
+          el.textContent = (activeCurrency === "USD")
+            ? formatMoneyUSD(usd)
+            : formatMoneyNGN(usd * NGN_RATE);
+        });
+      }
+
+      currencyBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          currencyBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeCurrency = btn.dataset.currency || "USD";
+          renderMoneyAll();
+        });
       });
 
-      /* -----------------------------
-         SEARCH (Modal + Results)
-      ------------------------------*/
-      const openSearchBtn = document.getElementById("open-search");
-      const searchModal = document.getElementById("search-modal");
-      const closeSearchBtn = document.getElementById("close-search");
-      const searchInput = document.getElementById("search-input");
-      const searchResults = document.getElementById("search-results");
+      renderMoneyAll();
 
-      const searchableProducts = [
-        {
-          name: "Punk Rock Lip Graphic Tee — Skeleton Band Back Print",
-          priceUSD: 22.26,
-          img: "assets/images/punk-rock-tee.jpg",
-          pageId: "prod-punkrock",
-          shopify: "https://mrcharliestxs.myshopify.com/products/punk-rock-lip-graphic-tee-2025-skeleton-band-back-print?variant=43781844467763"
-        },
-        {
-          name: "Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides",
-          priceUSD: 51.76,
-          img: "assets/images/blue-neon-wolf-slides.jpg",
-          pageId: "prod-wolfslides",
-          shopify: "https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
-        },
-        {
-          name: "WOLF TEA FLORAL T-SHIRT",
-          priceUSD: 38.99,
-          img: "assets/images/products/wolf-teal-floral.jpg",
-          pageId: "own-look",
-          shopify: "https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995"
-        },
-        {
-          name: "SAMURAI MOON T-SHIRT",
-          priceUSD: 25.73,
-          img: "assets/images/products/samurai-moon.jpg",
-          pageId: "own-look",
-          shopify: "https://mrcharliestxs.myshopify.com/products/samurai-moon-graphic-t-shirt-shine-back-print?variant=43781765464115"
-        },
-        {
-          name: "SAMURAI KANJI HOODIE",
-          priceUSD: 30.83,
-          img: "assets/images/products/samurai-kanji-hoodie.jpg",
-          pageId: "own-look",
-          shopify: "https://mrcharliestxs.myshopify.com/products/samurai-warrior-hoodie-vintage-japanese-kanji-design?variant=43772208054323"
-        },
-        {
-          name: "CHRISTMAS GINGERBREAD SWEATSHIRT",
-          priceUSD: 62.59,
-          img: "assets/images/products/gingerbread-sweatshirt.jpg",
-          pageId: "own-look",
-          shopify: "https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849317427"
-        }
-      ];
+      /* ========================= */
+      /* ✅ SEARCH (WORKING)       */
+      /* - shows results           */
+      /* - "view on page" scrolls  */
+      /* - Shopify link opens shop */
+      /* ========================= */
+      const searchBtn = document.getElementById("searchBtn");
+      const searchOverlay = document.getElementById("searchOverlay");
+      const searchModal = document.getElementById("searchModal");
+      const searchInput = document.getElementById("searchInput");
+      const searchResults = document.getElementById("searchResults");
+
+      function escapeHtml(s) {
+        return String(s)
+          .replaceAll("&","&amp;")
+          .replaceAll("<","&lt;")
+          .replaceAll(">","&gt;")
+          .replaceAll('"',"&quot;")
+          .replaceAll("'","&#039;");
+      }
 
       function openSearch() {
-        if (!searchModal) return;
+        if (!searchOverlay || !searchModal || !searchInput) return;
+        searchOverlay.classList.add("open");
         searchModal.classList.add("open");
+        searchOverlay.setAttribute("aria-hidden", "false");
         searchModal.setAttribute("aria-hidden", "false");
-        setTimeout(() => { if (searchInput) searchInput.focus(); }, 50);
-        renderResults("");
+        searchInput.value = "";
+        renderSearchResults("");
+        setTimeout(() => searchInput.focus(), 30);
       }
 
       function closeSearch() {
-        if (!searchModal) return;
+        if (!searchOverlay || !searchModal) return;
+        searchOverlay.classList.remove("open");
         searchModal.classList.remove("open");
+        searchOverlay.setAttribute("aria-hidden", "true");
         searchModal.setAttribute("aria-hidden", "true");
-        if (searchInput) searchInput.value = "";
       }
 
-      function renderResults(q) {
+      function renderSearchResults(query) {
         if (!searchResults) return;
-        const query = (q || "").trim().toLowerCase();
 
-        if (!query) {
-          searchResults.innerHTML = `<div style="padding:12px 8px; opacity:.7; font-size:13px;">Type to search products.</div>`;
+        const q = (query || "").trim().toLowerCase();
+        const matches = !q
+          ? products.slice(0, 6)
+          : products.filter(p => p.name.toLowerCase().includes(q) || (p.key && p.key.includes(q)));
+
+        if (!matches.length) {
+          searchResults.innerHTML = `<div style="padding:10px 2px; font-size:13px;">No results found.</div>`;
           return;
         }
 
-        const filtered = searchableProducts.filter(p => p.name.toLowerCase().includes(query));
+        searchResults.innerHTML = matches.map(p => {
+          const priceText = (activeCurrency === "USD")
+            ? `$${p.priceUSD.toFixed(2)}`
+            : `₦${Math.round(p.priceUSD * NGN_RATE).toLocaleString("en-NG")}`;
 
-        if (!filtered.length) {
-          searchResults.innerHTML = `<div style="padding:12px 8px; opacity:.7; font-size:13px;">No results found.</div>`;
-          return;
-        }
+          // view target: either onPageId or sliderIndex
+          const viewTarget = p.onPageId ? `page:${p.onPageId}` : (typeof p.sliderIndex === "number" ? `slider:${p.sliderIndex}` : "");
 
-        const formatInlinePrice = (usd) => {
-          return (activeCurrency === "USD")
-            ? `$${usd.toFixed(2)}`
-            : `₦${Math.round(usd * NGN_RATE).toLocaleString("en-NG")}`;
-        };
+          return `
+            <div class="search-result" role="group" aria-label="${escapeHtml(p.name)}">
+              <div class="search-thumb">
+                <img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy">
+              </div>
+              <div class="search-meta" style="flex:1;">
+                <div class="search-name">${escapeHtml(p.name)}</div>
+                <div class="search-price">${escapeHtml(priceText)}</div>
 
-        searchResults.innerHTML = filtered.map(p => `
-          <div class="search-item">
-            <img class="search-thumb" src="${p.img}" alt="${p.name}">
-            <div class="search-meta">
-              <div class="search-name">${p.name}</div>
-              <div class="search-price">${formatInlinePrice(p.priceUSD)}</div>
-              <div class="search-actions">
-                <a href="#${p.pageId}" data-page="${p.pageId}" class="view-page">View on this page</a>
-                <a href="${p.shopify}" target="_blank" rel="noopener">View on Shopify</a>
+                <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+                  <button
+                    type="button"
+                    class="icon-btn"
+                    style="border:1px solid #111; padding:8px 10px; border-radius:12px; font-size:12px; letter-spacing:1px;"
+                    data-view="${escapeHtml(viewTarget)}"
+                  >View on page</button>
+
+                  <a
+                    class="icon-btn"
+                    style="border:1px solid #111; padding:8px 10px; border-radius:12px; font-size:12px; letter-spacing:1px;"
+                    href="${escapeHtml(p.link)}"
+                    target="_blank"
+                    rel="noopener"
+                  >Open on Shopify</a>
+                </div>
               </div>
             </div>
-          </div>
-        `).join("");
+          `;
+        }).join("");
 
-        // page jump + highlight
-        searchResults.querySelectorAll(".view-page").forEach(a => {
-          a.addEventListener("click", (e) => {
-            e.preventDefault();
-            const id = a.getAttribute("data-page");
-            const el = document.getElementById(id);
-            if (el) {
-              closeSearch();
-              el.scrollIntoView({ behavior: "smooth", block: "start" });
-              el.classList.add("flash-highlight");
-              setTimeout(() => el.classList.remove("flash-highlight"), 1400);
+        // bind view buttons
+        searchResults.querySelectorAll("button[data-view]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const v = btn.getAttribute("data-view") || "";
+            closeSearch();
+
+            if (v.startsWith("page:")) {
+              const id = v.replace("page:", "");
+              const el = document.getElementById(id);
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "center" });
+                // quick highlight effect
+                el.style.outline = "2px solid #111";
+                el.style.outlineOffset = "8px";
+                setTimeout(() => { el.style.outline = "none"; el.style.outlineOffset = "0"; }, 1100);
+              }
+            } else if (v.startsWith("slider:")) {
+              const idx = Number(v.replace("slider:", ""));
+              if (!Number.isNaN(idx)) jumpToSliderProduct(idx);
             }
           });
         });
       }
 
-      if (openSearchBtn) openSearchBtn.addEventListener("click", openSearch);
-      if (closeSearchBtn) closeSearchBtn.addEventListener("click", closeSearch);
+      if (searchBtn) searchBtn.addEventListener("click", openSearch);
+      if (searchOverlay) searchOverlay.addEventListener("click", closeSearch);
 
-      if (searchModal) {
-        searchModal.addEventListener("click", (e) => {
-          if (e.target === searchModal) closeSearch();
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          renderSearchResults(e.target.value);
+        });
+
+        searchInput.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeSearch();
         });
       }
 
-      if (searchInput) {
-        searchInput.addEventListener("input", (e) => renderResults(e.target.value));
-      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeSearch();
+          closeChat();
+        }
+      });
 
+      /* ========================= */
+      /* PAUSE WHEN TAB HIDDEN     */
+      /* ========================= */
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
           stopOwnAuto();
