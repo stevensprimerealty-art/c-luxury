@@ -21,7 +21,7 @@
     </div>
 
     <div class="header-right">
-      <!-- ✅ SEARCH button now works -->
+      <!-- ✅ SEARCH button -->
       <button class="icon-btn" id="searchBtn" aria-label="Search">🔍</button>
 
       <a href="cart.html" class="icon-btn cart" aria-label="Cart">
@@ -197,16 +197,12 @@
     <!-- EXPLORE MORE -->
     <section class="explore-more reveal">
       <h3>EXPLORE MORE PRODUCTS</h3>
-      <a
-        href="https://mrcharliestxs.myshopify.com/collections/all"
-        target="_blank"
-        rel="noopener"
-      >
+      <a href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">
         Shop All Products
       </a>
     </section>
 
-    <!-- NEW BANNERS (AFTER SHOP ALL PRODUCTS) -->
+    <!-- NEW BANNERS -->
     <section class="feature-banners">
       <a
         href="https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
@@ -256,9 +252,13 @@
     </footer>
   </main>
 
-  <!-- ✅ SEARCH OVERLAY + MODAL (WORKING) -->
+  <!-- ✅ SEARCH OVERLAY + MODAL -->
   <div class="search-overlay" id="searchOverlay" aria-hidden="true"></div>
-  <div class="search-modal" id="searchModal" aria-hidden="true" role="dialog" aria-label="Search products">
+
+  <div class="search-modal" id="searchModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Search products">
+    <!-- ✅ close button -->
+    <button type="button" class="search-close" id="searchCloseBtn" aria-label="Close search">✕</button>
+
     <input
       type="search"
       class="search-input"
@@ -304,26 +304,20 @@
   <script>
     window.addEventListener("load", () => {
 
-      /* ========================= */
-      /* HIDE LOADER               */
-      /* ========================= */
+      /* HIDE LOADER */
       setTimeout(() => {
         const loader = document.querySelector(".site-loader");
         if (loader) loader.classList.add("hidden");
       }, 700);
 
-      /* ========================= */
-      /* MENU TOGGLE               */
-      /* ========================= */
+      /* MENU TOGGLE */
       const menuToggle = document.querySelector(".menu-toggle");
       const menuPanel = document.querySelector(".menu-panel");
       if (menuToggle && menuPanel) {
         menuToggle.onclick = () => menuPanel.classList.toggle("open");
       }
 
-      /* ========================= */
-      /* HERO SLIDER               */
-      /* ========================= */
+      /* HERO SLIDER */
       const heroTitle = document.getElementById("hero-title");
       const heroSubtext = document.getElementById("hero-subtext");
       const heroDots = document.querySelectorAll(".hero-dots .dot");
@@ -390,9 +384,7 @@
       if (bgLayers[0]) bgLayers[0].style.backgroundImage = `url(${slides[0].image})`;
       startHeroAuto();
 
-      /* ========================= */
-      /* REVEAL ON SCROLL          */
-      /* ========================= */
+      /* REVEAL ON SCROLL */
       const revealEls = document.querySelectorAll(".reveal");
       if (revealEls.length) {
         const observer = new IntersectionObserver((entries) => {
@@ -408,19 +400,8 @@
       }
 
       /* ========================= */
-      /* OWN THE LOOK SLIDER       */
+      /* PRODUCTS (search + slider) */
       /* ========================= */
-      const ownDots = document.querySelectorAll(".own-dot");
-      const ownImg = document.getElementById("own-img");
-      const ownName = document.getElementById("own-name");
-      const ownPrice = document.getElementById("own-price");
-      const ownLink = document.getElementById("own-link");
-      const ownCard = document.querySelector(".own-look-card");
-      const ownPrev = document.getElementById("own-prev");
-      const ownNext = document.getElementById("own-next");
-      const swipeArea = document.getElementById("own-swipe");
-
-      // ✅ Product catalog (used by slider AND search)
       const products = [
         {
           key: "punk-rock-tee",
@@ -472,8 +453,21 @@
         }
       ];
 
-      // slider items only
-      const sliderProducts = products.filter(p => typeof p.sliderIndex === "number").sort((a,b)=>a.sliderIndex-b.sliderIndex);
+      /* OWN THE LOOK SLIDER */
+      const ownDots = document.querySelectorAll(".own-dot");
+      const ownImg = document.getElementById("own-img");
+      const ownName = document.getElementById("own-name");
+      const ownPrice = document.getElementById("own-price");
+      const ownLink = document.getElementById("own-link");
+      const ownCard = document.querySelector(".own-look-card");
+      const ownPrev = document.getElementById("own-prev");
+      const ownNext = document.getElementById("own-next");
+      const swipeArea = document.getElementById("own-swipe");
+
+      const sliderProducts = products
+        .filter(p => typeof p.sliderIndex === "number")
+        .sort((a,b)=>a.sliderIndex-b.sliderIndex);
+
       sliderProducts.forEach(p => { const img = new Image(); img.src = p.img; });
 
       let ownCurrent = 0;
@@ -504,7 +498,6 @@
           ownName.textContent = p.name;
           ownLink.href = p.link;
 
-          // update currency base
           ownPrice.dataset.usd = String(p.priceUSD);
           renderMoneyAll();
 
@@ -512,7 +505,6 @@
         }, 250);
       }
 
-      // expose for Search
       function jumpToSliderProduct(sliderIndex) {
         showSlide(sliderIndex);
         const ownSection = document.getElementById("own-look");
@@ -561,9 +553,7 @@
       showSlide(0);
       startOwnAuto();
 
-      /* ========================= */
-      /* CHAT PANEL                */
-      /* ========================= */
+      /* CHAT PANEL */
       const chatPanel = document.getElementById("chatPanel");
       const chatOpenBtn = document.getElementById("chatOpenBtn");
       const chatCloseBtn = document.getElementById("chatCloseBtn");
@@ -583,14 +573,8 @@
       if (chatOpenBtn) chatOpenBtn.addEventListener("click", openChat);
       if (chatCloseBtn) chatCloseBtn.addEventListener("click", closeChat);
 
-      /* ========================= */
-      /* CURRENCY (USD / NGN)      */
-      /* ========================= */
-      // Default fallback rate (works offline)
-      let NGN_RATE = 1500; // fallback
-
-      // Optional: auto-update rate (no keys). If it fails, fallback stays.
-      // You can remove this fetch if you want manual rate only.
+      /* CURRENCY (USD / NGN) */
+      let NGN_RATE = 1500; // fallback offline
       fetch("https://open.er-api.com/v6/latest/USD")
         .then(r => r.json())
         .then(data => {
@@ -628,17 +612,13 @@
 
       renderMoneyAll();
 
-      /* ========================= */
-      /* ✅ SEARCH (WORKING)       */
-      /* - shows results           */
-      /* - "view on page" scrolls  */
-      /* - Shopify link opens shop */
-      /* ========================= */
+      /* ✅ SEARCH (View on page + Shopify + close button) */
       const searchBtn = document.getElementById("searchBtn");
       const searchOverlay = document.getElementById("searchOverlay");
       const searchModal = document.getElementById("searchModal");
       const searchInput = document.getElementById("searchInput");
       const searchResults = document.getElementById("searchResults");
+      const searchCloseBtn = document.getElementById("searchCloseBtn");
 
       function escapeHtml(s) {
         return String(s)
@@ -686,8 +666,9 @@
             ? `$${p.priceUSD.toFixed(2)}`
             : `₦${Math.round(p.priceUSD * NGN_RATE).toLocaleString("en-NG")}`;
 
-          // view target: either onPageId or sliderIndex
-          const viewTarget = p.onPageId ? `page:${p.onPageId}` : (typeof p.sliderIndex === "number" ? `slider:${p.sliderIndex}` : "");
+          const viewTarget = p.onPageId
+            ? `page:${p.onPageId}`
+            : (typeof p.sliderIndex === "number" ? `slider:${p.sliderIndex}` : "");
 
           return `
             <div class="search-result" role="group" aria-label="${escapeHtml(p.name)}">
@@ -730,10 +711,12 @@
               const el = document.getElementById(id);
               if (el) {
                 el.scrollIntoView({ behavior: "smooth", block: "center" });
-                // quick highlight effect
                 el.style.outline = "2px solid #111";
                 el.style.outlineOffset = "8px";
-                setTimeout(() => { el.style.outline = "none"; el.style.outlineOffset = "0"; }, 1100);
+                setTimeout(() => {
+                  el.style.outline = "none";
+                  el.style.outlineOffset = "0";
+                }, 1100);
               }
             } else if (v.startsWith("slider:")) {
               const idx = Number(v.replace("slider:", ""));
@@ -745,15 +728,11 @@
 
       if (searchBtn) searchBtn.addEventListener("click", openSearch);
       if (searchOverlay) searchOverlay.addEventListener("click", closeSearch);
+      if (searchCloseBtn) searchCloseBtn.addEventListener("click", closeSearch);
 
       if (searchInput) {
-        searchInput.addEventListener("input", (e) => {
-          renderSearchResults(e.target.value);
-        });
-
-        searchInput.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") closeSearch();
-        });
+        searchInput.addEventListener("input", (e) => renderSearchResults(e.target.value));
+        searchInput.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSearch(); });
       }
 
       document.addEventListener("keydown", (e) => {
@@ -763,9 +742,7 @@
         }
       });
 
-      /* ========================= */
-      /* PAUSE WHEN TAB HIDDEN     */
-      /* ========================= */
+      /* PAUSE WHEN TAB HIDDEN */
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
           stopOwnAuto();
