@@ -21,8 +21,10 @@
     </div>
 
     <div class="header-right">
+      <!-- SEARCH button -->
       <button class="icon-btn" id="searchBtn" aria-label="Search">🔍</button>
 
+      <!-- CART -->
       <a
         href="https://mrcharliestxs.myshopify.com/cart"
         class="icon-btn cart"
@@ -31,7 +33,7 @@
         target="_blank"
         rel="noopener"
       >
-        🛒<span class="cart-count is-empty" id="cartCount">0</span>
+        🛒<span class="cart-count is-empty" id="cartCount" aria-label="Cart item count">0</span>
       </a>
 
       <button class="icon-btn menu-toggle" aria-label="Menu">⋮</button>
@@ -52,7 +54,6 @@
     <!-- ABOUT HERO SLIDER -->
     <section class="about-slider" aria-label="About hero slider">
 
-      <!-- Slides (images) -->
       <div class="about-slide is-active"
            style="background-image:url('assets/images/about-1.png')"
            data-word="ABOUT"
@@ -68,11 +69,10 @@
            data-word="TIME"
            data-pos="right"></div>
 
-      <!-- Cinematic overlay layer (grain is handled in CSS) -->
-      <div class="about-cine"></div>
+      <!-- Cinematic overlay layer -->
+      <div class="about-cine" aria-hidden="true"></div>
 
-      <!-- Text + Button (fade together) -->
-      <div class="about-overlay" aria-hidden="false">
+      <div class="about-overlay">
         <h1 class="about-word is-in is-left" id="aboutWord">ABOUT</h1>
 
         <a
@@ -85,7 +85,6 @@
           SHOP NOW
         </a>
       </div>
-
     </section>
 
     <!-- MARQUEE -->
@@ -96,7 +95,7 @@
       </div>
     </section>
 
-    <!-- ABOUT COPY -->
+    <!-- ABOUT COPY (THIS IS YOUR TEXT) -->
     <section class="about-copy reveal" aria-label="About C-LUXURY">
       <h2 class="about-title">C-Luxury — Presence Without Noise</h2>
 
@@ -109,7 +108,7 @@
       </p>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (BLURRED BACKGROUND) -->
     <footer class="site-footer about-footer reveal">
       <div class="footer-inner">
         <div class="footer-brand">C-LUXURY</div>
@@ -127,35 +126,300 @@
         <p class="footer-copy">© 2026 C-LUXURY. All rights reserved.</p>
       </div>
     </footer>
+
   </main>
+
+  <!-- SEARCH OVERLAY + MODAL (same as main) -->
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true" hidden></div>
+
+  <div
+    class="search-modal"
+    id="searchModal"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Search products"
+    hidden
+  >
+    <button type="button" class="search-close" id="searchCloseBtn" aria-label="Close search">✕</button>
+
+    <input
+      type="search"
+      class="search-input"
+      id="searchInput"
+      placeholder="Search products..."
+      autocomplete="off"
+      aria-label="Search input"
+    />
+    <div class="search-results" id="searchResults" aria-label="Search results"></div>
+  </div>
+
+  <!-- USD / NGN (same as main) -->
+  <div class="floating-ui" aria-label="Floating controls">
+    <div class="currency-switch" role="group" aria-label="Currency switch">
+      <button type="button" class="currency-btn active" data-currency="USD">USD</button>
+      <button type="button" class="currency-btn" data-currency="NGN">NGN</button>
+    </div>
+  </div>
+
+  <!-- CHAT (same as main) -->
+  <button type="button" class="chat-bubble" aria-label="Chat with us" id="chatOpenBtn">
+    💬 <span class="chat-bubble-text">Chat with us</span>
+  </button>
+
+  <div class="chat-panel" id="chatPanel" aria-hidden="true">
+    <div class="chat-head">
+      <div class="chat-title">Chat with us</div>
+      <button type="button" class="chat-close" id="chatCloseBtn" aria-label="Close chat">✕</button>
+    </div>
+
+    <div class="chat-body">
+      <div class="chat-msg bot">Hi 👋 How can we help?</div>
+      <div class="chat-msg bot">Tap below to continue shopping.</div>
+    </div>
+
+    <div class="chat-actions">
+      <a class="chat-action" href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">Shop All Products</a>
+      <a class="chat-action" href="https://mrcharliestxs.myshopify.com/pages/contact" target="_blank" rel="noopener">Contact</a>
+    </div>
+  </div>
 
   <script>
     window.addEventListener("load", () => {
 
-      // LOADER
+      /* LOADER */
       setTimeout(() => {
         document.querySelector(".site-loader")?.classList.add("hidden");
       }, 700);
 
-      // MENU
+      /* MENU */
       document.querySelector(".menu-toggle")?.addEventListener("click", () => {
         document.querySelector(".menu-panel")?.classList.toggle("open");
       });
 
-      // ABOUT SLIDER (fade in/out + text + button fade together + mobile timing)
+      /* CART COUNT (safe) */
+      const SHOPIFY_DOMAIN = "https://mrcharliestxs.myshopify.com";
+
+      function applyCartCount(count) {
+        const el = document.getElementById("cartCount");
+        if (!el) return;
+        const n = Math.max(0, Number(count || 0));
+        el.textContent = String(n);
+        if (n > 0) el.classList.remove("is-empty");
+        else el.classList.add("is-empty");
+      }
+
+      async function tryFetchCartCount(url, opts) {
+        const r = await fetch(url, opts);
+        if (!r.ok) throw new Error("Failed cart fetch");
+        const cart = await r.json();
+        return Number(cart.item_count || 0);
+      }
+
+      async function updateCartCount() {
+        try {
+          const c1 = await tryFetchCartCount("/cart.js", { credentials: "same-origin" });
+          applyCartCount(c1);
+          return;
+        } catch (e) {}
+
+        try {
+          const c2 = await tryFetchCartCount(SHOPIFY_DOMAIN + "/cart.js", { credentials: "omit" });
+          applyCartCount(c2);
+          return;
+        } catch (e) {
+          applyCartCount(0);
+        }
+      }
+
+      updateCartCount();
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) updateCartCount();
+      });
+
+      /* REVEAL */
+      const revealEls = document.querySelectorAll(".reveal");
+      if (revealEls.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+
+        revealEls.forEach(el => observer.observe(el));
+      }
+
+      /* CHAT */
+      const chatPanel = document.getElementById("chatPanel");
+      const chatOpenBtn = document.getElementById("chatOpenBtn");
+      const chatCloseBtn = document.getElementById("chatCloseBtn");
+
+      function openChat() {
+        if (!chatPanel) return;
+        chatPanel.classList.add("open");
+        chatPanel.setAttribute("aria-hidden", "false");
+      }
+
+      function closeChat() {
+        if (!chatPanel) return;
+        chatPanel.classList.remove("open");
+        chatPanel.setAttribute("aria-hidden", "true");
+      }
+
+      if (chatOpenBtn) chatOpenBtn.addEventListener("click", openChat);
+      if (chatCloseBtn) chatCloseBtn.addEventListener("click", closeChat);
+
+      /* CURRENCY */
+      let NGN_RATE = 1500; // fallback
+      let activeCurrency = "USD";
+      const currencyBtns = document.querySelectorAll(".currency-btn");
+
+      function formatMoneyUSD(v) { return `$${v.toFixed(2)}`; }
+      function formatMoneyNGN(v) { return `₦${Math.round(v).toLocaleString("en-NG")}`; }
+
+      function renderMoneyAll() {
+        const moneyEls = document.querySelectorAll("[data-money][data-usd]");
+        moneyEls.forEach(el => {
+          const usd = Number(el.dataset.usd || "0");
+          el.textContent = (activeCurrency === "USD")
+            ? formatMoneyUSD(usd)
+            : formatMoneyNGN(usd * NGN_RATE);
+        });
+      }
+
+      fetch("https://open.er-api.com/v6/latest/USD")
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.result === "success" && data.rates && data.rates.NGN) {
+            NGN_RATE = Number(data.rates.NGN) || NGN_RATE;
+            renderMoneyAll();
+          }
+        })
+        .catch(() => {});
+
+      currencyBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          currencyBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeCurrency = btn.dataset.currency || "USD";
+          renderMoneyAll();
+        });
+      });
+
+      renderMoneyAll();
+
+      /* SEARCH (same product list used before) */
+      const products = [
+        { key:"punk-rock-tee", name:"Punk Rock Lip Graphic Tee — Skeleton Band Back Print", priceUSD:22.26, img:"assets/images/punk-rock-tee.jpg", link:"https://mrcharliestxs.myshopify.com/products/punk-rock-lip-graphic-tee-2025-skeleton-band-back-print?variant=43781844467763" },
+        { key:"blue-neon-wolf-slides", name:"Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides", priceUSD:51.76, img:"assets/images/blue-neon-wolf-slides.jpg", link:"https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891" },
+        { key:"wolf-teal-floral", name:"WOLF TEA FLORAL T-SHIRT", priceUSD:38.99, img:"assets/images/products/wolf-teal-floral.jpg", link:"https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995" },
+        { key:"samurai-moon", name:"SAMURAI MOON T-SHIRT", priceUSD:25.73, img:"assets/images/products/samurai-moon.jpg", link:"https://mrcharliestxs.myshopify.com/products/samurai-moon-graphic-t-shirt-shine-back-print?variant=43781765464115" }
+      ];
+
+      const searchBtn = document.getElementById("searchBtn");
+      const searchOverlay = document.getElementById("searchOverlay");
+      const searchModal = document.getElementById("searchModal");
+      const searchInput = document.getElementById("searchInput");
+      const searchResults = document.getElementById("searchResults");
+      const searchCloseBtn = document.getElementById("searchCloseBtn");
+
+      function escapeHtml(s) {
+        return String(s)
+          .replaceAll("&","&amp;")
+          .replaceAll("<","&lt;")
+          .replaceAll(">","&gt;")
+          .replaceAll('"',"&quot;")
+          .replaceAll("'","&#039;");
+      }
+
+      function openSearch() {
+        if (!searchOverlay || !searchModal || !searchInput) return;
+        searchOverlay.hidden = false;
+        searchModal.hidden = false;
+        searchOverlay.classList.add("open");
+        searchModal.classList.add("open");
+        searchOverlay.setAttribute("aria-hidden", "false");
+        searchModal.setAttribute("aria-hidden", "false");
+        searchInput.value = "";
+        renderSearchResults("");
+        setTimeout(() => searchInput.focus(), 30);
+      }
+
+      function closeSearch() {
+        if (!searchOverlay || !searchModal) return;
+        searchOverlay.classList.remove("open");
+        searchModal.classList.remove("open");
+        searchOverlay.setAttribute("aria-hidden", "true");
+        searchModal.setAttribute("aria-hidden", "true");
+        searchOverlay.hidden = true;
+        searchModal.hidden = true;
+      }
+
+      function renderSearchResults(query) {
+        if (!searchResults) return;
+        const q = (query || "").trim().toLowerCase();
+        const matches = !q ? products : products.filter(p => p.name.toLowerCase().includes(q) || p.key.includes(q));
+
+        if (!matches.length) {
+          searchResults.innerHTML = `<div style="padding:10px 2px; font-size:13px;">No results found.</div>`;
+          return;
+        }
+
+        searchResults.innerHTML = matches.map(p => {
+          const priceText = (activeCurrency === "USD")
+            ? `$${p.priceUSD.toFixed(2)}`
+            : `₦${Math.round(p.priceUSD * NGN_RATE).toLocaleString("en-NG")}`;
+
+          return `
+            <div class="search-result" role="group" aria-label="${escapeHtml(p.name)}">
+              <div class="search-thumb">
+                <img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy">
+              </div>
+              <div class="search-meta" style="flex:1;">
+                <div class="search-name">${escapeHtml(p.name)}</div>
+                <div class="search-price">${escapeHtml(priceText)}</div>
+                <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+                  <a
+                    class="icon-btn"
+                    style="border:1px solid #111; padding:8px 10px; border-radius:12px; font-size:12px; letter-spacing:1px;"
+                    href="${escapeHtml(p.link)}"
+                    target="_blank"
+                    rel="noopener"
+                  >Open on Shopify</a>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      if (searchBtn) searchBtn.addEventListener("click", openSearch);
+      if (searchOverlay) searchOverlay.addEventListener("click", closeSearch);
+      if (searchCloseBtn) searchCloseBtn.addEventListener("click", closeSearch);
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => renderSearchResults(e.target.value));
+        searchInput.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSearch(); });
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeSearch();
+          closeChat();
+        }
+      });
+
+      /* ABOUT SLIDER */
       const slides = Array.from(document.querySelectorAll(".about-slide"));
       const wordEl = document.getElementById("aboutWord");
       const btnEl = document.getElementById("aboutBtn");
-
       if (!slides.length || !wordEl || !btnEl) return;
 
       let i = 0;
       const isMobile = window.matchMedia("(max-width:768px)").matches;
-
-      // 5s desktop, shorter on mobile
       const HOLD = isMobile ? 3200 : 5000;
-
-      // fade duration (must match your CSS transition timing)
       const FADE_MS = isMobile ? 500 : 650;
 
       function setWordPosition(pos) {
@@ -169,33 +433,26 @@
         const current = slides[i];
         const next = slides[nextIndex];
 
-        // Start fade-out for text + button
         wordEl.classList.remove("is-in");
         btnEl.classList.remove("is-in");
 
-        // Crossfade slides
         current.classList.remove("is-active");
         current.classList.add("is-fadeout");
 
         next.classList.add("is-active");
         next.classList.remove("is-fadeout");
 
-        // After fade, update word + position, then fade-in
         setTimeout(() => {
           wordEl.textContent = next.dataset.word || "";
           setWordPosition(next.dataset.pos || "left");
-
           wordEl.classList.add("is-in");
           btnEl.classList.add("is-in");
-
-          // cleanup
           current.classList.remove("is-fadeout");
         }, FADE_MS);
 
         i = nextIndex;
       }
 
-      // Ensure only first slide visible at start
       slides.forEach((s, idx) => {
         if (idx === 0) {
           s.classList.add("is-active");
@@ -212,6 +469,7 @@
         const nextIndex = (i + 1) % slides.length;
         swapTo(nextIndex);
       }, HOLD);
+
     });
   </script>
 
