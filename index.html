@@ -96,7 +96,7 @@
         >
           <img src="assets/images/punk-rock-tee.jpg" alt="Punk Rock Lip Graphic Tee — Skeleton Band Back Print">
           <h4 class="new-in-name">Punk Rock Lip Graphic Tee — Skeleton Band Back Print</h4>
-          <p class="new-in-price">$22.26</p>
+          <p class="new-in-price" data-money data-usd="22.26">$22.26</p>
         </a>
 
         <a
@@ -107,7 +107,7 @@
         >
           <img src="assets/images/blue-neon-wolf-slides.jpg" alt="Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides">
           <h4 class="new-in-name">Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides</h4>
-          <p class="new-in-price">$51.76</p>
+          <p class="new-in-price" data-money data-usd="51.76">$51.76</p>
         </a>
       </div>
     </section>
@@ -185,7 +185,7 @@
 
           <div class="own-look-info">
             <h4 id="own-name">WOLF TEA FLORAL T-SHIRT</h4>
-            <p id="own-price">$38.99</p>
+            <p id="own-price" data-money data-usd="38.99">$38.99</p>
           </div>
         </a>
       </div>
@@ -203,7 +203,102 @@
       </a>
     </section>
 
+    <!-- NEW BANNERS (AFTER SHOP ALL PRODUCTS) -->
+    <section class="feature-banners">
+
+      <!-- Banner 1: NEW RELEASES -->
+      <a
+        href="https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
+        target="_blank"
+        rel="noopener"
+        class="feature-banner reveal"
+        style="background-image:url('assets/images/backgrounds/promo-3.jpg')"
+        aria-label="New Releases - Explore now"
+      >
+        <div class="feature-overlay">
+          <span class="feature-eyebrow">NEW RELEASES</span>
+          <span class="feature-cta">EXPLORE NOW</span>
+        </div>
+      </a>
+
+      <!-- Banner 2: FROM OUR NEW COLLECTION -->
+      <a
+        href="https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849382963"
+        target="_blank"
+        rel="noopener"
+        class="feature-banner reveal"
+        style="background-image:url('assets/images/backgrounds/promo-4.jpg')"
+        aria-label="From our new collection - Explore now"
+      >
+        <div class="feature-overlay">
+          <span class="feature-eyebrow">FROM OUR NEW COLLECTION</span>
+          <span class="feature-cta">EXPLORE NOW</span>
+        </div>
+      </a>
+
+    </section>
+
+    <!-- FOOTER (PROFESSIONAL) -->
+    <footer class="site-footer reveal">
+      <div class="footer-inner">
+        <div class="footer-brand">C-LUXURY</div>
+        <p class="footer-tagline">
+          WHERE HIGH FASHION IS A LIFESTYLE — CURATED PIECES, BOLD IDENTITY, TIMELESS ENERGY.
+        </p>
+
+        <div class="footer-links">
+          <a href="collections.html">Shop</a>
+          <a href="about.html">About</a>
+          <a href="login.html">Account</a>
+        </div>
+
+        <p class="footer-copy">© 2026 C-LUXURY. All rights reserved.</p>
+      </div>
+    </footer>
+
   </main>
+
+  <!-- FLOATING UI: Currency Switch + Chat Bubble (sticky on scroll) -->
+  <div class="floating-ui" aria-label="Floating controls">
+    <!-- Currency Switch -->
+    <div class="currency-switch" role="group" aria-label="Currency switch">
+      <button type="button" class="currency-btn active" data-currency="USD">USD</button>
+      <button type="button" class="currency-btn" data-currency="NGN">NGN</button>
+    </div>
+
+    <!-- Chat Bubble -->
+    <button type="button" class="chat-bubble" aria-label="Chat with us" id="chatOpenBtn">
+      💬 <span class="chat-bubble-text">Chat with us</span>
+    </button>
+  </div>
+
+  <!-- Chat Panel -->
+  <div class="chat-panel" id="chatPanel" aria-hidden="true">
+    <div class="chat-head">
+      <div class="chat-title">Chat with us</div>
+      <button type="button" class="chat-close" id="chatCloseBtn" aria-label="Close chat">✕</button>
+    </div>
+
+    <div class="chat-body">
+      <div class="chat-msg bot">Hi 👋 How can we help?</div>
+      <div class="chat-msg bot">Tap below to continue shopping.</div>
+    </div>
+
+    <div class="chat-actions">
+      <a
+        class="chat-action"
+        href="https://mrcharliestxs.myshopify.com/collections/all"
+        target="_blank"
+        rel="noopener"
+      >Shop All Products</a>
+      <a
+        class="chat-action"
+        href="https://mrcharliestxs.myshopify.com/pages/contact"
+        target="_blank"
+        rel="noopener"
+      >Contact</a>
+    </div>
+  </div>
 
   <script>
     window.addEventListener("load", () => {
@@ -334,25 +429,25 @@
         {
           img: "assets/images/products/wolf-teal-floral.jpg",
           name: "WOLF TEA FLORAL T-SHIRT",
-          price: "$38.99",
+          priceUSD: 38.99,
           link: "https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995"
         },
         {
           img: "assets/images/products/samurai-moon.jpg",
           name: "SAMURAI MOON T-SHIRT",
-          price: "$25.73",
+          priceUSD: 25.73,
           link: "https://mrcharliestxs.myshopify.com/products/samurai-moon-graphic-t-shirt-shine-back-print?variant=43781765464115"
         },
         {
           img: "assets/images/products/samurai-kanji-hoodie.jpg",
           name: "SAMURAI KANJI HOODIE",
-          price: "$30.83",
+          priceUSD: 30.83,
           link: "https://mrcharliestxs.myshopify.com/products/samurai-warrior-hoodie-vintage-japanese-kanji-design?variant=43772208054323"
         },
         {
           img: "assets/images/products/gingerbread-sweatshirt.jpg",
           name: "CHRISTMAS GINGERBREAD SWEATSHIRT",
-          price: "$62.59",
+          priceUSD: 62.59,
           link: "https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849317427"
         }
       ];
@@ -388,8 +483,12 @@
           ownImg.src = p.img;
           ownImg.alt = p.name;
           ownName.textContent = p.name;
-          ownPrice.textContent = p.price;
           ownLink.href = p.link;
+
+          // set USD base in dataset for currency switch
+          ownPrice.dataset.usd = String(p.priceUSD);
+          renderMoneyAll();
+
           ownCard.classList.remove("own-fade");
         }, 250);
       }
@@ -439,6 +538,73 @@
 
       showSlide(0);
       startOwnAuto();
+
+      /* -----------------------------
+         STICKY CHAT (INSPO STYLE)
+      ------------------------------*/
+      const chatPanel = document.getElementById("chatPanel");
+      const chatOpenBtn = document.getElementById("chatOpenBtn");
+      const chatCloseBtn = document.getElementById("chatCloseBtn");
+
+      function openChat() {
+        if (!chatPanel) return;
+        chatPanel.classList.add("open");
+        chatPanel.setAttribute("aria-hidden", "false");
+      }
+
+      function closeChat() {
+        if (!chatPanel) return;
+        chatPanel.classList.remove("open");
+        chatPanel.setAttribute("aria-hidden", "true");
+      }
+
+      if (chatOpenBtn) chatOpenBtn.addEventListener("click", openChat);
+      if (chatCloseBtn) chatCloseBtn.addEventListener("click", closeChat);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeChat();
+      });
+
+      /* -----------------------------
+         CURRENCY SWITCH (USD / NGN)
+         Note: adjust NGN_RATE anytime
+      ------------------------------*/
+      const NGN_RATE = 1500; // <- change this rate if you want (example: 1 USD = 1500 NGN)
+      let activeCurrency = "USD";
+
+      const currencyBtns = document.querySelectorAll(".currency-btn");
+
+      function formatMoneyUSD(v) {
+        return `$${v.toFixed(2)}`;
+      }
+
+      function formatMoneyNGN(v) {
+        return `₦${Math.round(v).toLocaleString("en-NG")}`;
+      }
+
+      function renderMoneyAll() {
+        const moneyEls = document.querySelectorAll("[data-money][data-usd]");
+        moneyEls.forEach(el => {
+          const usd = Number(el.dataset.usd || "0");
+          if (activeCurrency === "USD") {
+            el.textContent = formatMoneyUSD(usd);
+          } else {
+            el.textContent = formatMoneyNGN(usd * NGN_RATE);
+          }
+        });
+      }
+
+      currencyBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          currencyBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeCurrency = btn.dataset.currency || "USD";
+          renderMoneyAll();
+        });
+      });
+
+      // first render
+      renderMoneyAll();
 
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
