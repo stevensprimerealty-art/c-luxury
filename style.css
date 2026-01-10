@@ -377,6 +377,11 @@ body{
   overflow:hidden;
 }
 
+/* ✅ FIX: keep hoodie head visible on mobile/top-crop images */
+.feature-banner.new-release-banner{
+  background-position: center top !important;
+}
+
 .feature-banner::after{
   content:"";
   position:absolute;
@@ -928,8 +933,6 @@ body{
 
 /* ================================================= */
 /* SEARCH UI (MATCHES YOUR INDEX + JS)               */
-/* - hidden until .open is added                     */
-/* - has top-right close (✕)                         */
 /* ================================================= */
 .search-overlay{
   position:fixed;
@@ -945,7 +948,6 @@ body{
   pointer-events:auto;
 }
 
-/* IMPORTANT: hidden by default */
 .search-modal{
   position:fixed;
   top:110px;
@@ -963,15 +965,12 @@ body{
   pointer-events:none;
   transition:opacity .18s ease, transform .18s ease;
 }
-
-/* show when open */
 .search-modal.open{
   opacity:1;
   pointer-events:auto;
   transform:translateX(-50%) translateY(0);
 }
 
-/* Close (✕) button inside modal */
 .search-close{
   position:absolute;
   top:10px;
@@ -990,14 +989,11 @@ body{
   justify-content:center;
   -webkit-tap-highlight-color: transparent;
 }
-.search-close:hover{
-  border-color:#111;
-}
+.search-close:hover{ border-color:#111; }
 
-/* Input */
 .search-input{
   width:100%;
-  padding:14px 44px 14px 14px; /* space so close btn never overlaps */
+  padding:14px 44px 14px 14px;
   border:1px solid #ddd;
   border-radius:12px;
   font-size:14px;
@@ -1006,7 +1002,6 @@ body{
 }
 .search-input:focus{ border-color:#111; }
 
-/* Results list */
 .search-results{
   margin-top:12px;
   display:flex;
@@ -1017,7 +1012,6 @@ body{
   padding-right:4px;
 }
 
-/* Each result card */
 .search-result{
   display:flex;
   gap:12px;
@@ -1028,9 +1022,7 @@ body{
   padding:12px;
   background:#fff;
 }
-.search-result:hover{
-  border-color:#111;
-}
+.search-result:hover{ border-color:#111; }
 
 .search-thumb{
   width:52px;
@@ -1061,7 +1053,6 @@ body{
   font-weight:600;
 }
 
-/* Mobile: keep modal comfortable */
 @media (max-width:480px){
   .search-modal{
     top:96px;
