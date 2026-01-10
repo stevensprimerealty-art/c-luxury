@@ -24,7 +24,7 @@
       <!-- SEARCH button -->
       <button class="icon-btn" id="searchBtn" aria-label="Search">🔍</button>
 
-      <!-- ✅ SHOPIFY CART: ALWAYS opens Shopify cart (safe for GitHub Pages) -->
+      <!-- ✅ SHOPIFY CART -->
       <a
         href="https://mrcharliestxs.myshopify.com/cart"
         class="icon-btn cart"
@@ -62,32 +62,25 @@
   <main class="page">
 
     <!-- HERO -->
-    <section class="home-hero">
+    <section class="home-hero" aria-label="Home hero slider">
       <div class="hero-bg active"></div>
       <div class="hero-bg"></div>
 
+      <!-- cinematic overlay layer (like About) -->
+      <div class="home-cine" aria-hidden="true"></div>
+
       <div class="hero-content fade-in">
         <div class="brand-mark">
-          <h1 id="hero-title">A NEW YEAR<br />CURATED FOR YOU</h1>
+          <h1 id="hero-title">PRESENCE<br />WITHOUT NOISE</h1>
         </div>
 
         <p class="quiet" id="hero-subtext">
-          EMBRACE FRESH STYLES AND STATEMENT PIECES<br />
-          FROM YOUR FAVORITE BRAND.
+          QUIET CONFIDENCE.<br />
+          DISCIPLINED FORM.
         </p>
 
-        <div class="luxury-strip">
+        <div class="luxury-strip" aria-hidden="true">
           <span>LAGOS</span><span>DYNASTY</span><span>FORM</span><span>CONTROL</span><span>TIMELESS</span>
-        </div>
-
-        <div class="hero-nav">
-          <button id="prev-slide" aria-label="Previous slide">‹</button>
-          <div class="hero-dots" aria-label="Hero slide dots">
-            <span class="dot active" aria-label="Slide 1"></span>
-            <span class="dot" aria-label="Slide 2"></span>
-            <span class="dot" aria-label="Slide 3"></span>
-          </div>
-          <button id="next-slide" aria-label="Next slide">›</button>
         </div>
       </div>
     </section>
@@ -133,7 +126,6 @@
 
     <!-- FEATURE BANNERS -->
     <section class="feature-banners">
-      <!-- ✅ Hoodie banner: correct product link + top-position crop fix -->
       <a
         href="https://mrcharliestxs.myshopify.com/products/samurai-warrior-hoodie-vintage-japanese-kanji-design?variant=43772207988787"
         target="_blank"
@@ -217,40 +209,37 @@
       </a>
     </section>
 
-<!-- NEW BANNERS -->
-<section class="feature-banners">
+    <!-- NEW BANNERS -->
+    <section class="feature-banners">
+      <a
+        href="https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
+        target="_blank"
+        rel="noopener"
+        class="feature-banner reveal"
+        style="background-image:url('assets/images/backgrounds/promo-3.jpg')"
+        aria-label="Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides"
+      >
+        <div class="feature-overlay">
+          <span class="feature-eyebrow">NEW RELEASES</span>
+          <span class="feature-cta">EXPLORE NOW</span>
+        </div>
+      </a>
 
-  <!-- promo-3 image (Slides banner) -->
-  <a
-    href="https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
-    target="_blank"
-    rel="noopener"
-    class="feature-banner reveal"
-    style="background-image:url('assets/images/backgrounds/promo-3.jpg')"
-    aria-label="Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides"
-  >
-    <div class="feature-overlay">
-      <span class="feature-eyebrow">NEW RELEASES</span>
-      <span class="feature-cta">EXPLORE NOW</span>
-    </div>
-  </a>
+      <a
+        href="https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849382963"
+        target="_blank"
+        rel="noopener"
+        class="feature-banner reveal"
+        style="background-image:url('assets/images/backgrounds/gingerbread-crewneck.png');"
+        aria-label="Christmas Gingerbread Crewneck Sweatshirt"
+      >
+        <div class="feature-overlay">
+          <span class="feature-eyebrow">LIMITED SEASONAL DROP</span>
+          <span class="feature-cta">SHOP NOW</span>
+        </div>
+      </a>
+    </section>
 
-  <!-- promo-4 image (Gingerbread Crewneck – FINAL BANNER) -->
-  <a
-    href="https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849382963"
-    target="_blank"
-    rel="noopener"
-    class="feature-banner reveal"
-    style="background-image:url('assets/images/backgrounds/gingerbread-crewneck.png');"
-    aria-label="Christmas Gingerbread Crewneck Sweatshirt"
-  >
-    <div class="feature-overlay">
-      <span class="feature-eyebrow">LIMITED SEASONAL DROP</span>
-      <span class="feature-cta">SHOP NOW</span>
-    </div>
-  </a>
-
-</section>
     <!-- FOOTER -->
     <footer class="site-footer reveal">
       <div class="footer-inner">
@@ -295,7 +284,7 @@
     <div class="search-results" id="searchResults" aria-label="Search results"></div>
   </div>
 
-  <!-- FLOATING UI: Currency Switch (left) -->
+  <!-- FLOATING UI: Currency Switch -->
   <div class="floating-ui" aria-label="Floating controls">
     <div class="currency-switch" role="group" aria-label="Currency switch">
       <button type="button" class="currency-btn active" data-currency="USD">USD</button>
@@ -331,20 +320,17 @@
 
       /* HIDE LOADER */
       setTimeout(() => {
-        const loader = document.querySelector(".site-loader");
-        if (loader) loader.classList.add("hidden");
+        document.querySelector(".site-loader")?.classList.add("hidden");
       }, 700);
 
-      /* ✅ SAFE SHOPIFY CART COUNT (does NOT break if blocked) */
+      /* SAFE SHOPIFY CART COUNT */
       const SHOPIFY_DOMAIN = "https://mrcharliestxs.myshopify.com";
 
       function applyCartCount(count) {
         const el = document.getElementById("cartCount");
         if (!el) return;
-
         const n = Math.max(0, Number(count || 0));
         el.textContent = String(n);
-
         if (n > 0) el.classList.remove("is-empty");
         else el.classList.add("is-empty");
       }
@@ -358,104 +344,29 @@
 
       async function updateCartCount() {
         try {
-          // 1) If the site is ever hosted on Shopify, this works:
           const c1 = await tryFetchCartCount("/cart.js", { credentials: "same-origin" });
           applyCartCount(c1);
           return;
         } catch (e) {}
 
         try {
-          // 2) GitHub Pages fallback: attempt Shopify domain (may be blocked by browser/CORS)
           const c2 = await tryFetchCartCount(SHOPIFY_DOMAIN + "/cart.js", { credentials: "omit" });
           applyCartCount(c2);
           return;
         } catch (e) {
-          // If blocked, stay safe: hide badge for clean UI
           applyCartCount(0);
         }
       }
 
-      // Run once
       updateCartCount();
-
-      // Refresh when user returns to tab
       document.addEventListener("visibilitychange", () => {
         if (!document.hidden) updateCartCount();
       });
 
       /* MENU TOGGLE */
-      const menuToggle = document.querySelector(".menu-toggle");
-      const menuPanel = document.querySelector(".menu-panel");
-      if (menuToggle && menuPanel) {
-        menuToggle.onclick = () => menuPanel.classList.toggle("open");
-      }
-
-      /* HERO SLIDER */
-      const heroTitle = document.getElementById("hero-title");
-      const heroSubtext = document.getElementById("hero-subtext");
-      const heroDots = document.querySelectorAll(".hero-dots .dot");
-      const bgLayers = document.querySelectorAll(".hero-bg");
-      const heroContent = document.querySelector(".hero-content");
-
-      const slides = [
-        { image: "assets/images/hero/hero.PNG",   title: "A NEW YEAR<br>CURATED FOR YOU", text: "EMBRACE FRESH STYLES AND STATEMENT PIECES<br>FROM YOUR FAVORITE BRAND." },
-        { image: "assets/images/hero/hero-2.PNG", title: "PRESENCE<br>WITHOUT NOISE",      text: "QUIET CONFIDENCE.<br>DEFINED FORM.<br>TIMELESS CONTROL." },
-        { image: "assets/images/hero/hero-3.PNG", title: "WELCOME TO<br>C-LUXURY",         text: "EXPLORE DISTINCTIVE STYLES<br>AS YOU AWAIT WHAT’S TO COME." }
-      ];
-
-      slides.forEach(s => { const img = new Image(); img.src = s.image; });
-
-      let heroCurrent = 0;
-      let activeBg = 0;
-      let heroTimer = null;
-
-      function changeHero(index) {
-        if (!bgLayers.length || !heroTitle || !heroSubtext || !heroContent) return;
-
-        const nextBg = activeBg === 0 ? 1 : 0;
-        heroContent.classList.add("fade-out");
-
-        setTimeout(() => {
-          bgLayers[nextBg].style.backgroundImage = `url(${slides[index].image})`;
-          bgLayers[nextBg].classList.add("active");
-          bgLayers[activeBg].classList.remove("active");
-          activeBg = nextBg;
-
-          heroTitle.innerHTML = slides[index].title;
-          heroSubtext.innerHTML = slides[index].text;
-
-          heroDots.forEach(d => d.classList.remove("active"));
-          if (heroDots[index]) heroDots[index].classList.add("active");
-
-          heroContent.classList.remove("fade-out");
-          heroContent.classList.add("fade-in");
-        }, 600);
-      }
-
-      function stopHeroAuto() {
-        if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
-      }
-
-      function startHeroAuto() {
-        stopHeroAuto();
-        heroTimer = setInterval(() => {
-          heroCurrent = (heroCurrent + 1) % slides.length;
-          changeHero(heroCurrent);
-        }, 6500);
-      }
-
-      const nextHeroBtn = document.getElementById("next-slide");
-      const prevHeroBtn = document.getElementById("prev-slide");
-
-      if (nextHeroBtn) nextHeroBtn.onclick = () => { heroCurrent = (heroCurrent + 1) % slides.length; changeHero(heroCurrent); startHeroAuto(); };
-      if (prevHeroBtn) prevHeroBtn.onclick = () => { heroCurrent = (heroCurrent - 1 + slides.length) % slides.length; changeHero(heroCurrent); startHeroAuto(); };
-
-      heroDots.forEach((dot, i) => {
-        dot.onclick = () => { heroCurrent = i; changeHero(heroCurrent); startHeroAuto(); };
+      document.querySelector(".menu-toggle")?.addEventListener("click", () => {
+        document.querySelector(".menu-panel")?.classList.toggle("open");
       });
-
-      if (bgLayers[0]) bgLayers[0].style.backgroundImage = `url(${slides[0].image})`;
-      startHeroAuto();
 
       /* REVEAL ON SCROLL */
       const revealEls = document.querySelectorAll(".reveal");
@@ -472,7 +383,82 @@
         revealEls.forEach(el => observer.observe(el));
       }
 
-      /* PRODUCTS (search + slider) */
+      /* HERO: cinematic fade (6s rule) */
+      const heroTitle = document.getElementById("hero-title");
+      const heroSubtext = document.getElementById("hero-subtext");
+      const bgLayers = document.querySelectorAll(".hero-bg");
+      const heroContent = document.querySelector(".hero-content");
+
+      const HERO_SLIDES = [
+        {
+          image: "assets/images/hero/hero.PNG",
+          title: "PRESENCE<br>WITHOUT NOISE",
+          text: "QUIET CONFIDENCE.<br>DISCIPLINED FORM."
+        },
+        {
+          image: "assets/images/hero/hero-2.PNG",
+          title: "DEFINED<br>BY RESTRAINT",
+          text: "ELEVATED COMFORT.<br>INTENTIONAL DETAIL."
+        },
+        {
+          image: "assets/images/hero/hero-3.PNG",
+          title: "TIMELESS<br>ENERGY",
+          text: "BOLD IDENTITY.<br>CLEAR PURPOSE."
+        }
+      ];
+
+      HERO_SLIDES.forEach(s => { const img = new Image(); img.src = s.image; });
+
+      let heroCurrent = 0;
+      let activeBg = 0;
+      let heroTimer = null;
+
+      const HOLD_MS = 6000;   // ✅ 6 seconds
+      const FADE_MS = 650;    // smooth fade
+
+      function stopHeroAuto() {
+        if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+      }
+
+      function applyHeroSlide(idx) {
+        if (!bgLayers.length || !heroTitle || !heroSubtext || !heroContent) return;
+
+        const nextBg = activeBg === 0 ? 1 : 0;
+
+        // fade text out
+        heroContent.classList.remove("fade-in");
+        heroContent.classList.add("fade-out");
+
+        // fade image by swapping active bg layer
+        setTimeout(() => {
+          bgLayers[nextBg].style.backgroundImage = `url(${HERO_SLIDES[idx].image})`;
+          bgLayers[nextBg].classList.add("active");
+          bgLayers[activeBg].classList.remove("active");
+          activeBg = nextBg;
+
+          heroTitle.innerHTML = HERO_SLIDES[idx].title;
+          heroSubtext.innerHTML = HERO_SLIDES[idx].text;
+
+          // fade text in
+          heroContent.classList.remove("fade-out");
+          heroContent.classList.add("fade-in");
+        }, FADE_MS);
+      }
+
+      function startHeroAuto() {
+        stopHeroAuto();
+        heroTimer = setInterval(() => {
+          heroCurrent = (heroCurrent + 1) % HERO_SLIDES.length;
+          applyHeroSlide(heroCurrent);
+        }, HOLD_MS);
+      }
+
+      // init first image immediately
+      if (bgLayers[0]) bgLayers[0].style.backgroundImage = `url(${HERO_SLIDES[0].image})`;
+      applyHeroSlide(0);
+      startHeroAuto();
+
+      /* PRODUCTS */
       const products = [
         {
           key: "punk-rock-tee",
@@ -524,6 +510,159 @@
         }
       ];
 
+      /* CHAT */
+      const chatPanel = document.getElementById("chatPanel");
+      const chatOpenBtn = document.getElementById("chatOpenBtn");
+      const chatCloseBtn = document.getElementById("chatCloseBtn");
+
+      function openChat() {
+        if (!chatPanel) return;
+        chatPanel.classList.add("open");
+        chatPanel.setAttribute("aria-hidden", "false");
+      }
+      function closeChat() {
+        if (!chatPanel) return;
+        chatPanel.classList.remove("open");
+        chatPanel.setAttribute("aria-hidden", "true");
+      }
+
+      chatOpenBtn?.addEventListener("click", openChat);
+      chatCloseBtn?.addEventListener("click", closeChat);
+
+      /* CURRENCY */
+      let NGN_RATE = 1500; // fallback
+      let activeCurrency = "USD";
+      const currencyBtns = document.querySelectorAll(".currency-btn");
+
+      function formatMoneyUSD(v) { return `$${v.toFixed(2)}`; }
+      function formatMoneyNGN(v) { return `₦${Math.round(v).toLocaleString("en-NG")}`; }
+
+      function renderMoneyAll() {
+        const moneyEls = document.querySelectorAll("[data-money][data-usd]");
+        moneyEls.forEach(el => {
+          const usd = Number(el.dataset.usd || "0");
+          el.textContent = (activeCurrency === "USD")
+            ? formatMoneyUSD(usd)
+            : formatMoneyNGN(usd * NGN_RATE);
+        });
+      }
+
+      fetch("https://open.er-api.com/v6/latest/USD")
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.result === "success" && data.rates && data.rates.NGN) {
+            NGN_RATE = Number(data.rates.NGN) || NGN_RATE;
+            renderMoneyAll();
+          }
+        })
+        .catch(() => {});
+
+      currencyBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          currencyBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeCurrency = btn.dataset.currency || "USD";
+          renderMoneyAll();
+        });
+      });
+
+      renderMoneyAll();
+
+      /* SEARCH */
+      const searchBtn = document.getElementById("searchBtn");
+      const searchOverlay = document.getElementById("searchOverlay");
+      const searchModal = document.getElementById("searchModal");
+      const searchInput = document.getElementById("searchInput");
+      const searchResults = document.getElementById("searchResults");
+      const searchCloseBtn = document.getElementById("searchCloseBtn");
+
+      function escapeHtml(s) {
+        return String(s)
+          .replaceAll("&","&amp;")
+          .replaceAll("<","&lt;")
+          .replaceAll(">","&gt;")
+          .replaceAll('"',"&quot;")
+          .replaceAll("'","&#039;");
+      }
+
+      function openSearch() {
+        if (!searchOverlay || !searchModal || !searchInput) return;
+        searchOverlay.hidden = false;
+        searchModal.hidden = false;
+        searchOverlay.classList.add("open");
+        searchModal.classList.add("open");
+        searchOverlay.setAttribute("aria-hidden", "false");
+        searchModal.setAttribute("aria-hidden", "false");
+        searchInput.value = "";
+        renderSearchResults("");
+        setTimeout(() => searchInput.focus(), 30);
+      }
+
+      function closeSearch() {
+        if (!searchOverlay || !searchModal) return;
+        searchOverlay.classList.remove("open");
+        searchModal.classList.remove("open");
+        searchOverlay.setAttribute("aria-hidden", "true");
+        searchModal.setAttribute("aria-hidden", "true");
+        searchOverlay.hidden = true;
+        searchModal.hidden = true;
+      }
+
+      function renderSearchResults(query) {
+        if (!searchResults) return;
+
+        const q = (query || "").trim().toLowerCase();
+        const matches = !q
+          ? products.slice(0, 6)
+          : products.filter(p => p.name.toLowerCase().includes(q) || (p.key && p.key.includes(q)));
+
+        if (!matches.length) {
+          searchResults.innerHTML = `<div style="padding:10px 2px; font-size:13px;">No results found.</div>`;
+          return;
+        }
+
+        searchResults.innerHTML = matches.map(p => {
+          const priceText = (activeCurrency === "USD")
+            ? `$${p.priceUSD.toFixed(2)}`
+            : `₦${Math.round(p.priceUSD * NGN_RATE).toLocaleString("en-NG")}`;
+
+          return `
+            <div class="search-result" role="group" aria-label="${escapeHtml(p.name)}">
+              <div class="search-thumb">
+                <img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy">
+              </div>
+              <div class="search-meta" style="flex:1;">
+                <div class="search-name">${escapeHtml(p.name)}</div>
+                <div class="search-price">${escapeHtml(priceText)}</div>
+                <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+                  <a
+                    class="icon-btn"
+                    style="border:1px solid #111; padding:8px 10px; border-radius:12px; font-size:12px; letter-spacing:1px;"
+                    href="${escapeHtml(p.link)}"
+                    target="_blank"
+                    rel="noopener"
+                  >Open on Shopify</a>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      searchBtn?.addEventListener("click", openSearch);
+      searchOverlay?.addEventListener("click", closeSearch);
+      searchCloseBtn?.addEventListener("click", closeSearch);
+
+      searchInput?.addEventListener("input", (e) => renderSearchResults(e.target.value));
+      searchInput?.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSearch(); });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeSearch();
+          closeChat();
+        }
+      });
+
       /* OWN THE LOOK SLIDER */
       const ownDots = document.querySelectorAll(".own-dot");
       const ownImg = document.getElementById("own-img");
@@ -559,7 +698,7 @@
         ownCurrent = (i + sliderProducts.length) % sliderProducts.length;
 
         ownDots.forEach(d => d.classList.remove("active"));
-        if (ownDots[ownCurrent]) ownDots[ownCurrent].classList.add("active");
+        ownDots[ownCurrent]?.classList.add("active");
 
         ownCard.classList.add("own-fade");
         setTimeout(() => {
@@ -576,15 +715,9 @@
         }, 250);
       }
 
-      function jumpToSliderProduct(sliderIndex) {
-        showSlide(sliderIndex);
-        const ownSection = document.getElementById("own-look");
-        if (ownSection) ownSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-
-      ownDots.forEach((dot, i) => { dot.onclick = () => { showSlide(i); startOwnAuto(); }; });
-      if (ownPrev) ownPrev.onclick = () => { showSlide(ownCurrent - 1); startOwnAuto(); };
-      if (ownNext) ownNext.onclick = () => { showSlide(ownCurrent + 1); startOwnAuto(); };
+      ownDots.forEach((dot, i) => dot.addEventListener("click", () => { showSlide(i); startOwnAuto(); }));
+      ownPrev?.addEventListener("click", () => { showSlide(ownCurrent - 1); startOwnAuto(); });
+      ownNext?.addEventListener("click", () => { showSlide(ownCurrent + 1); startOwnAuto(); });
 
       // swipe
       let startX = 0, startY = 0, isSwiping = false;
@@ -593,7 +726,6 @@
         const t = e.touches[0];
         startX = t.clientX; startY = t.clientY; isSwiping = true;
       }
-
       function onTouchMove(e) {
         if (!isSwiping) return;
         const t = e.touches[0];
@@ -601,7 +733,6 @@
         const dy = t.clientY - startY;
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 18) e.preventDefault();
       }
-
       function onTouchEnd(e) {
         if (!isSwiping) return;
         isSwiping = false;
@@ -623,204 +754,6 @@
 
       showSlide(0);
       startOwnAuto();
-
-      /* CHAT PANEL */
-      const chatPanel = document.getElementById("chatPanel");
-      const chatOpenBtn = document.getElementById("chatOpenBtn");
-      const chatCloseBtn = document.getElementById("chatCloseBtn");
-
-      function openChat() {
-        if (!chatPanel) return;
-        chatPanel.classList.add("open");
-        chatPanel.setAttribute("aria-hidden", "false");
-      }
-
-      function closeChat() {
-        if (!chatPanel) return;
-        chatPanel.classList.remove("open");
-        chatPanel.setAttribute("aria-hidden", "true");
-      }
-
-      if (chatOpenBtn) chatOpenBtn.addEventListener("click", openChat);
-      if (chatCloseBtn) chatCloseBtn.addEventListener("click", closeChat);
-
-      /* CURRENCY (USD / NGN) */
-      let NGN_RATE = 1500; // fallback offline
-
-      fetch("https://open.er-api.com/v6/latest/USD")
-        .then(r => r.json())
-        .then(data => {
-          if (data && data.result === "success" && data.rates && data.rates.NGN) {
-            NGN_RATE = Number(data.rates.NGN) || NGN_RATE;
-            renderMoneyAll();
-          }
-        })
-        .catch(() => { /* keep fallback */ });
-
-      let activeCurrency = "USD";
-      const currencyBtns = document.querySelectorAll(".currency-btn");
-
-      function formatMoneyUSD(v) { return `$${v.toFixed(2)}`; }
-      function formatMoneyNGN(v) { return `₦${Math.round(v).toLocaleString("en-NG")}`; }
-
-      function renderMoneyAll() {
-        const moneyEls = document.querySelectorAll("[data-money][data-usd]");
-        moneyEls.forEach(el => {
-          const usd = Number(el.dataset.usd || "0");
-          el.textContent = (activeCurrency === "USD")
-            ? formatMoneyUSD(usd)
-            : formatMoneyNGN(usd * NGN_RATE);
-        });
-      }
-
-      currencyBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          currencyBtns.forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          activeCurrency = btn.dataset.currency || "USD";
-          renderMoneyAll();
-        });
-      });
-
-      renderMoneyAll();
-
-      /* SEARCH */
-      const searchBtn = document.getElementById("searchBtn");
-      const searchOverlay = document.getElementById("searchOverlay");
-      const searchModal = document.getElementById("searchModal");
-      const searchInput = document.getElementById("searchInput");
-      const searchResults = document.getElementById("searchResults");
-      const searchCloseBtn = document.getElementById("searchCloseBtn");
-
-      function escapeHtml(s) {
-        return String(s)
-          .replaceAll("&","&amp;")
-          .replaceAll("<","&lt;")
-          .replaceAll(">","&gt;")
-          .replaceAll('"',"&quot;")
-          .replaceAll("'","&#039;");
-      }
-
-      function openSearch() {
-        if (!searchOverlay || !searchModal || !searchInput) return;
-
-        searchOverlay.hidden = false;
-        searchModal.hidden = false;
-
-        searchOverlay.classList.add("open");
-        searchModal.classList.add("open");
-        searchOverlay.setAttribute("aria-hidden", "false");
-        searchModal.setAttribute("aria-hidden", "false");
-
-        searchInput.value = "";
-        renderSearchResults("");
-        setTimeout(() => searchInput.focus(), 30);
-      }
-
-      function closeSearch() {
-        if (!searchOverlay || !searchModal) return;
-
-        searchOverlay.classList.remove("open");
-        searchModal.classList.remove("open");
-        searchOverlay.setAttribute("aria-hidden", "true");
-        searchModal.setAttribute("aria-hidden", "true");
-
-        searchOverlay.hidden = true;
-        searchModal.hidden = true;
-      }
-
-      function renderSearchResults(query) {
-        if (!searchResults) return;
-
-        const q = (query || "").trim().toLowerCase();
-        const matches = !q
-          ? products.slice(0, 6)
-          : products.filter(p => p.name.toLowerCase().includes(q) || (p.key && p.key.includes(q)));
-
-        if (!matches.length) {
-          searchResults.innerHTML = `<div style="padding:10px 2px; font-size:13px;">No results found.</div>`;
-          return;
-        }
-
-        searchResults.innerHTML = matches.map(p => {
-          const priceText = (activeCurrency === "USD")
-            ? `$${p.priceUSD.toFixed(2)}`
-            : `₦${Math.round(p.priceUSD * NGN_RATE).toLocaleString("en-NG")}`;
-
-          const viewTarget = p.onPageId
-            ? `page:${p.onPageId}`
-            : (typeof p.sliderIndex === "number" ? `slider:${p.sliderIndex}` : "");
-
-          return `
-            <div class="search-result" role="group" aria-label="${escapeHtml(p.name)}">
-              <div class="search-thumb">
-                <img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy">
-              </div>
-              <div class="search-meta" style="flex:1;">
-                <div class="search-name">${escapeHtml(p.name)}</div>
-                <div class="search-price">${escapeHtml(priceText)}</div>
-
-                <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
-                  <button
-                    type="button"
-                    class="icon-btn"
-                    style="border:1px solid #111; padding:8px 10px; border-radius:12px; font-size:12px; letter-spacing:1px;"
-                    data-view="${escapeHtml(viewTarget)}"
-                  >View on page</button>
-
-                  <a
-                    class="icon-btn"
-                    style="border:1px solid #111; padding:8px 10px; border-radius:12px; font-size:12px; letter-spacing:1px;"
-                    href="${escapeHtml(p.link)}"
-                    target="_blank"
-                    rel="noopener"
-                  >Open on Shopify</a>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join("");
-
-        searchResults.querySelectorAll("button[data-view]").forEach(btn => {
-          btn.addEventListener("click", () => {
-            const v = btn.getAttribute("data-view") || "";
-            closeSearch();
-
-            if (v.startsWith("page:")) {
-              const id = v.replace("page:", "");
-              const el = document.getElementById(id);
-              if (el) {
-                el.scrollIntoView({ behavior: "smooth", block: "center" });
-                el.style.outline = "2px solid #111";
-                el.style.outlineOffset = "8px";
-                setTimeout(() => {
-                  el.style.outline = "none";
-                  el.style.outlineOffset = "0";
-                }, 1100);
-              }
-            } else if (v.startsWith("slider:")) {
-              const idx = Number(v.replace("slider:", ""));
-              if (!Number.isNaN(idx)) jumpToSliderProduct(idx);
-            }
-          });
-        });
-      }
-
-      if (searchBtn) searchBtn.addEventListener("click", openSearch);
-      if (searchOverlay) searchOverlay.addEventListener("click", closeSearch);
-      if (searchCloseBtn) searchCloseBtn.addEventListener("click", closeSearch);
-
-      if (searchInput) {
-        searchInput.addEventListener("input", (e) => renderSearchResults(e.target.value));
-        searchInput.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSearch(); });
-      }
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          closeSearch();
-          closeChat();
-        }
-      });
 
       /* PAUSE WHEN TAB HIDDEN */
       document.addEventListener("visibilitychange", () => {
