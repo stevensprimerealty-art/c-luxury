@@ -21,10 +21,13 @@
     </div>
 
     <div class="header-right">
-      <button class="icon-btn" aria-label="Search">🔍</button>
+      <!-- Search now opens modal -->
+      <button class="icon-btn" id="open-search" aria-label="Search">🔍</button>
+
       <a href="cart.html" class="icon-btn cart" aria-label="Cart">
         🛒<span class="cart-count">0</span>
       </a>
+
       <button class="icon-btn menu-toggle" aria-label="Menu">⋮</button>
     </div>
   </header>
@@ -90,6 +93,7 @@
       <div class="new-in-grid">
         <a
           class="new-in-card"
+          id="prod-punkrock"
           href="https://mrcharliestxs.myshopify.com/products/punk-rock-lip-graphic-tee-2025-skeleton-band-back-print?variant=43781844467763"
           target="_blank"
           rel="noopener"
@@ -101,6 +105,7 @@
 
         <a
           class="new-in-card"
+          id="prod-wolfslides"
           href="https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
           target="_blank"
           rel="noopener"
@@ -146,7 +151,7 @@
     </section>
 
     <!-- OWN THE LOOK -->
-    <section class="own-look reveal">
+    <section class="own-look reveal" id="own-look">
       <div class="own-look-head">
         <h3 class="own-look-title">OWN THE LOOK</h3>
 
@@ -266,9 +271,10 @@
       <button type="button" class="currency-btn" data-currency="NGN">NGN</button>
     </div>
 
-    <!-- Chat Bubble -->
+    <!-- Chat Bubble (right corner + horizontal handled in CSS) -->
     <button type="button" class="chat-bubble" aria-label="Chat with us" id="chatOpenBtn">
-      💬 <span class="chat-bubble-text">Chat with us</span>
+      <span class="chat-icon">💬</span>
+      <span class="chat-bubble-text">Chat with us</span>
     </button>
   </div>
 
@@ -297,6 +303,26 @@
         target="_blank"
         rel="noopener"
       >Contact</a>
+    </div>
+  </div>
+
+  <!-- SEARCH MODAL -->
+  <div class="search-modal" id="search-modal" aria-hidden="true">
+    <div class="search-box" role="dialog" aria-label="Search products">
+      <div class="search-top">
+        <div class="search-title">SEARCH</div>
+        <button class="search-close" id="close-search" aria-label="Close search">✕</button>
+      </div>
+
+      <input
+        class="search-input"
+        id="search-input"
+        type="search"
+        placeholder="Search products…"
+        autocomplete="off"
+      />
+
+      <div class="search-results" id="search-results"></div>
     </div>
   </div>
 
@@ -414,6 +440,36 @@
         revealEls.forEach(el => observer.observe(el));
       }
 
+      /* -----------------------------
+         CURRENCY SWITCH (USD / NGN)
+      ------------------------------*/
+      const NGN_RATE = 1500; // change anytime
+      let activeCurrency = "USD";
+      const currencyBtns = document.querySelectorAll(".currency-btn");
+
+      function formatMoneyUSD(v) { return `$${v.toFixed(2)}`; }
+      function formatMoneyNGN(v) { return `₦${Math.round(v).toLocaleString("en-NG")}`; }
+
+      function renderMoneyAll() {
+        const moneyEls = document.querySelectorAll("[data-money][data-usd]");
+        moneyEls.forEach(el => {
+          const usd = Number(el.dataset.usd || "0");
+          el.textContent = (activeCurrency === "USD") ? formatMoneyUSD(usd) : formatMoneyNGN(usd * NGN_RATE);
+        });
+      }
+
+      currencyBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          currencyBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeCurrency = btn.dataset.currency || "USD";
+          renderMoneyAll();
+        });
+      });
+
+      // first render
+      renderMoneyAll();
+
       /* OWN THE LOOK */
       const ownDots = document.querySelectorAll(".own-dot");
       const ownImg = document.getElementById("own-img");
@@ -458,12 +514,8 @@
       let ownTimer = null;
 
       function stopOwnAuto() {
-        if (ownTimer) {
-          clearInterval(ownTimer);
-          ownTimer = null;
-        }
+        if (ownTimer) { clearInterval(ownTimer); ownTimer = null; }
       }
-
       function startOwnAuto() {
         stopOwnAuto();
         ownTimer = setInterval(() => showSlide(ownCurrent + 1), 5200);
@@ -562,49 +614,145 @@
       if (chatCloseBtn) chatCloseBtn.addEventListener("click", closeChat);
 
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeChat();
+        if (e.key === "Escape") {
+          closeChat();
+          closeSearch();
+        }
       });
 
       /* -----------------------------
-         CURRENCY SWITCH (USD / NGN)
-         Note: adjust NGN_RATE anytime
+         SEARCH (Modal + Results)
       ------------------------------*/
-      const NGN_RATE = 1500; // <- change this rate if you want (example: 1 USD = 1500 NGN)
-      let activeCurrency = "USD";
+      const openSearchBtn = document.getElementById("open-search");
+      const searchModal = document.getElementById("search-modal");
+      const closeSearchBtn = document.getElementById("close-search");
+      const searchInput = document.getElementById("search-input");
+      const searchResults = document.getElementById("search-results");
 
-      const currencyBtns = document.querySelectorAll(".currency-btn");
+      const searchableProducts = [
+        {
+          name: "Punk Rock Lip Graphic Tee — Skeleton Band Back Print",
+          priceUSD: 22.26,
+          img: "assets/images/punk-rock-tee.jpg",
+          pageId: "prod-punkrock",
+          shopify: "https://mrcharliestxs.myshopify.com/products/punk-rock-lip-graphic-tee-2025-skeleton-band-back-print?variant=43781844467763"
+        },
+        {
+          name: "Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides",
+          priceUSD: 51.76,
+          img: "assets/images/blue-neon-wolf-slides.jpg",
+          pageId: "prod-wolfslides",
+          shopify: "https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891"
+        },
+        {
+          name: "WOLF TEA FLORAL T-SHIRT",
+          priceUSD: 38.99,
+          img: "assets/images/products/wolf-teal-floral.jpg",
+          pageId: "own-look",
+          shopify: "https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995"
+        },
+        {
+          name: "SAMURAI MOON T-SHIRT",
+          priceUSD: 25.73,
+          img: "assets/images/products/samurai-moon.jpg",
+          pageId: "own-look",
+          shopify: "https://mrcharliestxs.myshopify.com/products/samurai-moon-graphic-t-shirt-shine-back-print?variant=43781765464115"
+        },
+        {
+          name: "SAMURAI KANJI HOODIE",
+          priceUSD: 30.83,
+          img: "assets/images/products/samurai-kanji-hoodie.jpg",
+          pageId: "own-look",
+          shopify: "https://mrcharliestxs.myshopify.com/products/samurai-warrior-hoodie-vintage-japanese-kanji-design?variant=43772208054323"
+        },
+        {
+          name: "CHRISTMAS GINGERBREAD SWEATSHIRT",
+          priceUSD: 62.59,
+          img: "assets/images/products/gingerbread-sweatshirt.jpg",
+          pageId: "own-look",
+          shopify: "https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849317427"
+        }
+      ];
 
-      function formatMoneyUSD(v) {
-        return `$${v.toFixed(2)}`;
+      function openSearch() {
+        if (!searchModal) return;
+        searchModal.classList.add("open");
+        searchModal.setAttribute("aria-hidden", "false");
+        setTimeout(() => { if (searchInput) searchInput.focus(); }, 50);
+        renderResults("");
       }
 
-      function formatMoneyNGN(v) {
-        return `₦${Math.round(v).toLocaleString("en-NG")}`;
+      function closeSearch() {
+        if (!searchModal) return;
+        searchModal.classList.remove("open");
+        searchModal.setAttribute("aria-hidden", "true");
+        if (searchInput) searchInput.value = "";
       }
 
-      function renderMoneyAll() {
-        const moneyEls = document.querySelectorAll("[data-money][data-usd]");
-        moneyEls.forEach(el => {
-          const usd = Number(el.dataset.usd || "0");
-          if (activeCurrency === "USD") {
-            el.textContent = formatMoneyUSD(usd);
-          } else {
-            el.textContent = formatMoneyNGN(usd * NGN_RATE);
-          }
+      function renderResults(q) {
+        if (!searchResults) return;
+        const query = (q || "").trim().toLowerCase();
+
+        if (!query) {
+          searchResults.innerHTML = `<div style="padding:12px 8px; opacity:.7; font-size:13px;">Type to search products.</div>`;
+          return;
+        }
+
+        const filtered = searchableProducts.filter(p => p.name.toLowerCase().includes(query));
+
+        if (!filtered.length) {
+          searchResults.innerHTML = `<div style="padding:12px 8px; opacity:.7; font-size:13px;">No results found.</div>`;
+          return;
+        }
+
+        const formatInlinePrice = (usd) => {
+          return (activeCurrency === "USD")
+            ? `$${usd.toFixed(2)}`
+            : `₦${Math.round(usd * NGN_RATE).toLocaleString("en-NG")}`;
+        };
+
+        searchResults.innerHTML = filtered.map(p => `
+          <div class="search-item">
+            <img class="search-thumb" src="${p.img}" alt="${p.name}">
+            <div class="search-meta">
+              <div class="search-name">${p.name}</div>
+              <div class="search-price">${formatInlinePrice(p.priceUSD)}</div>
+              <div class="search-actions">
+                <a href="#${p.pageId}" data-page="${p.pageId}" class="view-page">View on this page</a>
+                <a href="${p.shopify}" target="_blank" rel="noopener">View on Shopify</a>
+              </div>
+            </div>
+          </div>
+        `).join("");
+
+        // page jump + highlight
+        searchResults.querySelectorAll(".view-page").forEach(a => {
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+            const id = a.getAttribute("data-page");
+            const el = document.getElementById(id);
+            if (el) {
+              closeSearch();
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+              el.classList.add("flash-highlight");
+              setTimeout(() => el.classList.remove("flash-highlight"), 1400);
+            }
+          });
         });
       }
 
-      currencyBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          currencyBtns.forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          activeCurrency = btn.dataset.currency || "USD";
-          renderMoneyAll();
-        });
-      });
+      if (openSearchBtn) openSearchBtn.addEventListener("click", openSearch);
+      if (closeSearchBtn) closeSearchBtn.addEventListener("click", closeSearch);
 
-      // first render
-      renderMoneyAll();
+      if (searchModal) {
+        searchModal.addEventListener("click", (e) => {
+          if (e.target === searchModal) closeSearch();
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => renderResults(e.target.value));
+      }
 
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
