@@ -59,9 +59,19 @@ body{
   z-index:1000;
 }
 
+/* ✅ Bigger + more “capitalized” brand */
 .header-left .brand{
-  font-size:14px;
-  letter-spacing:4px;
+  font-size:18px;              /* was 14px */
+  letter-spacing:5px;          /* stronger luxury spacing */
+  text-transform:uppercase;    /* force caps */
+  font-weight:600;             /* more premium */
+}
+
+@media (max-width:768px){
+  .header-left .brand{
+    font-size:16px;
+    letter-spacing:4px;
+  }
 }
 
 .header-right{
@@ -360,7 +370,6 @@ body{
 
 /* ================================================= */
 /* FEATURE BANNERS (ALL BANNER SECTIONS)             */
-/* - Reused for first banners + new promo banners    */
 /* ================================================= */
 .feature-banners{ width:100%; }
 
@@ -377,7 +386,6 @@ body{
   overflow:hidden;
 }
 
-/* soft dark fade so text is readable */
 .feature-banner::after{
   content:"";
   position:absolute;
@@ -390,7 +398,6 @@ body{
   );
 }
 
-/* text block placement (bottom-left) */
 .feature-overlay{
   position:absolute;
   left:22px;
@@ -514,7 +521,6 @@ body{
   display:block;
 }
 
-/* QUICK VIEW overlay */
 .own-quickview{
   position:absolute;
   left:0;
@@ -539,7 +545,6 @@ body{
   transform: translateY(0);
 }
 
-/* always visible on touch devices */
 @media (hover:none){
   .own-quickview{ opacity:1; transform:none; }
 }
@@ -600,8 +605,7 @@ body{
 }
 
 /* ================================================= */
-/* FOOTER (PROFESSIONAL POLISH)                      */
-/* matches your new footer HTML                      */
+/* FOOTER                                            */
 /* ================================================= */
 .site-footer{
   background:#0c0c0c;
@@ -664,7 +668,6 @@ body{
   background:#fff;
   padding:80px 40px;
 }
-
 .collection-section{ margin-bottom:100px; }
 
 .collection-title{
@@ -740,8 +743,10 @@ body{
 
 /* ================================================= */
 /* FLOATING UI: Currency Switch + Chat Bubble        */
-/* (matches your HTML screenshots: .floating-ui etc) */
+/* ✅ Currency left-bottom, ✅ Chat right-bottom      */
 /* ================================================= */
+
+/* Currency stays bottom-left */
 .floating-ui{
   position:fixed;
   left:16px;
@@ -750,17 +755,15 @@ body{
   display:flex;
   flex-direction:column;
   gap:12px;
-  pointer-events:none; /* allow only children to be clickable */
+  pointer-events:none;
 }
 
-/* Currency switch container */
 .currency-switch{
   display:flex;
   gap:10px;
   pointer-events:auto;
 }
 
-/* Currency buttons */
 .currency-btn{
   appearance:none;
   border:1px solid rgba(0,0,0,.18);
@@ -775,40 +778,55 @@ body{
   opacity:.96;
   -webkit-tap-highlight-color: transparent;
 }
-
 .currency-btn:hover{ opacity:1; }
-
 .currency-btn.active{
   background:#111;
   color:#fff;
   border-color:#111;
 }
 
-/* Keep it visible even while sliding/scrolling on mobile */
+/* safe-area on iPhone */
 @supports (-webkit-touch-callout: none){
   .floating-ui{ bottom: calc(16px + env(safe-area-inset-bottom)); }
 }
 
-/* Chat bubble button (inspo style) */
+/* ✅ Chat bubble now on RIGHT corner + horizontal text */
 .chat-bubble{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:2000;
+
   pointer-events:auto;
-  width:54px;
-  height:54px;
-  border-radius:999px;
   border:0;
   background:#2b2b2b;
   color:#fff;
+
+  height:54px;
+  padding:0 16px;
+  border-radius:999px;
+
   display:flex;
   align-items:center;
-  justify-content:center;
-  font-size:22px;
+  gap:10px;
+
+  font-size:20px;
   cursor:pointer;
+
   box-shadow:0 14px 34px rgba(0,0,0,.22);
-  position:relative;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Green online dot like inspo */
+/* show text */
+.chat-bubble-text{
+  font-size:14px;
+  letter-spacing:1px;
+  text-transform:none;
+  opacity:.95;
+  white-space:nowrap;
+}
+
+/* green online dot */
 .chat-bubble::after{
   content:"";
   width:10px;
@@ -816,16 +834,16 @@ body{
   border-radius:999px;
   background:#2ecc71;
   position:absolute;
-  right:8px;
-  bottom:8px;
+  right:10px;
+  bottom:10px;
   border:2px solid #2b2b2b;
 }
 
-/* Chat panel (opens above bubble) */
+/* Chat panel opens above bubble (right side) */
 .chat-panel{
   position:fixed;
   right:16px;
-  bottom:16px;
+  bottom:80px; /* above the bubble */
   z-index:2001;
   width:min(360px, calc(100vw - 32px));
   background:#fff;
@@ -838,15 +856,12 @@ body{
   pointer-events:none;
   transition:opacity .22s ease, transform .22s ease;
 }
-
-/* Add this class from JS when open */
 .chat-panel.open{
   opacity:1;
   transform: translateY(0);
   pointer-events:auto;
 }
 
-/* Chat header */
 .chat-head{
   background:#111;
   color:#fff;
@@ -875,7 +890,6 @@ body{
   font-size:16px;
 }
 
-/* Body */
 .chat-body{
   padding:14px;
   background:#fff;
@@ -919,14 +933,110 @@ body{
   color:#fff;
 }
 
-/* On very small screens, keep bubble and switch compact */
+/* small screens polish */
 @media (max-width:420px){
   .currency-btn{ padding:9px 12px; font-size:11px; }
-  .chat-bubble{ width:52px; height:52px; }
+  .chat-bubble{ height:52px; padding:0 14px; }
+  .chat-bubble-text{ font-size:13px; }
 }
 
 /* ================================================= */
-/* REDUCED MOTION (ACCESSIBLE)                       */
+/* SEARCH UI (CSS ONLY — for when you add HTML/JS)   */
+/* ================================================= */
+.search-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:3000;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+}
+.search-overlay.open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.search-modal{
+  position:fixed;
+  top:110px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(720px, calc(100vw - 32px));
+  background:#fff;
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:16px;
+  box-shadow:0 30px 90px rgba(0,0,0,.28);
+  z-index:3001;
+  padding:16px;
+}
+
+.search-input{
+  width:100%;
+  padding:14px 14px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:14px;
+  letter-spacing:.5px;
+  outline:none;
+}
+.search-input:focus{ border-color:#111; }
+
+.search-results{
+  margin-top:12px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-height:55vh;
+  overflow:auto;
+  padding-right:4px;
+}
+
+.search-result{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  text-decoration:none;
+  color:#111;
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:12px;
+}
+.search-result:hover{
+  border-color:#111;
+}
+
+.search-thumb{
+  width:52px;
+  height:52px;
+  border-radius:12px;
+  background:#f5f5f5;
+  flex:0 0 auto;
+  overflow:hidden;
+}
+.search-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.search-meta{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.search-name{
+  font-size:13px;
+  letter-spacing:.2px;
+}
+.search-price{
+  font-size:13px;
+  font-weight:600;
+}
+
+/* ================================================= */
+/* REDUCED MOTION                                    */
 /* ================================================= */
 @media (prefers-reduced-motion: reduce){
   body{ animation:none; opacity:1; }
@@ -939,7 +1049,8 @@ body{
   .hero-content,
   .own-look-card,
   .own-quickview,
-  .chat-panel{
+  .chat-panel,
+  .search-overlay{
     transition:none !important;
   }
 }
