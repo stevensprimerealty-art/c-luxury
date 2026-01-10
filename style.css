@@ -1,3 +1,5 @@
+/* ✅ FINAL style.css (copy/paste) */
+
 /* ============================= */
 /* RESET                         */
 /* ============================= */
@@ -377,9 +379,9 @@ body{
   overflow:hidden;
 }
 
-/* ✅ FIX: keep hoodie head visible on mobile/top-crop images */
+/* ✅ FIX: keep hoodie head visible (top crop) */
 .feature-banner.new-release-banner{
-  background-position: center top !important;
+  background-position:center top !important;
 }
 
 .feature-banner::after{
@@ -740,8 +742,6 @@ body{
 /* ================================================= */
 /* FLOATING UI: Currency + Chat                       */
 /* ================================================= */
-
-/* Currency stays bottom-left */
 .floating-ui{
   position:fixed;
   left:16px;
@@ -780,12 +780,10 @@ body{
   border-color:#111;
 }
 
-/* safe-area on iPhone */
 @supports (-webkit-touch-callout: none){
   .floating-ui{ bottom: calc(16px + env(safe-area-inset-bottom)); }
 }
 
-/* Chat bubble on RIGHT + horizontal */
 .chat-bubble{
   position:fixed;
   right:16px;
@@ -831,7 +829,6 @@ body{
   border:2px solid #2b2b2b;
 }
 
-/* Chat panel opens above bubble */
 .chat-panel{
   position:fixed;
   right:16px;
