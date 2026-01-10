@@ -1,4 +1,3 @@
-<!-- ✅ FINAL index.html (copy/paste) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +24,16 @@
       <!-- SEARCH button -->
       <button class="icon-btn" id="searchBtn" aria-label="Search">🔍</button>
 
-      <a href="cart.html" class="icon-btn cart" aria-label="Cart">
-        🛒<span class="cart-count">0</span>
+      <!-- ✅ SHOPIFY CART: ALWAYS opens Shopify cart (safe for GitHub Pages) -->
+      <a
+        href="https://mrcharliestxs.myshopify.com/cart"
+        class="icon-btn cart"
+        aria-label="Cart"
+        id="cartLink"
+        target="_blank"
+        rel="noopener"
+      >
+        🛒<span class="cart-count is-empty" id="cartCount" aria-label="Cart item count">0</span>
       </a>
 
       <button class="icon-btn menu-toggle" aria-label="Menu">⋮</button>
@@ -262,7 +269,7 @@
     </footer>
   </main>
 
-  <!-- SEARCH OVERLAY + MODAL (starts hidden so it won't block the view) -->
+  <!-- SEARCH OVERLAY + MODAL -->
   <div class="search-overlay" id="searchOverlay" aria-hidden="true" hidden></div>
 
   <div
@@ -274,7 +281,6 @@
     aria-label="Search products"
     hidden
   >
-    <!-- close button -->
     <button type="button" class="search-close" id="searchCloseBtn" aria-label="Close search">✕</button>
 
     <input
@@ -296,7 +302,7 @@
     </div>
   </div>
 
-  <!-- Chat bubble (right corner, horizontal) -->
+  <!-- Chat bubble -->
   <button type="button" class="chat-bubble" aria-label="Chat with us" id="chatOpenBtn">
     💬 <span class="chat-bubble-text">Chat with us</span>
   </button>
@@ -327,6 +333,54 @@
         const loader = document.querySelector(".site-loader");
         if (loader) loader.classList.add("hidden");
       }, 700);
+
+      /* ✅ SAFE SHOPIFY CART COUNT (does NOT break if blocked) */
+      const SHOPIFY_DOMAIN = "https://mrcharliestxs.myshopify.com";
+
+      function applyCartCount(count) {
+        const el = document.getElementById("cartCount");
+        if (!el) return;
+
+        const n = Math.max(0, Number(count || 0));
+        el.textContent = String(n);
+
+        if (n > 0) el.classList.remove("is-empty");
+        else el.classList.add("is-empty");
+      }
+
+      async function tryFetchCartCount(url, opts) {
+        const r = await fetch(url, opts);
+        if (!r.ok) throw new Error("Failed cart fetch");
+        const cart = await r.json();
+        return Number(cart.item_count || 0);
+      }
+
+      async function updateCartCount() {
+        try {
+          // 1) If the site is ever hosted on Shopify, this works:
+          const c1 = await tryFetchCartCount("/cart.js", { credentials: "same-origin" });
+          applyCartCount(c1);
+          return;
+        } catch (e) {}
+
+        try {
+          // 2) GitHub Pages fallback: attempt Shopify domain (may be blocked by browser/CORS)
+          const c2 = await tryFetchCartCount(SHOPIFY_DOMAIN + "/cart.js", { credentials: "omit" });
+          applyCartCount(c2);
+          return;
+        } catch (e) {
+          // If blocked, stay safe: hide badge for clean UI
+          applyCartCount(0);
+        }
+      }
+
+      // Run once
+      updateCartCount();
+
+      // Refresh when user returns to tab
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) updateCartCount();
+      });
 
       /* MENU TOGGLE */
       const menuToggle = document.querySelector(".menu-toggle");
@@ -629,7 +683,7 @@
 
       renderMoneyAll();
 
-      /* SEARCH (View on page + Shopify + close button) */
+      /* SEARCH */
       const searchBtn = document.getElementById("searchBtn");
       const searchOverlay = document.getElementById("searchOverlay");
       const searchModal = document.getElementById("searchModal");
@@ -670,7 +724,6 @@
         searchOverlay.setAttribute("aria-hidden", "true");
         searchModal.setAttribute("aria-hidden", "true");
 
-        // ensure it never blocks the view (even if CSS is misconfigured)
         searchOverlay.hidden = true;
         searchModal.hidden = true;
       }
