@@ -743,7 +743,7 @@ body{
 }
 
 /* ================================================= */
-/* FLOATING UI: Currency + Chat                       */
+/* FLOATING UI: Currency + Chat                      */
 /* ================================================= */
 .floating-ui{
   position:fixed;
@@ -1080,4 +1080,194 @@ body{
   .search-modal{
     transition:none !important;
   }
+}
+
+/* ================================================= */
+/* ABOUT PAGE                                        */
+/* ================================================= */
+body.about-page{
+  background:#fff;
+}
+
+/* Header same as main, with dark underline */
+.site-header.about-header{
+  border-bottom:1px solid #111;
+}
+
+/* Offset content below fixed header (About page) */
+.about-wrap{
+  padding-top:80px;
+}
+
+/* Adjust menu position on About page */
+body.about-page .menu-panel{
+  top:90px;
+}
+
+/* ============================= */
+/* ABOUT HERO                    */
+/* ============================= */
+.about-hero{
+  position:relative;
+  width:100%;
+  height:min(78vh, 720px);
+  overflow:hidden;
+  background:#fff;
+}
+
+.about-hero-bg{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  animation:aboutHeroFade 1.2s ease forwards;
+}
+
+@keyframes aboutHeroFade{
+  to{ opacity:1; }
+}
+
+.about-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.52) 0%,
+    rgba(0,0,0,.18) 55%,
+    rgba(0,0,0,.10) 100%
+  );
+}
+
+.about-hero-overlay{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  padding:24px;
+  text-shadow:0 10px 30px rgba(0,0,0,.28);
+}
+
+.about-hero-title{
+  font-size:34px;
+  font-weight:300;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  line-height:1.05;
+}
+
+.about-hero-sub{
+  margin-top:14px;
+  font-size:13px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  opacity:.9;
+}
+
+@media (max-width:768px){
+  .about-hero-title{ font-size:30px; }
+}
+
+/* ============================= */
+/* MARQUEE TEXT                  */
+/* ============================= */
+.marquee{
+  background:#fff;
+  border-top:1px solid #eee;
+  border-bottom:1px solid #eee;
+  overflow:hidden;
+  padding:18px 0;
+}
+
+.marquee-track{
+  display:flex;
+  width:max-content;
+  white-space:nowrap;
+  gap:64px;
+  padding-left:64px;
+  will-change:transform;
+  animation:marqueeMove 18s linear infinite;
+}
+
+.marquee-track span{
+  font-size:64px;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  font-weight:300;
+  color:#111;
+  opacity:.12;
+}
+
+@keyframes marqueeMove{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+@media (max-width:768px){
+  .marquee-track span{ font-size:44px; }
+}
+
+/* ============================= */
+/* ABOUT COPY                    */
+/* ============================= */
+.about-copy{
+  max-width:980px;
+  margin:0 auto;
+  padding:70px 24px 90px;
+  text-align:left;
+  background:#fff;
+}
+
+.about-title{
+  font-size:18px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-weight:600;
+  margin-bottom:18px;
+}
+
+.about-text{
+  font-size:16px;
+  line-height:1.9;
+  color:#111;
+  opacity:.92;
+  max-width:860px;
+}
+
+/* ============================= */
+/* ABOUT FOOTER (BLURRED IMAGE)  */
+/* ============================= */
+.site-footer.about-footer{
+  position:relative;
+  overflow:hidden;
+}
+
+.site-footer.about-footer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url('assets/images/backgrounds/promo-4.jpg');
+  background-size:cover;
+  background-position:center;
+  filter:blur(14px);
+  transform:scale(1.08);
+  opacity:.55;
+}
+
+.site-footer.about-footer::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.62);
+}
+
+.site-footer.about-footer .footer-inner{
+  position:relative;
+  z-index:2;
 }
