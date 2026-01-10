@@ -21,7 +21,7 @@
     </div>
 
     <div class="header-right">
-      <!-- ✅ SEARCH button -->
+      <!-- SEARCH button -->
       <button class="icon-btn" id="searchBtn" aria-label="Search">🔍</button>
 
       <a href="cart.html" class="icon-btn cart" aria-label="Cart">
@@ -98,7 +98,10 @@
           target="_blank"
           rel="noopener"
         >
-          <img src="assets/images/punk-rock-tee.jpg" alt="Punk Rock Lip Graphic Tee — Skeleton Band Back Print" />
+          <img
+            src="assets/images/punk-rock-tee.jpg"
+            alt="Punk Rock Lip Graphic Tee — Skeleton Band Back Print"
+          />
           <h4 class="new-in-name">Punk Rock Lip Graphic Tee — Skeleton Band Back Print</h4>
           <p class="new-in-price" data-money data-usd="22.26">$22.26</p>
         </a>
@@ -110,7 +113,10 @@
           target="_blank"
           rel="noopener"
         >
-          <img src="assets/images/blue-neon-wolf-slides.jpg" alt="Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides" />
+          <img
+            src="assets/images/blue-neon-wolf-slides.jpg"
+            alt="Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides"
+          />
           <h4 class="new-in-name">Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides</h4>
           <p class="new-in-price" data-money data-usd="51.76">$51.76</p>
         </a>
@@ -252,11 +258,19 @@
     </footer>
   </main>
 
-  <!-- ✅ SEARCH OVERLAY + MODAL -->
-  <div class="search-overlay" id="searchOverlay" aria-hidden="true"></div>
+  <!-- SEARCH OVERLAY + MODAL (starts hidden so it won't block the view) -->
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true" hidden></div>
 
-  <div class="search-modal" id="searchModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Search products">
-    <!-- ✅ close button -->
+  <div
+    class="search-modal"
+    id="searchModal"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Search products"
+    hidden
+  >
+    <!-- close button -->
     <button type="button" class="search-close" id="searchCloseBtn" aria-label="Close search">✕</button>
 
     <input
@@ -278,7 +292,7 @@
     </div>
   </div>
 
-  <!-- ✅ Chat bubble (right corner, horizontal) -->
+  <!-- Chat bubble (right corner, horizontal) -->
   <button type="button" class="chat-bubble" aria-label="Chat with us" id="chatOpenBtn">
     💬 <span class="chat-bubble-text">Chat with us</span>
   </button>
@@ -399,9 +413,7 @@
         revealEls.forEach(el => observer.observe(el));
       }
 
-      /* ========================= */
       /* PRODUCTS (search + slider) */
-      /* ========================= */
       const products = [
         {
           key: "punk-rock-tee",
@@ -575,6 +587,7 @@
 
       /* CURRENCY (USD / NGN) */
       let NGN_RATE = 1500; // fallback offline
+
       fetch("https://open.er-api.com/v6/latest/USD")
         .then(r => r.json())
         .then(data => {
@@ -612,7 +625,7 @@
 
       renderMoneyAll();
 
-      /* ✅ SEARCH (View on page + Shopify + close button) */
+      /* SEARCH (View on page + Shopify + close button) */
       const searchBtn = document.getElementById("searchBtn");
       const searchOverlay = document.getElementById("searchOverlay");
       const searchModal = document.getElementById("searchModal");
@@ -631,10 +644,15 @@
 
       function openSearch() {
         if (!searchOverlay || !searchModal || !searchInput) return;
+
+        searchOverlay.hidden = false;
+        searchModal.hidden = false;
+
         searchOverlay.classList.add("open");
         searchModal.classList.add("open");
         searchOverlay.setAttribute("aria-hidden", "false");
         searchModal.setAttribute("aria-hidden", "false");
+
         searchInput.value = "";
         renderSearchResults("");
         setTimeout(() => searchInput.focus(), 30);
@@ -642,10 +660,15 @@
 
       function closeSearch() {
         if (!searchOverlay || !searchModal) return;
+
         searchOverlay.classList.remove("open");
         searchModal.classList.remove("open");
         searchOverlay.setAttribute("aria-hidden", "true");
         searchModal.setAttribute("aria-hidden", "true");
+
+        // ensure it never blocks the view (even if CSS is misconfigured)
+        searchOverlay.hidden = true;
+        searchModal.hidden = true;
       }
 
       function renderSearchResults(query) {
@@ -700,7 +723,6 @@
           `;
         }).join("");
 
-        // bind view buttons
         searchResults.querySelectorAll("button[data-view]").forEach(btn => {
           btn.addEventListener("click", () => {
             const v = btn.getAttribute("data-view") || "";
