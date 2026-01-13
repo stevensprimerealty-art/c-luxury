@@ -38,18 +38,19 @@ body{
   z-index:9999;
   font-size:14px;
   letter-spacing:4px;
-  transition:opacity 1s ease;
+  transition:opacity .9s ease;
 
-  /* ✅ FAILSAFE: if JS fails, loader disappears after 4 seconds */
+  /* ✅ FAILSAFE: even if JS fails, loader disappears */
   animation:loaderFailsafe 0s linear 4s forwards;
 }
 @keyframes loaderFailsafe{
   to { opacity:0; visibility:hidden; pointer-events:none; }
 }
+
 .site-loader.hidden{
   opacity:0;
-  pointer-events:none;
   visibility:hidden;
+  pointer-events:none;
 }
 
 /* ============================= */
