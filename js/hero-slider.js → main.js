@@ -1,10 +1,28 @@
+/* =============================
+   C-LUXURY — main.js (FULL FIX)
+   - Loader hide (with safety)
+   - Menu toggle
+   - Reveal on scroll
+   - Hero slider: crossfade + stagger text + per-image mobile crop + dots + swipe
+   - Own the look slider + dots + swipe
+   - Currency switch (USD/NGN)
+   - Search modal
+   - Chat panel
+   - Cart count (safe)
+============================= */
+
 window.addEventListener("load", () => {
-  /* HIDE LOADER */
+  /* =============================
+     LOADER (hide)
+  ============================= */
   setTimeout(() => {
-    document.querySelector(".site-loader")?.classList.add("hidden");
+    const loader = document.querySelector(".site-loader");
+    if (loader) loader.classList.add("hidden");
   }, 700);
 
-  /* SAFE SHOPIFY CART COUNT */
+  /* =============================
+     SAFE SHOPIFY CART COUNT
+  ============================= */
   const SHOPIFY_DOMAIN = "https://mrcharliestxs.myshopify.com";
 
   function applyCartCount(count) {
@@ -24,12 +42,14 @@ window.addEventListener("load", () => {
   }
 
   async function updateCartCount() {
+    // Attempt same-origin first
     try {
       const c1 = await tryFetchCartCount("/cart.js", { credentials: "same-origin" });
       applyCartCount(c1);
       return;
     } catch (e) {}
 
+    // Fallback (may be blocked by CORS on github pages)
     try {
       const c2 = await tryFetchCartCount(SHOPIFY_DOMAIN + "/cart.js", { credentials: "omit" });
       applyCartCount(c2);
@@ -44,24 +64,44 @@ window.addEventListener("load", () => {
     if (!document.hidden) updateCartCount();
   });
 
-  /* MENU TOGGLE */
-  document.querySelector(".menu-toggle")?.addEventListener("click", () => {
-    document.querySelector(".menu-panel")?.classList.toggle("open");
+  /* =============================
+     MENU TOGGLE
+  ============================= */
+  const menuBtn = document.querySelector(".menu-toggle");
+  const menuPanel = document.querySelector(".menu-panel");
+
+  menuBtn?.addEventListener("click", () => {
+    menuPanel?.classList.toggle("open");
   });
 
-  /* REVEAL ON SCROLL */
+  // close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!menuPanel || !menuBtn) return;
+    const target = e.target;
+    if (!(target instanceof Element)) return;
+    const clickedInsideMenu = menuPanel.contains(target);
+    const clickedMenuBtn = menuBtn.contains(target);
+    if (!clickedInsideMenu && !clickedMenuBtn) menuPanel.classList.remove("open");
+  });
+
+  /* =============================
+     REVEAL ON SCROLL
+  ============================= */
   const revealEls = document.querySelectorAll(".reveal");
   if (revealEls.length) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+    );
 
-    revealEls.forEach(el => observer.observe(el));
+    revealEls.forEach((el) => observer.observe(el));
   }
 
   /* =========================================================
@@ -74,69 +114,80 @@ window.addEventListener("load", () => {
   const heroSubtext = document.getElementById("heroSubtext");
   const heroDotsWrap = document.getElementById("heroDots");
 
-  // ✅ Set your existing hero images here (match your repo filenames)
-  // Per-image crop control:
-  // - posDesktop: "center center", "center top", etc.
-  // - posMobile:  "50% 30%" etc. (great for keeping faces/heads visible)
+  // ✅ Update these image paths to match your repo EXACTLY
   const HERO_SLIDES = [
     {
       image: "assets/images/hero/hero-01.jpg",
       title: "PRESENCE<br>WITHOUT NOISE",
       text: "QUIET CONFIDENCE.<br>DISCIPLINED FORM.",
       posDesktop: "center center",
-      posMobile: "50% 35%"
+      posMobile: "50% 35%",
     },
     {
       image: "assets/images/hero/hero-02.jpg",
       title: "DEFINED<br>BY RESTRAINT",
       text: "ELEVATED COMFORT.<br>INTENTIONAL DETAIL.",
       posDesktop: "center center",
-      posMobile: "50% 28%"
+      posMobile: "50% 28%",
     },
     {
-      image: "assets/images/hero/hero-3.jpg",
+      image: "assets/images/hero/hero-03.jpg",
       title: "TIMELESS<br>ENERGY",
       text: "BOLD IDENTITY.<br>CLEAR PURPOSE.",
       posDesktop: "center center",
-      posMobile: "50% 30%"
+      posMobile: "50% 30%",
     },
     {
-      image: "assets/images/hero/hero-4.jpg",
+      image: "assets/images/hero/hero-04.jpg",
       title: "FORM<br>WITH CONTROL",
       text: "MINIMAL LUXURY.<br>MAXIMUM PRESENCE.",
       posDesktop: "center center",
-      posMobile: "50% 25%"
+      posMobile: "50% 25%",
     },
     {
-      image: "assets/images/hero/hero-5.jpg",
+      image: "assets/images/hero/hero-05.jpg",
       title: "SILENCE<br>AS POWER",
       text: "DETAIL IS INTENT.<br>NOT DECORATION.",
       posDesktop: "center center",
-      posMobile: "50% 30%"
+      posMobile: "50% 30%",
     },
     {
-      image: "assets/images/hero/hero-6.jpg",
+      image: "assets/images/hero/hero-06.jpg",
       title: "C-LUXURY",
       text: "RESTRAINED DESIGN.<br>TIMELESS IDENTITY.",
       posDesktop: "center center",
-      posMobile: "50% 32%"
-    }
+      posMobile: "50% 32%",
+    },
   ];
 
-  // Preload
-  HERO_SLIDES.forEach(s => { const img = new Image(); img.src = s.image; });
+  // Preload hero images
+  HERO_SLIDES.forEach((s) => {
+    const img = new Image();
+    img.src = s.image;
+  });
+
+  const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
   let heroCurrent = 0;
   let activeBg = 0;
   let heroTimer = null;
 
-  const HOLD_MS = 6000; // 6 seconds
-  const FADE_MS = 650;
-
-  const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
+  const HOLD_MS = 6000; // time between slide changes
 
   function stopHeroAuto() {
-    if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+    if (heroTimer) {
+      clearInterval(heroTimer);
+      heroTimer = null;
+    }
+  }
+
+  function startHeroAuto() {
+    stopHeroAuto();
+    heroTimer = setInterval(() => {
+      heroCurrent = (heroCurrent + 1) % HERO_SLIDES.length;
+      applyHeroSlide(heroCurrent);
+      updateActiveDot();
+    }, HOLD_MS);
   }
 
   function setTextOut() {
@@ -153,15 +204,19 @@ window.addEventListener("load", () => {
 
   function renderHeroDots() {
     if (!heroDotsWrap) return;
-    heroDotsWrap.innerHTML = HERO_SLIDES.map((_, i) => {
-      return `<button class="hero-dot ${i === heroCurrent ? "active" : ""}" type="button" aria-label="Hero slide ${i+1}"></button>`;
-    }).join("");
+    heroDotsWrap.innerHTML = HERO_SLIDES.map(
+      (_, i) =>
+        `<button class="hero-dot ${i === heroCurrent ? "active" : ""}" type="button" aria-label="Hero slide ${
+          i + 1
+        }"></button>`
+    ).join("");
 
     const dots = heroDotsWrap.querySelectorAll(".hero-dot");
     dots.forEach((dot, i) => {
       dot.addEventListener("click", () => {
         heroCurrent = i;
         applyHeroSlide(heroCurrent, true);
+        updateActiveDot();
         startHeroAuto();
       });
     });
@@ -179,10 +234,10 @@ window.addEventListener("load", () => {
     const slide = HERO_SLIDES[idx];
     const nextBg = activeBg === 0 ? 1 : 0;
 
-    // Start text out (stagger handled by CSS class)
+    // text out first
     setTextOut();
 
-    // Swap background after a short delay so text begins fading first
+    // swap bg + text after a short delay
     setTimeout(() => {
       bgLayers[nextBg].style.backgroundImage = `url(${slide.image})`;
       bgLayers[nextBg].style.backgroundPosition = isMobile() ? slide.posMobile : slide.posDesktop;
@@ -194,403 +249,94 @@ window.addEventListener("load", () => {
       heroTitle.innerHTML = slide.title;
       heroSubtext.innerHTML = slide.text;
 
-      // Text back in (staggered)
       requestAnimationFrame(() => setTextIn());
-
-      // Dots
       if (userAction) updateActiveDot();
     }, 180);
   }
 
-  function startHeroAuto() {
-    stopHeroAuto();
-    heroTimer = setInterval(() => {
-      heroCurrent = (heroCurrent + 1) % HERO_SLIDES.length;
-      applyHeroSlide(heroCurrent);
-      updateActiveDot();
-    }, HOLD_MS);
-  }
+  function initHero() {
+    if (!hero || !bgLayers.length) return;
 
-  // Init hero
-  if (bgLayers[0]) {
-    bgLayers[0].style.backgroundImage = `url(${HERO_SLIDES[0].image})`;
-    bgLayers[0].style.backgroundPosition = isMobile() ? HERO_SLIDES[0].posMobile : HERO_SLIDES[0].posDesktop;
-  }
-  if (bgLayers[1]) {
-    bgLayers[1].style.backgroundImage = `url(${HERO_SLIDES[0].image})`;
-    bgLayers[1].style.backgroundPosition = isMobile() ? HERO_SLIDES[0].posMobile : HERO_SLIDES[0].posDesktop;
-  }
-  renderHeroDots();
-  setTextIn();
-  startHeroAuto();
+    // init both layers to first slide so no flash
+    const s0 = HERO_SLIDES[0];
 
-  // Pause on hover (desktop)
-  if (hero) {
-    hero.addEventListener("mouseenter", () => stopHeroAuto());
-    hero.addEventListener("mouseleave", () => startHeroAuto());
-  }
+    bgLayers.forEach((layer) => {
+      layer.style.backgroundImage = `url(${s0.image})`;
+      layer.style.backgroundPosition = isMobile() ? s0.posMobile : s0.posDesktop;
+    });
 
-  // Swipe
-  let startX = 0, startY = 0, swiping = false;
+    bgLayers[0].classList.add("active");
 
-  function onTouchStart(e) {
-    const t = e.touches[0];
-    startX = t.clientX;
-    startY = t.clientY;
-    swiping = true;
-    stopHeroAuto();
-  }
-
-  function onTouchMove(e) {
-    if (!swiping) return;
-    const t = e.touches[0];
-    const dx = t.clientX - startX;
-    const dy = t.clientY - startY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 18) e.preventDefault();
-  }
-
-  function onTouchEnd(e) {
-    if (!swiping) return;
-    swiping = false;
-
-    const t = e.changedTouches[0];
-    const dx = t.clientX - startX;
-    const dy = t.clientY - startY;
-
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      if (dx < 0) heroCurrent = (heroCurrent + 1) % HERO_SLIDES.length;
-      else heroCurrent = (heroCurrent - 1 + HERO_SLIDES.length) % HERO_SLIDES.length;
-
-      applyHeroSlide(heroCurrent, true);
-      updateActiveDot();
-    }
-
+    renderHeroDots();
+    setTextIn();
     startHeroAuto();
-  }
 
-  if (hero) {
-    hero.addEventListener("touchstart", onTouchStart, { passive: true });
-    hero.addEventListener("touchmove", onTouchMove, { passive: false });
-    hero.addEventListener("touchend", onTouchEnd, { passive: true });
-  }
+    // Pause on hover (desktop)
+    hero.addEventListener("mouseenter", stopHeroAuto);
+    hero.addEventListener("mouseleave", startHeroAuto);
 
-  // Keep crop correct on resize
-  window.addEventListener("resize", () => {
-    const slide = HERO_SLIDES[heroCurrent];
-    bgLayers.forEach(layer => {
-      layer.style.backgroundPosition = isMobile() ? slide.posMobile : slide.posDesktop;
-    });
-  });
+    // Swipe (mobile)
+    let startX = 0,
+      startY = 0,
+      swiping = false;
 
-  /* PRODUCTS */
-  const products = [
-    {
-      key: "punk-rock-tee",
-      name: "Punk Rock Lip Graphic Tee — Skeleton Band Back Print",
-      priceUSD: 22.26,
-      img: "assets/images/punk-rock-tee.jpg",
-      link: "https://mrcharliestxs.myshopify.com/products/punk-rock-lip-graphic-tee-2025-skeleton-band-back-print?variant=43781844467763",
-      onPageId: "product-newin-1"
-    },
-    {
-      key: "blue-neon-wolf-slides",
-      name: "Slide Sandals — Blue Neon Wolf Graphic Removable-Strap Slides",
-      priceUSD: 51.76,
-      img: "assets/images/blue-neon-wolf-slides.jpg",
-      link: "https://mrcharliestxs.myshopify.com/products/slide-sandals-blue-neon-wolf-graphic-removable-strap-slides?variant=43781873827891",
-      onPageId: "product-newin-2"
-    },
-    {
-      key: "wolf-teal-floral",
-      name: "WOLF TEA FLORAL T-SHIRT",
-      priceUSD: 38.99,
-      img: "assets/images/products/wolf-teal-floral.jpg",
-      link: "https://mrcharliestxs.myshopify.com/products/wolf-wave-graphic-t-shirt-teal-floral-wolf-design?variant=43781864914995",
-      sliderIndex: 0
-    },
-    {
-      key: "samurai-moon",
-      name: "SAMURAI MOON T-SHIRT",
-      priceUSD: 25.73,
-      img: "assets/images/products/samurai-moon.jpg",
-      link: "https://mrcharliestxs.myshopify.com/products/samurai-moon-graphic-t-shirt-shine-back-print?variant=43781765464115",
-      sliderIndex: 1
-    },
-    {
-      key: "samurai-kanji-hoodie",
-      name: "SAMURAI KANJI HOODIE",
-      priceUSD: 30.83,
-      img: "assets/images/products/samurai-kanji-hoodie.jpg",
-      link: "https://mrcharliestxs.myshopify.com/products/samurai-warrior-hoodie-vintage-japanese-kanji-design?variant=43772207988787",
-      sliderIndex: 2
-    },
-    {
-      key: "gingerbread-sweatshirt",
-      name: "CHRISTMAS GINGERBREAD SWEATSHIRT",
-      priceUSD: 62.59,
-      img: "assets/images/products/gingerbread-sweatshirt.jpg",
-      link: "https://mrcharliestxs.myshopify.com/products/christmas-gingerbread-crewneck-sweatshirt-its-the-sweetest-time-of-the-year?variant=43781849382963",
-      sliderIndex: 3
-    }
-  ];
+    hero.addEventListener(
+      "touchstart",
+      (e) => {
+        const t = e.touches[0];
+        startX = t.clientX;
+        startY = t.clientY;
+        swiping = true;
+        stopHeroAuto();
+      },
+      { passive: true }
+    );
 
-  /* CHAT */
-  const chatPanel = document.getElementById("chatPanel");
-  const chatOpenBtn = document.getElementById("chatOpenBtn");
-  const chatCloseBtn = document.getElementById("chatCloseBtn");
+    hero.addEventListener(
+      "touchmove",
+      (e) => {
+        if (!swiping) return;
+        const t = e.touches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 18) e.preventDefault();
+      },
+      { passive: false }
+    );
 
-  function openChat() {
-    if (!chatPanel) return;
-    chatPanel.classList.add("open");
-    chatPanel.setAttribute("aria-hidden", "false");
-  }
-  function closeChat() {
-    if (!chatPanel) return;
-    chatPanel.classList.remove("open");
-    chatPanel.setAttribute("aria-hidden", "true");
-  }
+    hero.addEventListener(
+      "touchend",
+      (e) => {
+        if (!swiping) return;
+        swiping = false;
 
-  chatOpenBtn?.addEventListener("click", openChat);
-  chatCloseBtn?.addEventListener("click", closeChat);
+        const t = e.changedTouches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
 
-  /* CURRENCY */
-  let NGN_RATE = 1500; // fallback
-  let activeCurrency = "USD";
-  const currencyBtns = document.querySelectorAll(".currency-btn");
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+          if (dx < 0) heroCurrent = (heroCurrent + 1) % HERO_SLIDES.length;
+          else heroCurrent = (heroCurrent - 1 + HERO_SLIDES.length) % HERO_SLIDES.length;
 
-  function formatMoneyUSD(v) { return `$${v.toFixed(2)}`; }
-  function formatMoneyNGN(v) { return `₦${Math.round(v).toLocaleString("en-NG")}`; }
+          applyHeroSlide(heroCurrent, true);
+          updateActiveDot();
+        }
 
-  function renderMoneyAll() {
-    const moneyEls = document.querySelectorAll("[data-money][data-usd]");
-    moneyEls.forEach(el => {
-      const usd = Number(el.dataset.usd || "0");
-      el.textContent = (activeCurrency === "USD")
-        ? formatMoneyUSD(usd)
-        : formatMoneyNGN(usd * NGN_RATE);
+        startHeroAuto();
+      },
+      { passive: true }
+    );
+
+    // Keep crop correct on resize
+    window.addEventListener("resize", () => {
+      const slide = HERO_SLIDES[heroCurrent];
+      bgLayers.forEach((layer) => {
+        layer.style.backgroundPosition = isMobile() ? slide.posMobile : slide.posDesktop;
+      });
     });
   }
 
-  fetch("https://open.er-api.com/v6/latest/USD")
-    .then(r => r.json())
-    .then(data => {
-      if (data && data.result === "success" && data.rates && data.rates.NGN) {
-        NGN_RATE = Number(data.rates.NGN) || NGN_RATE;
-        renderMoneyAll();
-      }
-    })
-    .catch(() => {});
+  initHero();
 
-  currencyBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      currencyBtns.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeCurrency = btn.dataset.currency || "USD";
-      renderMoneyAll();
-    });
-  });
-
-  renderMoneyAll();
-
-  /* SEARCH */
-  const searchBtn = document.getElementById("searchBtn");
-  const searchOverlay = document.getElementById("searchOverlay");
-  const searchModal = document.getElementById("searchModal");
-  const searchInput = document.getElementById("searchInput");
-  const searchResults = document.getElementById("searchResults");
-  const searchCloseBtn = document.getElementById("searchCloseBtn");
-
-  function escapeHtml(s) {
-    return String(s)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
-
-  function openSearch() {
-    if (!searchOverlay || !searchModal || !searchInput) return;
-    searchOverlay.hidden = false;
-    searchModal.hidden = false;
-    searchOverlay.classList.add("open");
-    searchModal.classList.add("open");
-    searchOverlay.setAttribute("aria-hidden", "false");
-    searchModal.setAttribute("aria-hidden", "false");
-    searchInput.value = "";
-    renderSearchResults("");
-    setTimeout(() => searchInput.focus(), 30);
-  }
-
-  function closeSearch() {
-    if (!searchOverlay || !searchModal) return;
-    searchOverlay.classList.remove("open");
-    searchModal.classList.remove("open");
-    searchOverlay.setAttribute("aria-hidden", "true");
-    searchModal.setAttribute("aria-hidden", "true");
-    searchOverlay.hidden = true;
-    searchModal.hidden = true;
-  }
-
-  function renderSearchResults(query) {
-    if (!searchResults) return;
-
-    const q = (query || "").trim().toLowerCase();
-    const matches = !q
-      ? products.slice(0, 6)
-      : products.filter(p => p.name.toLowerCase().includes(q) || (p.key && p.key.includes(q)));
-
-    if (!matches.length) {
-      searchResults.innerHTML = `<div style="padding:10px 2px; font-size:13px;">No results found.</div>`;
-      return;
-    }
-
-    searchResults.innerHTML = matches.map(p => {
-      const priceText = (activeCurrency === "USD")
-        ? `$${p.priceUSD.toFixed(2)}`
-        : `₦${Math.round(p.priceUSD * NGN_RATE).toLocaleString("en-NG")}`;
-
-      return `
-        <div class="search-result" role="group" aria-label="${escapeHtml(p.name)}">
-          <div class="search-thumb">
-            <img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy">
-          </div>
-          <div class="search-meta" style="flex:1;">
-            <div class="search-name">${escapeHtml(p.name)}</div>
-            <div class="search-price">${escapeHtml(priceText)}</div>
-            <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
-              <a
-                class="icon-btn"
-                style="border:1px solid #111; padding:8px 10px; border-radius:12px; font-size:12px; letter-spacing:1px;"
-                href="${escapeHtml(p.link)}"
-                target="_blank"
-                rel="noopener"
-              >Open on Shopify</a>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join("");
-  }
-
-  searchBtn?.addEventListener("click", openSearch);
-  searchOverlay?.addEventListener("click", closeSearch);
-  searchCloseBtn?.addEventListener("click", closeSearch);
-
-  searchInput?.addEventListener("input", (e) => renderSearchResults(e.target.value));
-  searchInput?.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSearch(); });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeSearch();
-      closeChat();
-    }
-  });
-
-  /* OWN THE LOOK SLIDER */
-  const ownDots = document.querySelectorAll(".own-dot");
-  const ownImg = document.getElementById("own-img");
-  const ownName = document.getElementById("own-name");
-  const ownPrice = document.getElementById("own-price");
-  const ownLink = document.getElementById("own-link");
-  const ownCard = document.querySelector(".own-look-card");
-  const ownPrev = document.getElementById("own-prev");
-  const ownNext = document.getElementById("own-next");
-  const swipeArea = document.getElementById("own-swipe");
-
-  const sliderProducts = products
-    .filter(p => typeof p.sliderIndex === "number")
-    .sort((a,b)=>a.sliderIndex-b.sliderIndex);
-
-  sliderProducts.forEach(p => { const img = new Image(); img.src = p.img; });
-
-  let ownCurrent = 0;
-  let ownTimer = null;
-
-  function stopOwnAuto() {
-    if (ownTimer) { clearInterval(ownTimer); ownTimer = null; }
-  }
-
-  function startOwnAuto() {
-    stopOwnAuto();
-    ownTimer = setInterval(() => showSlide(ownCurrent + 1), 5200);
-  }
-
-  function showSlide(i) {
-    if (!ownImg || !ownName || !ownPrice || !ownLink || !ownCard) return;
-
-    ownCurrent = (i + sliderProducts.length) % sliderProducts.length;
-
-    ownDots.forEach(d => d.classList.remove("active"));
-    ownDots[ownCurrent]?.classList.add("active");
-
-    ownCard.classList.add("own-fade");
-    setTimeout(() => {
-      const p = sliderProducts[ownCurrent];
-      ownImg.src = p.img;
-      ownImg.alt = p.name;
-      ownName.textContent = p.name;
-      ownLink.href = p.link;
-
-      ownPrice.dataset.usd = String(p.priceUSD);
-      renderMoneyAll();
-
-      ownCard.classList.remove("own-fade");
-    }, 250);
-  }
-
-  ownDots.forEach((dot, i) => dot.addEventListener("click", () => { showSlide(i); startOwnAuto(); }));
-  ownPrev?.addEventListener("click", () => { showSlide(ownCurrent - 1); startOwnAuto(); });
-  ownNext?.addEventListener("click", () => { showSlide(ownCurrent + 1); startOwnAuto(); });
-
-  // swipe
-  let startX = 0, startY = 0, isSwiping = false;
-
-  function onTouchStart2(e) {
-    const t = e.touches[0];
-    startX = t.clientX; startY = t.clientY; isSwiping = true;
-  }
-  function onTouchMove2(e) {
-    if (!isSwiping) return;
-    const t = e.touches[0];
-    const dx = t.clientX - startX;
-    const dy = t.clientY - startY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 18) e.preventDefault();
-  }
-  function onTouchEnd2(e) {
-    if (!isSwiping) return;
-    isSwiping = false;
-    const t = e.changedTouches[0];
-    const dx = t.clientX - startX;
-    const dy = t.clientY - startY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      if (dx < 0) showSlide(ownCurrent + 1);
-      else showSlide(ownCurrent - 1);
-      startOwnAuto();
-    }
-  }
-
-  if (swipeArea) {
-    swipeArea.addEventListener("touchstart", onTouchStart2, { passive: true });
-    swipeArea.addEventListener("touchmove", onTouchMove2, { passive: false });
-    swipeArea.addEventListener("touchend", onTouchEnd2, { passive: true });
-  }
-
-  showSlide(0);
-  startOwnAuto();
-
-  /* PAUSE WHEN TAB HIDDEN */
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      stopOwnAuto();
-      stopHeroAuto();
-    } else {
-      startOwnAuto();
-      startHeroAuto();
-    }
-  });
-
-  // expose hero stop/start to visibility handler
-  function stopHeroAuto() { /* overwritten below by closure if hero exists */ }
-  function startHeroAuto() { /* overwritten below by closure if hero exists */ }
-});
+  /* =============================
+     PRODUCTS
