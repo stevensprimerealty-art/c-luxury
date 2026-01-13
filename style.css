@@ -26,7 +26,7 @@ body{
 .page, header, nav, main, section{ position:relative; z-index:1; }
 
 /* ============================= */
-/* LOADER                        */
+/* LOADER (✅ with FAILSAFE)      */
 /* ============================= */
 .site-loader{
   position:fixed;
@@ -39,8 +39,18 @@ body{
   font-size:14px;
   letter-spacing:4px;
   transition:opacity 1s ease;
+
+  /* ✅ FAILSAFE: if JS fails, loader disappears after 4 seconds */
+  animation:loaderFailsafe 0s linear 4s forwards;
 }
-.site-loader.hidden{ opacity:0; pointer-events:none; }
+@keyframes loaderFailsafe{
+  to { opacity:0; visibility:hidden; pointer-events:none; }
+}
+.site-loader.hidden{
+  opacity:0;
+  pointer-events:none;
+  visibility:hidden;
+}
 
 /* ============================= */
 /* HEADER                        */
@@ -262,7 +272,7 @@ body{
   100% { transform:translate3d(2%, -2%, 0); }
 }
 
-/* Text layer */
+/* Text forwarding layer */
 .hero-content{
   position:relative;
   z-index:3;
